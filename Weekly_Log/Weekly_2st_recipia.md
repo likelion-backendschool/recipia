@@ -113,4 +113,4 @@
 
 - **git & issue 관련 test 결과물**
 
-![git_idea11](/Weekly_2st_log/git_idea11.png)
+![git_idea11](git_idea11.png)
