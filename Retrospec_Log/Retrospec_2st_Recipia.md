@@ -96,7 +96,7 @@ th:text="${question.subject}"
 
 ### Validation 동작 구조와 유용한 어노테이션
 
-![/image/1.png](/image/1.png)
+![/image/1.png](image/1.png)
 
 1. 사용자는 Get 메서드를 통해 글 작성 폼의 페이지를 요청한다.
     1. 서버는 글 작성 폼을 사용자에게 보여주며 응답한다.
@@ -147,7 +147,7 @@ BindingResult 매개변수는 항상 @Valid 매개변수 바로 뒤에 위치해
 
 ### Validation의 유용한 어노테이션
 
-![출처: [/image/2.PNG](https://wikidocs.net/161873)](/image/2.PNG)
+![출처: [/image/2.PNG](https://wikidocs.net/161873)](image/2.PNG)
 
 출처: [https://wikidocs.net/161873](https://wikidocs.net/161873)
 
@@ -165,7 +165,7 @@ BindingResult 매개변수는 항상 @Valid 매개변수 바로 뒤에 위치해
 2. **인가(Authorize)** : 해당 리소스에 대해 접근 가능한 권한을 가지고 있는지 확인하는 과정 (After Authentication, 인증 이후)
 3. **권한** : 어떠한 리소스에 대한 접근 제한, 모든 리소스는 접근 제어 권한이 걸려있다. 즉, 인가 과정에서해당 리소스에 대한 제한된 최소한의 권한을 가졌는지 확인한다.
 
-![/image/3.png](/image/3.png)
+![/image/3.png](image/3.png)
 
 Spring Security는 **세션-쿠키 방식으로 인증한다.**
 
@@ -186,23 +186,23 @@ Spring Security는 **세션-쿠키 방식으로 인증한다.**
 
 ### **이소영님 회고록**
 
-![Untitled](/image/4.png)
+![Untitled](image/4.png)
 
 ### **서진수님 회고록**
 
-![Untitled](/image/5.png)
+![Untitled](image/5.png)
 
 ### **김지훈님 회고록**
 
-![Untitled](/image/6.png)
+![Untitled](image/6.png)
 
 ### **김상훈님 회고록**
 
-![Untitled](/image/7.png)
+![Untitled](image/7.png)
 
 ### **도성구님 회고록**
 
-![Untitled](/image/8.png)
+![Untitled](image/8.png)
 
 ---
 
@@ -211,7 +211,7 @@ Spring Security는 **세션-쿠키 방식으로 인증한다.**
 - 필수) 팀원들과 함께 찍은 인증샷(온라인 만남시 스크린 캡쳐)도 함께 업로드 해주세요 🙂
 - 이번주는 다같이 회의한 사진으로 대체합니다!!
     
-    ![Untitled](/image/9.png)
+    ![Untitled](image/9.png)
     
 - 필수) 자랑 멘트는 **‘팀 내에서 어떻게 복습을 하고 있고, 해당 복습 과정으로 인해 어떤 긍정적인 효과가 발생했는지’**에 대해 간단하게 작성해 주시면 됩니다 😊
     
