@@ -96,7 +96,7 @@ th:text="${question.subject}"
 
 ### Validation 동작 구조와 유용한 어노테이션
 
-![스크린샷 2022-08-17 오후 3.56.26.png](/image/1.png)
+![/image/1.png](/image/1.png)
 
 1. 사용자는 Get 메서드를 통해 글 작성 폼의 페이지를 요청한다.
     1. 서버는 글 작성 폼을 사용자에게 보여주며 응답한다.
@@ -147,7 +147,7 @@ BindingResult 매개변수는 항상 @Valid 매개변수 바로 뒤에 위치해
 
 ### Validation의 유용한 어노테이션
 
-![출처: [https://wikidocs.net/161873](https://wikidocs.net/161873)](/image/2.PNG)
+![출처: [/image/2.PNG](https://wikidocs.net/161873)](/image/2.PNG)
 
 출처: [https://wikidocs.net/161873](https://wikidocs.net/161873)
 
@@ -165,7 +165,7 @@ BindingResult 매개변수는 항상 @Valid 매개변수 바로 뒤에 위치해
 2. **인가(Authorize)** : 해당 리소스에 대해 접근 가능한 권한을 가지고 있는지 확인하는 과정 (After Authentication, 인증 이후)
 3. **권한** : 어떠한 리소스에 대한 접근 제한, 모든 리소스는 접근 제어 권한이 걸려있다. 즉, 인가 과정에서해당 리소스에 대한 제한된 최소한의 권한을 가졌는지 확인한다.
 
-![Untitled](/image/3.png)
+![/image/3.png](/image/3.png)
 
 Spring Security는 **세션-쿠키 방식으로 인증한다.**
 
