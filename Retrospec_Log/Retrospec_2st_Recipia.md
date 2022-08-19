@@ -96,7 +96,7 @@ th:text="${question.subject}"
 
 ### Validation 동작 구조와 유용한 어노테이션
 
-![스크린샷 2022-08-17 오후 3.56.26.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d7c4b094-4c32-4061-b7a0-0691c7bf9536/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-08-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_3.56.26.png)
+![스크린샷 2022-08-17 오후 3.56.26.png](/image/1.png)
 
 1. 사용자는 Get 메서드를 통해 글 작성 폼의 페이지를 요청한다.
     1. 서버는 글 작성 폼을 사용자에게 보여주며 응답한다.
@@ -147,7 +147,7 @@ BindingResult 매개변수는 항상 @Valid 매개변수 바로 뒤에 위치해
 
 ### Validation의 유용한 어노테이션
 
-![출처: [https://wikidocs.net/161873](https://wikidocs.net/161873)](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/267cda1c-6e4e-4921-abaa-48e1155fb4fc/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-08-17_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_10.29.47.png)
+![출처: [https://wikidocs.net/161873](https://wikidocs.net/161873)](/image/2.PNG)
 
 출처: [https://wikidocs.net/161873](https://wikidocs.net/161873)
 
@@ -165,7 +165,7 @@ BindingResult 매개변수는 항상 @Valid 매개변수 바로 뒤에 위치해
 2. **인가(Authorize)** : 해당 리소스에 대해 접근 가능한 권한을 가지고 있는지 확인하는 과정 (After Authentication, 인증 이후)
 3. **권한** : 어떠한 리소스에 대한 접근 제한, 모든 리소스는 접근 제어 권한이 걸려있다. 즉, 인가 과정에서해당 리소스에 대한 제한된 최소한의 권한을 가졌는지 확인한다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b3d59832-aaa3-4e99-9ce0-be699ce85e6a/Untitled.png)
+![Untitled](/image/3.png)
 
 Spring Security는 **세션-쿠키 방식으로 인증한다.**
 
@@ -186,23 +186,23 @@ Spring Security는 **세션-쿠키 방식으로 인증한다.**
 
 ### **이소영님 회고록**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d5c8f23c-bb45-40c8-a782-c62a6f02b4c9/Untitled.png)
+![Untitled](/image/4.png)
 
 ### **서진수님 회고록**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ab541bc9-7c8a-4f57-8c0d-c2ed1e2e6685/Untitled.png)
+![Untitled](/image/5.png)
 
 ### **김지훈님 회고록**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3e86e05b-9862-4800-8a11-6f2d79f7f8b3/Untitled.png)
+![Untitled](/image/6.png)
 
 ### **김상훈님 회고록**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ec68b50f-960d-4de4-bad0-ac87d541111b/Untitled.png)
+![Untitled](/image/7.png)
 
 ### **도성구님 회고록**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc93b8ab-f185-450e-8b63-8e7a8ca5c967/Untitled.png)
+![Untitled](/image/8.png)
 
 ---
 
@@ -211,7 +211,7 @@ Spring Security는 **세션-쿠키 방식으로 인증한다.**
 - 필수) 팀원들과 함께 찍은 인증샷(온라인 만남시 스크린 캡쳐)도 함께 업로드 해주세요 🙂
 - 이번주는 다같이 회의한 사진으로 대체합니다!!
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6054a211-a464-453b-96cb-beaa3a9a7850/Untitled.png)
+    ![Untitled](/image/9.png)
     
 - 필수) 자랑 멘트는 **‘팀 내에서 어떻게 복습을 하고 있고, 해당 복습 과정으로 인해 어떤 긍정적인 효과가 발생했는지’**에 대해 간단하게 작성해 주시면 됩니다 😊
     
