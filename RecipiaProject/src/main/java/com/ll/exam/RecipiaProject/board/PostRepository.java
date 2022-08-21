@@ -2,5 +2,5 @@ package com.ll.exam.RecipiaProject.board;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BoardRepository extends JpaRepository<Board,Integer> {
+public interface PostRepository extends JpaRepository<Post,Integer> {
 }
