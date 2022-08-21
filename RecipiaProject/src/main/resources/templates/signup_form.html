@@ -6,8 +6,8 @@
         </div>
     </div>
     <div class="block p-6 rounded-lg shadow-lg bg-white w-full">
-        <div th:replace="form_errors :: formErrorsFragment"></div>
         <form th:action="@{/user/sign-up}" th:object="${userFormDto}" method="post">
+            <div th:replace="form_errors :: formErrorsFragment"></div>
               <div class="flex flex-col">
                   <label class="form-label mt-3">사용자ID</label>
                    <div class="form-group mb-6">

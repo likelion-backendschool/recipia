@@ -1,6 +1,7 @@
 package com.ll.exam.RecipiaProject.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,15 @@ public class UserController {
                     ,"비밀번호가 일치하지 않습니다.");
             return "signup_form";
         }
-        userService.create(userFormDto.getUsername(), userFormDto.getPassword1(), userFormDto.getEmail());
+        try{
+            userService.create(userFormDto.getUsername(), userFormDto.getPassword1(), userFormDto.getEmail());
+        }catch (UsernameDuplicatedException e){
+            bindingResult.reject("usernameDuplicatedError", e.getMessage());
+            return "signup_form";
+        }catch (EmailDuplicatedException e){
+            bindingResult.reject("emailDuplicatedError", e.getMessage());
+            return "signup_form";
+        }
         return "redirect:/user/home";
     }
 }
