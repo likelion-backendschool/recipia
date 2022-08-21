@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link
@@ -11,6 +11,33 @@
     <title>Title</title>
 </head>
 <body>
-<h1>postList</h1>
+<main class="min-h-screen ">
+    <div class="flex flex-wrap m-10 justify-center gap-4">
+    <div th:each="post : ${posts}">
+
+        <div class="card w-100 bg-base-100 shadow-xl">
+            <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+            <div class="card-body">
+                <h2 class="card-title">
+                    <p th:text="${post.title}"></p>
+                    <div class="badge badge-secondary">NEW</div>
+                </h2>
+                <p th:text="${post.content}"></p>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
+                    <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
+                    <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
+                </div>
+                <div class="card-actions justify-end ">
+                    <div class="badge badge-outline " th:text="|created : ${post.createdDate}|"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </th:each>
+    </div>
+    </div>
+</main>
 </body>
 </html>

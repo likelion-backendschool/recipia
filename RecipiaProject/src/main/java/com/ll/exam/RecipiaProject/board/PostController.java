@@ -17,6 +17,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final PostRepository postRepository;
 
     @GetMapping("")
     public String postForm(Model model){
@@ -31,6 +32,8 @@ public class PostController {
 
     @GetMapping("/list")
     public String posts(Model model){
+        List<Post> posts=postRepository.findAll();
+        model.addAttribute("posts",posts);
         return "post/postList";
     }
 

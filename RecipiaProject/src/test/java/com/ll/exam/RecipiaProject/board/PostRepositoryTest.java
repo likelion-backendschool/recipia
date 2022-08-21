@@ -32,20 +32,23 @@ class PostRepositoryTest {
                 .build();
         usersRepository.save(users);
         Users users1 = usersRepository.findById(users.getId()).orElseThrow(()->new EntityNotFoundException("문제발생"));
-        Post post=Post.builder()
-                .title("title")
-                .content("content")
-                .image(Files.readAllBytes(file.toPath()))
-                .score(1)
-                .views(2)
-                .likes(3)
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .deleteDate(Timestamp.valueOf(LocalDateTime.now()))
-                .modifiedDate(Timestamp.valueOf(LocalDateTime.now()))
-                .isBlind(true)
-                .users(users1)
-                .build();
-        postRepository.save(post);
-        Assertions.assertEquals("title",post.getTitle());
+        Post post=null;
+      for(int i=1;i<=8;i++){
+         post =Post.builder()
+                  .title("title%s".formatted(i))
+                  .content("content%s".formatted(i))
+                  .image(Files.readAllBytes(file.toPath()))
+                  .score(1*i)
+                  .views(2*i)
+                  .likes(3*i)
+                  .createdDate(Timestamp.valueOf(LocalDateTime.now()))
+                  .deleteDate(Timestamp.valueOf(LocalDateTime.now()))
+                  .modifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                  .isBlind(true)
+                  .users(users1)
+                  .build();
+          postRepository.save(post);
+      }
+        Assertions.assertEquals("title8",post.getTitle());
     }
 }
