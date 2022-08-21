@@ -1,13 +1,22 @@
 package com.ll.exam.RecipiaProject.board;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/posts")
+@RequiredArgsConstructor
 @Controller
 public class PostController {
+
+    private final PostService postService;
 
     @GetMapping("")
     public String postForm(Model model){

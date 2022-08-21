@@ -1,7 +1,9 @@
 package com.ll.exam.RecipiaProject.board;
 
-import com.ll.exam.RecipiaProject.user.User;
+import com.ll.exam.RecipiaProject.user.Users;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,6 +13,7 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 public class Post {
     @Id
@@ -42,6 +45,19 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
-
+    private Users users;
+    @Builder
+    public Post(String title, String content, byte[] image, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind, Users users){
+        this.title=title;
+        this.content=content;
+        this.image=image;
+        this.score=score;
+        this.views=views;
+        this.likes=likes;
+        this.createdDate=createdDate;
+        this.modifiedDate=modifiedDate;
+        this.deleteDate=deleteDate;
+        this.isBlind=isBlind;
+        this.users = users;
+    }
 }
