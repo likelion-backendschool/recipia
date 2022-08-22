@@ -1,4 +1,4 @@
-package com.ll.exam.RecipiaProject.board;
+package com.ll.exam.RecipiaProject.post;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

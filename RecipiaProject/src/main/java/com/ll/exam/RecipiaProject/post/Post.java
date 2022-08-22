@@ -1,4 +1,4 @@
-package com.ll.exam.RecipiaProject.board;
+package com.ll.exam.RecipiaProject.post;
 
 import lombok.Builder;
 import lombok.Getter;
