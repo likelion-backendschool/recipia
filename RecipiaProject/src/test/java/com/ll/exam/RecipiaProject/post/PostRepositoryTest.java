@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 class PostRepositoryTest {
     @Autowired
     private PostRepository postRepository;
-    static File file=new File("C:\\Users\\KIM\\Desktop\\p1.png");
+//    static File file=new File("C:\\Users\\KIM\\Desktop\\p1.png");
     @BeforeEach
     public void beforeEach() throws IOException {
         clearData();
@@ -34,7 +34,7 @@ class PostRepositoryTest {
             post =Post.builder()
                     .title("title%s".formatted(i))
                     .content("content%s".formatted(i))
-                    .image(Files.readAllBytes(file.toPath()))
+                    //.image(Files.readAllBytes(file.toPath()))
                     .score(1*i)
                     .views(2*i)
                     .likes(3*i)
