@@ -1,6 +1,5 @@
 package com.ll.exam.RecipiaProject.board;
 
-import com.ll.exam.RecipiaProject.user.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,11 +42,8 @@ public class Post {
 
     private boolean isBlind;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users users;
     @Builder
-    public Post(String title, String content, byte[] image, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind, Users users){
+    public Post(String title, String content, byte[] image, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind){
         this.title=title;
         this.content=content;
         this.image=image;
@@ -58,6 +54,5 @@ public class Post {
         this.modifiedDate=modifiedDate;
         this.deleteDate=deleteDate;
         this.isBlind=isBlind;
-        this.users = users;
     }
 }
