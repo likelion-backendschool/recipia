@@ -110,13 +110,13 @@
 ---
 - **회원 가입 페이지**
 
-![회원 가입 페이지](https://github.com/likelion-backendschool/recipia/blob/feature-%2328/Weekly_Log/week3_signUpPage.png)
+![회원 가입 페이지](https://github.com/likelion-backendschool/recipia/blob/feature-%2328/Weekly_Log/images/week3_signUpPage.png)
 
 - **게시물 리스트**
 
-![게시물 리스트 페이지](https://github.com/likelion-backendschool/recipia/blob/feature-%2328/Weekly_Log/week3_postList.png)
+![게시물 리스트 페이지](https://github.com/likelion-backendschool/recipia/blob/feature-%2328/Weekly_Log/images/week3_postList.png)
 
 - **마이 페이지**
 
-![회원 가입 페이지](https://github.com/likelion-backendschool/recipia/blob/feature-%2328/Weekly_Log/week3_myPage.png)
+![회원 가입 페이지](https://github.com/likelion-backendschool/recipia/blob/feature-%2328/Weekly_Log/images/week3_myPage.png)
 
