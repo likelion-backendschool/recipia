@@ -9,11 +9,11 @@ import javax.persistence.*;
 @Setter
 @Entity
 public class MyPage {
-    @Id
+    @Id //pk
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true) //중복 허용 X
     private String email;
 
     @Column(unique = true)
