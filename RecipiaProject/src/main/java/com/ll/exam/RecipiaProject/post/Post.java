@@ -45,7 +45,7 @@ public class Post {
     private SiteUser siteUser;
 
     @Builder
-    public Post(String title, String content, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind){
+    public Post(String title, String content, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind,SiteUser siteUser){
         this.title=title;
         this.content=content;
         this.score=score;
@@ -55,5 +55,6 @@ public class Post {
         this.modifiedDate=modifiedDate;
         this.deleteDate=deleteDate;
         this.isBlind=isBlind;
+        this.siteUser=siteUser;
     }
 }
