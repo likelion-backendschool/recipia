@@ -28,7 +28,7 @@ public class Post {
 
     private int score;
 
-    private int views ;
+    private int views;
 
     private int likes;
 
