@@ -24,28 +24,28 @@ public class UserController {
 
     @GetMapping("/sign-up")
     public String signUpForm(UserFormDto userFormDto){
-        return "signup_form";
+        return "user/signup_form";
     }
 
     @PostMapping("/sign-up")
     public String signUpFormPost(@Valid UserFormDto userFormDto, BindingResult bindingResult){
         // 만일 오류가 있다면 다시 회원가입 입력 폼으로
         if (bindingResult.hasErrors()){
-            return "signup_form";
+            return "user/signup_form";
         }
         if (!userFormDto.getPassword1().equals(userFormDto.getPassword2())){
             bindingResult.rejectValue("password2","passwordInCorrect"
                     ,"비밀번호가 일치하지 않습니다.");
-            return "signup_form";
+            return "user/signup_form";
         }
         try{
             userService.create(userFormDto.getUsername(), userFormDto.getPassword1(), userFormDto.getEmail());
         }catch (UsernameDuplicatedException e){
             bindingResult.reject("usernameDuplicatedError", e.getMessage());
-            return "signup_form";
+            return "user/signup_form";
         }catch (EmailDuplicatedException e){
             bindingResult.reject("emailDuplicatedError", e.getMessage());
-            return "signup_form";
+            return "user/signup_form";
         }
         return "redirect:/user/home";
     }
