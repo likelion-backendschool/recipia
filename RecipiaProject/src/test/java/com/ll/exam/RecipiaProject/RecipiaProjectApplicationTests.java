@@ -1,16 +1,31 @@
 package com.ll.exam.RecipiaProject;
 
 
+import com.ll.exam.RecipiaProject.mypage.MyPage;
+import com.ll.exam.RecipiaProject.mypage.MyPageRepository;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class RecipiaProjectApplicationTests {
 
 
+	@Autowired
+	private MyPageRepository myPageRepository;
+
 	@Test
 	void contextLoads() {
 	}
 
+	@Test
+	void MyPage_id_NickName_Matching() {
+		MyPage q = this.myPageRepository.findByNickName("seonggu");
+
+		assertEquals(1, q.getId());
+	}
 
 }
