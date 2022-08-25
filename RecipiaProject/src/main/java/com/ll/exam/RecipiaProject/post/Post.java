@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,6 @@ public class Post {
 
     private String content;
 
-    @Lob
-    private byte[] image;
 
     private int score;
 
@@ -42,11 +41,13 @@ public class Post {
 
     private boolean isBlind;
 
+    @ManyToOne
+    private SiteUser siteUser;
+
     @Builder
-    public Post(String title, String content, byte[] image, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind){
+    public Post(String title, String content, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind){
         this.title=title;
         this.content=content;
-        this.image=image;
         this.score=score;
         this.views=views;
         this.likes=likes;
