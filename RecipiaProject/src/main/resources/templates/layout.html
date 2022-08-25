@@ -12,11 +12,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>안녕!</title>
 </head>
-<body>
+<body class="relative">
 <!-- 네비게이션바 -->
 <nav th:replace="navbar :: navbarFragment"></nav>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 <th:block layout:fragment="content"></th:block>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+<!-- footer -->
+<footer th:replace="footer :: footerFragment"></footer>
 </body>
 </html>
