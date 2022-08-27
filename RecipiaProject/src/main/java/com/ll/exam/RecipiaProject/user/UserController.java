@@ -53,8 +53,4 @@ public class UserController {
     public String userLogin(UserFormDto userFormDto){
         return "user/login_form";
     }
-    @PostMapping("/login")
-    public String userLoginPost (@Valid UserFormDto userFormDto, BindingResult bindingResult){
-        return "redirect:/user/home";
-    }
 }
