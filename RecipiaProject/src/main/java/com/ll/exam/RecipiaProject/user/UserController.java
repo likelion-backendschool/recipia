@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String userLogin(UserFormDto userFormDto){
+    public String userLogin(){
         return "user/login_form";
     }
 }
