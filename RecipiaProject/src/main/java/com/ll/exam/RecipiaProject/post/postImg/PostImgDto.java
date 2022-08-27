@@ -1,4 +1,4 @@
-package com.ll.exam.RecipiaProject.post.postImage;
+package com.ll.exam.RecipiaProject.post.postImg;
 
 
 public class PostImgDto {
