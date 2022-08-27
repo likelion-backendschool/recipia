@@ -1,13 +1,11 @@
 package com.ll.exam.RecipiaProject.post;
 
-import com.ll.exam.RecipiaProject.post.postImage.PostImgDto;
+import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
