@@ -35,4 +35,9 @@ public class PostImg {
         this.imgUrl=imgUrl;
         this.thumbnailYn=thumbnailYn;
     }
+    public void updatePostImg(String oriImgName,String imgName,String imgUrl){
+            this.oriImgName=oriImgName;
+            this.imgName=imgName;
+            this.imgUrl=imgUrl;
+    }
 }
