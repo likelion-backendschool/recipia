@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -19,15 +20,13 @@ private String title;
 
 private String content;
 
+//상세페이지 구현시 이미지 전송 에 사용될 변수
 private List<PostImgDto> postImgDtoList=new ArrayList<>();
 
 public Post createPost(SiteUser siteUser){
     return Post.builder()
             .title(title)
             .content(content)
-            .score(0)
-            .views(0)
-            .likes(0)
             .siteUser(siteUser)
             .build();
 }
