@@ -18,8 +18,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/**").permitAll()
                 .and()
-                .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
                 .headers()
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(
                         XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
