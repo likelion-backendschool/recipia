@@ -1,10 +1,13 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequestMapping("/posts")
@@ -13,6 +16,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+
 
     //게시글 작성 폼으로 이동
     @GetMapping("")
@@ -23,7 +27,8 @@ public class PostController {
 
     //게시글 작성
     @PostMapping("")
-    public String postCreate(){
+    public String postCreate(PostFormDto postFormDto, @RequestParam("imgFile") List<MultipartFile> files, Principal principal){
+        postService.createPost(postFormDto,files,principal);
         return "redirect:/posts/list";
     }
 
