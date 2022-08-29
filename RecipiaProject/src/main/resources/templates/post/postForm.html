@@ -5,10 +5,6 @@
 
       layout:decorate="~{layout}">
 
-<!--csrf 토큰-->
-<meta name="_csrf" th:content="${_csrf.token}"/>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-
 <th:bloack layout:fragment="content">
 
     <form  method="post" th:object="${postFormDto}" enctype="multipart/form-data">
