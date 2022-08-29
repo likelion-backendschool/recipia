@@ -1,6 +1,8 @@
 package com.ll.exam.RecipiaProject.mypage;
 
-public class MyPage {
+import com.ll.exam.RecipiaProject.user.SiteUser;
+
+public class MyPageDto {
 
     private Integer id;
 
@@ -11,5 +13,14 @@ public class MyPage {
     private String nickname;
 
     private String passward;
+    public SiteUser siteUser() {
+        return SiteUser.builder()
+                .id(id)
+                .email(email)
+                .username(username)
+                .nickname(nickname)
+                .password(passward)
+                .build();
+    }
 
 }

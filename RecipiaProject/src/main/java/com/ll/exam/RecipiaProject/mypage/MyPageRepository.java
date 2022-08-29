@@ -2,13 +2,13 @@ package com.ll.exam.RecipiaProject.mypage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MyPageRepository extends JpaRepository<MyPage, Integer> {
+public interface MyPageRepository extends JpaRepository<MyPageDto, Integer> {
 
-    MyPage findById(String id);
+    MyPageDto findById(String id);
 
-    MyPage findByNickName(String nickname);
+    MyPageDto findByNickName(String nickname);
 
-    MyPage findByEmail(String email);
+    MyPageDto findByEmail(String email);
 
-    MyPage findByUserName(String username);
+    MyPageDto findByUserName(String username);
 }

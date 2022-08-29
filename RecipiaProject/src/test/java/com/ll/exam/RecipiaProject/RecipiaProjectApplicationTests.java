@@ -1,7 +1,7 @@
 package com.ll.exam.RecipiaProject;
 
 
-import com.ll.exam.RecipiaProject.mypage.MyPage;
+import com.ll.exam.RecipiaProject.mypage.MyPageDto;
 import com.ll.exam.RecipiaProject.mypage.MyPageRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ class RecipiaProjectApplicationTests {
 	}
 	@Test
 	void MyPage_id_NickName_Matching() {
-		MyPage q = this.myPageRepository.findByNickName("seonggu");
+		MyPageDto q = this.myPageRepository.findByNickName("seonggu");
 
 		assertEquals(1, q.getId());
 	}
