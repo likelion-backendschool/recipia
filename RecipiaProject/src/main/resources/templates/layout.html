@@ -11,6 +11,10 @@
     <!-- 테일윈드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <title>안녕!</title>
+    <!--csrf 토큰-->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
 </head>
 <body class="flex flex-col min-h-screen">
 <!-- 네비게이션바 -->
