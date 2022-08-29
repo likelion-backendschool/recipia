@@ -1,4 +1,4 @@
-# 3주차 팀 위클리
+# 4주차 팀 위클리
 
 날짜: 2022년 8월 29일
 
@@ -112,5 +112,5 @@
 
 - **마이 페이지**
 
-![회원 가입 페이지]()
+![마이 페이지](https://github.com/likelion-backendschool/recipia/blob/feature-%2346/Weekly_Log/images/4%EC%A3%BC%EC%B0%A8%EB%8F%84%EC%84%B1%EA%B5%AC%EB%8B%98%ED%8E%98%EC%9D%B4%EC%A7%80.png)
 
