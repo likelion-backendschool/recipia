@@ -26,7 +26,7 @@ public class PostService {
 
     public void createPost(PostFormDto postFormDto,List<MultipartFile> files,Principal principal) {
         //로그인 기능 추가시 여기에 principal 로 SiteUser 불러오기
-        SiteUser user=userRepository.findByUsername("user1");
+        SiteUser user = userRepository.findByUsername("user1");
         Post post=postFormDto.createPost(user);
         postRepository.save(post);
         for(int i=0;i<files.size();i++){
