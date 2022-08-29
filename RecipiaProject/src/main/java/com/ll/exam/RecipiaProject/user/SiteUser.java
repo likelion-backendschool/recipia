@@ -29,4 +29,16 @@ public class SiteUser {
     private String nickname;
 
     private String gender;
+
+
+    // 객체 생성 패턴 Not Null방지를 해주자.
+    @Builder
+    public SiteUser(Integer id, String username, String password, String email, String nickname, String gender){
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.nickname = nickname;
+        this.gender = gender;
+    }
 }
