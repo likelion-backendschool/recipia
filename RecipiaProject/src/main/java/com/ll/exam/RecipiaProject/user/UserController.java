@@ -1,7 +1,6 @@
 package com.ll.exam.RecipiaProject.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,5 +47,10 @@ public class UserController {
             return "user/signup_form";
         }
         return "redirect:/user/home";
+    }
+
+    @GetMapping("/login")
+    public String userLogin(){
+        return "user/login_form";
     }
 }

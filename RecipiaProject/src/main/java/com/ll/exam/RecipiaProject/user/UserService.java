@@ -16,7 +16,7 @@ public class UserService {
             throws UsernameDuplicatedException, EmailDuplicatedException{
         SiteUser newUser = SiteUser.builder()
                 .username(username)
-                .passward(passwordEncoder.encode(password))
+                .password(passwordEncoder.encode(password))
                 .email(email)
                 .build();
 
