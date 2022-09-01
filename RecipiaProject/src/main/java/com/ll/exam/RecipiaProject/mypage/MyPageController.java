@@ -16,7 +16,7 @@ public class MyPageController {
     @GetMapping("/home")
     public String mypageHome() {
 
-        return "mypage_home";
+        return "mypage/mypage_home";
     }
 
 
