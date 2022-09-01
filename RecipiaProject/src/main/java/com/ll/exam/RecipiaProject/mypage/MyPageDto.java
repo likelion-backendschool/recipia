@@ -11,4 +11,15 @@ import lombok.Setter;
 @Getter
 // getter,setter default -> public
 public class MyPageDto {
+
+    private Integer id;
+
+    private String username;
+
+    private String email;
+
+    private String nickname;
+
+    private String gender;
+
 }
