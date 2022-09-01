@@ -18,9 +18,12 @@ public class MyPageController {
 
     @GetMapping("/home")
     public String mypageHome() {
-        //예외처리를 위한 옵셔널 다시 체킹해야함
+
+
         SiteUser siteUser = userRepository.findByUsername("user1").orElseThrow(() ->new EntityNotFoundException());
         MyPageDto myPageDto = MyPageDto.createMyPageDto(siteUser);
+        //principal
+        //model MVC
 
         return "mypage/mypage_home";
     }
