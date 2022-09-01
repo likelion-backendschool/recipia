@@ -1,13 +1,11 @@
 package com.ll.exam.RecipiaProject.hashtag;
 
+import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -20,11 +18,15 @@ public class HashTag {
     private int tagView;
     private String tagCategory;
 
+    @ManyToOne
+    private SiteUser siteUser;
+
     @Builder
-    public HashTag(int tagId, String tagContent, int tagView, String tagCategory){
+    public HashTag(int tagId, String tagContent, int tagView, String tagCategory, SiteUser siteUser){
         this.tagId = tagId;
         this.tagContent= tagContent;
         this.tagView= tagView;
         this.tagCategory = tagCategory;
+        this.siteUser = siteUser;
     }
 }

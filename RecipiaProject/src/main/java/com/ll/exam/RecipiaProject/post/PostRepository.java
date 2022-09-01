@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-public interface PostRepository extends JpaRepository<Post,Integer> {
+public interface PostRepository extends JpaRepository<Post, Integer> {
     public Post findByTitle(String title);
 
     @Transactional
     @Modifying
-    @Query(value = "ALTER TABLE Post AUTO_INCREMENT=1",nativeQuery = true)
+    @Query(value = "ALTER TABLE Post AUTO_INCREMENT=1", nativeQuery = true)
     public void truncate();
 }
