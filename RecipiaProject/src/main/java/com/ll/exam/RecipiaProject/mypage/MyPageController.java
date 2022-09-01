@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.mypage;
 
+import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ public class MyPageController {
 
     @GetMapping("/home")
     public String mypageHome() {
+        SiteUser siteUser = userRepository.findByUsername("user1")
 
         return "mypage/mypage_home";
     }
