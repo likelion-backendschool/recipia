@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Optional; //NullpointerException 해결
+import javax.persistence.EntityNotFoundException;
 
 @RequestMapping("/mypage") // 여기에 적으면 MyPageController URL 상위
 @Controller
@@ -18,7 +18,8 @@ public class MyPageController {
 
     @GetMapping("/home")
     public String mypageHome() {
-        Optional<SiteUser> siteUser = userRepository.findByUsername("user1");
+        //예외처리를 위한 옵셔널 다시 체킹해야함
+        SiteUser siteUser = userRepository.findByUsername("user1").orElseThrow(() ->new EntityNotFoundException());
 
         return "mypage/mypage_home";
     }
