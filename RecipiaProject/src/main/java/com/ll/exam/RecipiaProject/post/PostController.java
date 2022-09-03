@@ -2,6 +2,7 @@ package com.ll.exam.RecipiaProject.post;
 
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +35,9 @@ public class PostController {
 
     //게시글 리스트로 이동
     @GetMapping("/list")
-    public String posts(Model model){
-        List<Post> posts=postService.getPostList();
-        model.addAttribute("posts",posts);
+    public String posts(String kw, Model model, @RequestParam(defaultValue = "0") int page) {
+        Page<Post> paging = postService.getPostList(kw, page);
+        model.addAttribute("paging",paging);
         return "post/postList";
     }
 
