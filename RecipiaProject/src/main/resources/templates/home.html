@@ -1,5 +1,21 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment = "content">
-    <h1>메인 페이지야!!</h1>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        layout:decorate="~{layout}">
+
+<div layout:fragment="content" class="container my-3">
+
+    <div class="row my-3">
+
+        <div class="col-6">
+            <form class="input-group">
+                <input class="form-control" type="text" name="kw" placeholder="검색어를 입력해주세요." th:value="${param.kw}">
+                <button type="submit" class="btn btn-outline">검색</button>
+            </form>
+        </div>
+    </div>
+
+
 </div>
+
 </html>
