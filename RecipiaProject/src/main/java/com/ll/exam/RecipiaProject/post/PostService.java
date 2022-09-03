@@ -5,7 +5,6 @@ import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +29,6 @@ public class PostService {
 
     public Page<Post> getPostList(String kw, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
 
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // 한 페이지에 10까지 가능
 
@@ -38,7 +36,7 @@ public class PostService {
             return postRepository.findAll(pageable);
         }
 
-        return postRepository.findByTitleOrContentOrAuthor(kw, kw, kw, pageable);
+        return postRepository.findByTitleOrContentOrSiteUser(kw, kw, kw, pageable);
     }
 
     public Post getPost(int id) {

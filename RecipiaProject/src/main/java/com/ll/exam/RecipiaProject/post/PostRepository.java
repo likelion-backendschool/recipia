@@ -17,5 +17,5 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
     public void truncate();
 
     //제목 + 내용 + 글쓴이 정보 찾기
-    Page<Post> findByTitleOrContentOrAuthor(String kw, String kw_, String kw__, Pageable pageable);
+    Page<Post> findByTitleOrContentOrSiteUser(String kw, String kw_, String kw__, Pageable pageable);
 }
