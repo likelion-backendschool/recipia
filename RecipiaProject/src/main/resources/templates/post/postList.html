@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link
-    href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css"
-    rel="stylesheet"
-    type="text/css"
-  />
-  <script src="https://cdn.tailwindcss.com"></script>
-    <title>Title</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<th:bloack layout:fragment="content">
 <main class="min-h-screen ">
     <div class="flex flex-wrap m-10 justify-center gap-4">
     <div th:each="post : ${posts}">
@@ -39,5 +33,5 @@
     </div>
     </div>
 </main>
-</body>
+</th:bloack>
 </html>
