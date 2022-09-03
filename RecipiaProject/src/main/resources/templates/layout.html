@@ -14,13 +14,15 @@
     <!--csrf 토큰-->
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </head>
 <body class="flex flex-col min-h-screen">
 <!-- 네비게이션바 -->
 <nav th:replace="navbar :: navbarFragment"></nav>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<div class="h-screen">
+<div class="flex-grow">
     <th:block layout:fragment="content"></th:block>
 </div>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
