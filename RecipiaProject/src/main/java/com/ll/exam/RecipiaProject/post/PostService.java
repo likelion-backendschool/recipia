@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.DataNotFoundException;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import com.ll.exam.RecipiaProject.user.SiteUser;
@@ -38,6 +39,11 @@ public class PostService {
         }
 
         return postRepository.findByTitleOrContentOrAuthor(kw, kw, kw, pageable);
+    }
+
+    public Post getPost(int id) {
+        return postRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("no %d question not found,".formatted(id)));
     }
 
     public void createPost(PostFormDto postFormDto,List<MultipartFile> files,Principal principal) {
