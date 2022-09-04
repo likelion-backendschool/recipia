@@ -29,5 +29,25 @@ public class MyPageController {
         return "mypage/mypage_home";
     }
 
+    @GetMapping("/bookmark")
+    public String myPageBookmark() {
+        return "mypage/mypage_bookmark";
+    }
+
+    @GetMapping("/allergy")
+    public String myPageAllergyFilter() {
+        return "mypage/mypage_allergyFilter";
+    }
+
+    @GetMapping("/modify")
+    public String userModify() {
+        return "mypage/mypage_userModify";
+    }
+
+    @GetMapping("/withdraw")
+    public String userWithdraw() {
+        return "mypage/mypage_userWithdraw";
+    }
+
 
 }

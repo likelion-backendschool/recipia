@@ -6,7 +6,9 @@
   <th:block layout:fragment="content">
     <form th:action="@{/mypage}"  th:object="${MyPageDto}" method="post">
       <div class="flex justify-center">
-        <div class="mt-20 h-32 w-32 p-4 border-4 bg-black rounded "></div>
+        <div class="mt-20 h-32 w-32 p-4 border-4 bg-black rounded ">
+          <a th:href="@{/user/sign-up}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+        </div>
       </div>
 
       <div class="flex justify-center">
