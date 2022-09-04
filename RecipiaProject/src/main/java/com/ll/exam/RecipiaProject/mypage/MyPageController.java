@@ -16,7 +16,7 @@ public class MyPageController {
 
     private final UserRepository userRepository;
 
-    @GetMapping("/home")
+    @GetMapping("")
     public String mypageHome() {
 
 
