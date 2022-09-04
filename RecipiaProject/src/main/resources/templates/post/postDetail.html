@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>postDetail</h1>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<th:bloack layout:fragment="content">
+<h1 th:text="${postDetailDto.title}"></h1>
+    <img th:src="@{C:post/img/88c5109a-4cd5-4264-91d6-2228f8f0e9d8.png}"/>
+</th:bloack>
 </html>

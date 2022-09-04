@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -48,6 +49,9 @@ public class PostController {
     //게시글 상세 페이지로 이동
     @GetMapping("/{postId}")
     public String postDetail(@PathVariable("postId") int postId,Model model){
+        PostDetailDto postDetailDto=new PostDetailDto();
+        postDetailDto=postService.getPostDetail(postId);
+        model.addAttribute("postDetailDto",postDetailDto);
         return "post/postDetail";
     }
 

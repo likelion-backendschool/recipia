@@ -44,4 +44,8 @@ public class PostService {
             postImgService.createPostImg(postImg,files.get(i));
         }
     }
+
+    public PostDetailDto getPostDetail(int postId) {
+        return postRepository.getPostDetail(postId);
+    }
 }
