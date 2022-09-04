@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.EntityNotFoundException;
+import java.security.Principal;
 
 @RequestMapping("/mypage") // 여기에 적으면 MyPageController URL 상위
 @Controller
@@ -18,7 +19,7 @@ public class MyPageController {
     private final UserRepository userRepository;
 
     @GetMapping("")
-    public String mypageHome(Model model) {
+    public String mypageHome(Model model, Principal principal) {
 
 
         SiteUser siteUser = userRepository.findByUsername("user1").orElseThrow(() ->new EntityNotFoundException());
