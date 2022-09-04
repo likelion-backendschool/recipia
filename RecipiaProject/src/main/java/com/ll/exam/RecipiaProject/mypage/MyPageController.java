@@ -29,6 +29,10 @@ public class MyPageController {
         return "mypage/mypage_home";
     }
 
+    @GetMapping("/myposts")
+    public String myPosts() {
+        return "mypage/mypage_myPosts";
+    }
     @GetMapping("/bookmark")
     public String myPageBookmark() {
         return "mypage/mypage_bookmark";

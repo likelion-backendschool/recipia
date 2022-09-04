@@ -6,9 +6,7 @@
   <th:block layout:fragment="content">
     <form th:action="@{/mypage}"  th:object="${MyPageDto}" method="post">
       <div class="flex justify-center">
-        <div class="mt-20 h-32 w-32 p-4 border-4 bg-black rounded ">
-          <a th:href="@{/user/sign-up}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
-        </div>
+        <div class="mt-20 h-32 w-32 p-4 border-4 bg-black rounded "></div>
       </div>
 
       <div class="flex justify-center">
@@ -54,11 +52,11 @@
 
         <!--각 페이지로 넘어가기위한 button -->
         <div class="flex justify-center mt-1">
-          <button class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">나의 게시물</button>
-          <button class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">즐겨찾기</button>
-          <button class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</button>
-          <button class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</button>
-          <button class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원탈퇴</button>
+          <a th:href="@{/mypage/myposts}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">나의 게시물</a>
+          <a th:href="@{/mypage/bookmark}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">즐겨찾기</a>
+          <a th:href="@{/mypage/allergy}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
+          <a th:href="@{/mypage/modify}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
+          <a th:href="@{/mypage/withdraw}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원탈퇴</a>
         </div>
       </div>
     </form>
