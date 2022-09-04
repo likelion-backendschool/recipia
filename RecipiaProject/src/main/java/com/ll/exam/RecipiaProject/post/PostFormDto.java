@@ -20,8 +20,10 @@ private String title;
 
 private String content;
 
-//상세페이지 구현시 이미지 전송 에 사용될 변수
+//작성폼 수정시 사용
 private List<PostImgDto> postImgDtoList=new ArrayList<>();
+//작성폼 수정시 사용
+private List<Integer>postImgIds =new ArrayList<>();
 
 public Post createPost(SiteUser siteUser){
     return Post.builder()
