@@ -4,6 +4,7 @@ import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,13 +18,13 @@ public class MyPageController {
     private final UserRepository userRepository;
 
     @GetMapping("")
-    public String mypageHome() {
+    public String mypageHome(Model model) {
 
 
         SiteUser siteUser = userRepository.findByUsername("user1").orElseThrow(() ->new EntityNotFoundException());
         MyPageDto myPageDto = MyPageDto.createMyPageDto(siteUser);
         //principal
-        //model MVC
+        model.addAttribute("MyPageDto", new MyPageDto());
 
         return "mypage/mypage_home";
     }
