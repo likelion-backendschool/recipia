@@ -14,22 +14,31 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.util.List;
 
+@RequestMapping("/hashtag")
 @RequiredArgsConstructor
 @Controller
 public class HashTagController {
     private final HashTagService hashTagService;
     private final HashTagRepository hashTagRepository;
 
-    @RequestMapping("/hashtag")
+
     @GetMapping("")
     public String hashTagForm(Model model) {
+        model.addAttribute("hashTagFormDto", new HashTagFormDto());
         return "hashtag/hashtagForm";
     }
 
     @PostMapping("")
     public String hashTagCreate(HashTagFormDto hashTagFormDto,Principal principal){
         hashTagService.createHashTag(hashTagFormDto,principal);
-        return "redirect:/hashTag";
+        return "redirect:/hashtag/list";
+    }
+
+    @GetMapping("/list")
+    public String list(Model model){
+        List<HashTag> hashTagList = this.hashTagRepository.findAll();
+        model.addAttribute("hashtagList", hashTagList);
+        return"hashtag/hashtagList";
     }
 
 }

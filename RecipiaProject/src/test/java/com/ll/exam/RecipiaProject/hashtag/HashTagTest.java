@@ -29,7 +29,7 @@ class HashTagTest {
 
     private void createSample() throws IOException{
         HashTag hashTag = null;
-        for(int i = 1; i <= 2; i++){
+        for(int i = 1; i <= 6; i++){
             hashTag=HashTag.builder()
                     .tagContent("tagContent%s".formatted(i))
                     .tagCategory("tagCategory%s".formatted(i))
@@ -42,6 +42,7 @@ class HashTagTest {
 
     private void clearData(){
         hashTagRepository.deleteAll();
+        hashTagRepository.truncate();
 
     }
 
@@ -50,6 +51,14 @@ class HashTagTest {
     @Rollback(value = false)
     public void save(){
         HashTag hashTag = hashTagRepository.findByTagContent("tagContent1");
+        Assertions.assertEquals("tagContent1", hashTag.getTagContent());
+    }
+
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    public void post_hashTag(){
+        HashTag hashTag = hashTagRepository.findByTagContent("감자");
         Assertions.assertEquals("tagContent1", hashTag.getTagContent());
     }
 }

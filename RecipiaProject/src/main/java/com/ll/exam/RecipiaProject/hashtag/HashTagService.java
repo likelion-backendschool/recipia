@@ -25,10 +25,13 @@ public class HashTagService {
         return hashTagRepository.findAll();
     }
 
+
+
     public void createHashTag(HashTagFormDto hashTagFormDto, Principal principal){
         SiteUser user=userRepository.findByUsername("user1").orElseThrow(()->new EntityNotFoundException());
         HashTag hashTag = hashTagFormDto.createHashTag(user);
         hashTagRepository.save(hashTag);
     }
+
 
 }
