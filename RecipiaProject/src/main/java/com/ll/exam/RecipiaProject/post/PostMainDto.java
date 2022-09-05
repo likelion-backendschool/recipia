@@ -1,6 +1,7 @@
 package com.ll.exam.RecipiaProject.post;
 
 import com.ll.exam.RecipiaProject.user.SiteUser;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostMainDto {
 
     private int id;
@@ -27,4 +29,6 @@ public class PostMainDto {
     private int views ;
 
     private int likes;
+
+    private String imgUrl;
 }

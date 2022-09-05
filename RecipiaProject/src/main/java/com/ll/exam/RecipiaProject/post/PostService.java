@@ -23,8 +23,8 @@ public class PostService {
     private final UserRepository userRepository;
 
     private final PostImgService postImgService;
-    public Page<Post> getPostList(Pageable pageable){
-        return postRepository.findAll(pageable);
+    public Page<PostMainDto> getPostList(Pageable pageable){
+        return postRepository.getPostList(pageable);
     }
 
     public void createPost(PostFormDto postFormDto,List<MultipartFile> files,Principal principal) {

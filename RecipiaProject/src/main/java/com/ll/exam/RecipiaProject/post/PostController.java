@@ -41,7 +41,7 @@ public class PostController {
     @GetMapping({"/list/{page}","/list"})
     public String posts(@PathVariable(value = "page") Optional<Integer> page, Model model){
         Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6);
-        Page<Post> posts=postService.getPostList(pageable);
+        Page<PostMainDto> posts=postService.getPostList(pageable);
         model.addAttribute("posts",posts);
         return "post/postList";
     }
