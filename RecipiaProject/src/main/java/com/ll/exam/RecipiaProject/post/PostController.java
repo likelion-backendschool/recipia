@@ -49,8 +49,7 @@ public class PostController {
     //게시글 상세 페이지로 이동
     @GetMapping("/{postId}")
     public String postDetail(@PathVariable("postId") int postId,Model model){
-        PostDetailDto postDetailDto=new PostDetailDto();
-        postDetailDto=postService.getPostDetail(postId);
+        PostDetailDto postDetailDto=postService.getPostDetail(postId);
         model.addAttribute("postDetailDto",postDetailDto);
         return "post/postDetail";
     }
