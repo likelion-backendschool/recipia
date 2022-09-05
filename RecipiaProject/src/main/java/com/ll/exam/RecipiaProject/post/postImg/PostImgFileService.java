@@ -1,9 +1,14 @@
 package com.ll.exam.RecipiaProject.post.postImg;
 
+import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.UUID;
 @Transactional
@@ -14,10 +19,16 @@ public class PostImgFileService {
         String extension=originImgName.substring(originImgName.lastIndexOf("."));
         String savedFileName=uuid.toString()+extension;
         String fileUploadUrl=postImgLocation+savedFileName;
-        FileOutputStream fos=new FileOutputStream(fileUploadUrl);
-        fos.write(file.getBytes());
-        fos.close();
+
+        BufferedImage bi=ImageIO.read(file.getInputStream());
+        bi=resizeImage(bi,450,450);
+        ImageIO.write(bi,"jpg",new File(fileUploadUrl));
         return savedFileName;
+    }
+
+    //이미지 리사이징 해주는 메서드
+    BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws Exception {
+        return Scalr.resize(originalImage, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, targetWidth, targetHeight, Scalr.OP_ANTIALIAS);
     }
 
 }
