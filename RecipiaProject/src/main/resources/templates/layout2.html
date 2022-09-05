@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 폰트 어썸 -->
+    <script src="https://use.fontawesome.com/7fa2757e91.js"></script>
+    <!-- 데이지 UI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <!-- 테일윈드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>안녕!</title>
+    <!--csrf 토큰-->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- 네비게이션바 -->
+<nav th:replace="navbar :: navbarFragment"></nav>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<div class="h-screen">
+    <th:block layout:fragment="content"></th:block>
+</div>
+
+</body>
+</html>

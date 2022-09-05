@@ -1,18 +1,275 @@
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:th="http://www.thymeleaf.org"
-        layout:decorate="~{layout}">
+        layout:decorate="~{layout2}">
 
 <div layout:fragment="content" class="container my-3">
 
-    <div class="row my-3">
+    <div class="w-25 p-3 card my-32 ">
+        <div>
 
-        <div class="col-6">
-            <form class="input-group">
-                <input class="form-control" type="text" name="kw" placeholder="검색어를 입력해주세요." th:value="${param.kw}">
-                <button type="submit" class="btn btn-outline">검색</button>
-            </form>
         </div>
+    </div>
+
+        <div class="row my-3">
+
+            <div class="col-6">
+                <form class="input-group">
+                    <input class="form-control" type="text" name="kw" placeholder="검색어를 입력해주세요." th:value="${param.kw}">
+                    <button type="submit" class="btn btn-outline">검색</button>
+                </form>
+            </div>
+        </div>
+
+    <div class="w-25 p-3 card my-20 ">
+        <div>
+
+        </div>
+    </div>
+
+    <div class="container mx-auto">
+        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[20px]">
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/231/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/100/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/230/752/440" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/211/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/110/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/577/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/381/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/790/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/227/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/271/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/140/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/231/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/100/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/230/752/440" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/211/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/110/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/577/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/381/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/790/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/227/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/271/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/140/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/231/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/100/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/230/752/440" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/211/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/110/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/577/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/381/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/790/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/227/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/271/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/140/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/231/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/100/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/230/752/440" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/211/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/110/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/577/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/381/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/790/752/302" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/227/752/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/271/802/442" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/140/752/302" alt="">
+                </a>
+            </li>
+        </ul>
     </div>
 
 
