@@ -35,6 +35,9 @@
         <tr th:each="hash_tag : ${hashtagList}">
             <td th:text="${hash_tag.tagId}"></td>
             <td th:text = "${hash_tag.tagContent}"></td>
+            <td>
+                <a th:href="@{|/hashtag/${hash_tag.tagId}|}" th:text="삭제"></a>
+            </td>
 
         </tr>
         </tbody>

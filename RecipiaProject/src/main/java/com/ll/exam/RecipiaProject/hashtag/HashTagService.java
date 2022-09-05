@@ -33,5 +33,10 @@ public class HashTagService {
         hashTagRepository.save(hashTag);
     }
 
+    public void deleteHashTag(int tagId){
+        SiteUser user=userRepository.findByUsername("user1").orElseThrow(()->new EntityNotFoundException());
+        hashTagRepository.deleteById(tagId);
+    }
+
 
 }

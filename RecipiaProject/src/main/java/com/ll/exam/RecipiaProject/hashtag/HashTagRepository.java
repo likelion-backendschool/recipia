@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 
 public interface HashTagRepository extends JpaRepository<HashTag, Integer> {
     HashTag findByTagContent(String tagContent);
-
     @Transactional
     @Modifying
     @Query(value = "ALTER TABLE hash_tag AUTO_INCREMENT=1", nativeQuery = true)
