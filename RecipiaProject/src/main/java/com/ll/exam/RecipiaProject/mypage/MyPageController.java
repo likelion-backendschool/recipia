@@ -3,6 +3,7 @@ package com.ll.exam.RecipiaProject.mypage;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,16 @@ public class MyPageController {
     private final UserRepository userRepository;
 
     @GetMapping("")
+    @PreAuthorize("isAuthenticated()")
     public String mypageHome(Model model, Principal principal) {
 
+        if (principal != null) {
+            System.out.println("타입정보 : " + principal.getClass());
+            System.out.println("ID정보 : " + principal.getName());
+        }
 
         SiteUser siteUser = userRepository.findByUsername("user1").orElseThrow(() ->new EntityNotFoundException());
         MyPageDto myPageDto = MyPageDto.createMyPageDto(siteUser);
-        model.addAttribute("MyPageDto", new MyPageDto());
 
         return "mypage/mypage_home";
     }
