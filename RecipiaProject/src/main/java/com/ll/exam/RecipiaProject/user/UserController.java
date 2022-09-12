@@ -61,17 +61,10 @@ public class UserController {
     }
 
     @PostMapping("/find-password")
-    public String findPasswordPost(@Valid String username, @Valid String email, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
+    public String findPasswordPost(@RequestParam("email") String email){
+        if (!userService.checkEmail(email)){
             return "user/find_password_form";
         }
-
-        try{
-            userService.checkUser(username, email);
-        }catch (Exception e){
-            return "user/find_password_form";
-        }
-
         return "user/send_mail_form";
     }
 }
