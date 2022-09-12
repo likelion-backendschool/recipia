@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -57,5 +58,20 @@ public class UserController {
     @GetMapping("/find-password")
     public String findPassword(){
         return "user/find_password_form";
+    }
+
+    @PostMapping("/find-password")
+    public String findPasswordPost(@Valid String username, @Valid String email, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "user/find_password_form";
+        }
+
+        try{
+            userService.checkUser(username, email);
+        }catch (Exception e){
+            return "user/find_password_form";
+        }
+
+        return "user/send_mail_form";
     }
 }
