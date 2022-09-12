@@ -53,4 +53,9 @@ public class UserController {
     public String userLogin(){
         return "user/login_form";
     }
+
+    @GetMapping("/find-password")
+    public String findPassword(){
+        return "user/find_password_form";
+    }
 }
