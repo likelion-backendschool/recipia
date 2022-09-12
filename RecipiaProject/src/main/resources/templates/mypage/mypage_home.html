@@ -4,13 +4,12 @@
       layout:decorate="~{layout}">
 
   <th:block layout:fragment="content">
-    <form th:action="@{/mypage}"  th:object="${MyPageDto}" method="post">
       <div class="flex justify-center">
         <div class="mt-20 h-32 w-32 p-4 border-4 bg-black rounded "></div>
       </div>
 
       <div class="flex justify-center">
-        <p th:text="${myPageDto.username}"></p>
+        <div th:text="${myPageDto.username}"></div>
       </div>
 
       <div class="flex justify-center">
@@ -59,7 +58,6 @@
           <a th:href="@{/mypage/withdraw}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원탈퇴</a>
         </div>
       </div>
-    </form>
   </th:block>
 
 </html>

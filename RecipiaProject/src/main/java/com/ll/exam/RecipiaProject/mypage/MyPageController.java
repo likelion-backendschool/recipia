@@ -30,6 +30,7 @@ public class MyPageController {
 
         SiteUser siteUser = userRepository.findByUsername("user1").orElseThrow(() ->new EntityNotFoundException());
         MyPageDto myPageDto = MyPageDto.createMyPageDto(siteUser);
+        model.addAttribute("myPageDto", myPageDto);
 
         return "mypage/mypage_home";
     }
