@@ -36,25 +36,31 @@ public class MyPageController {
     }
 
     @GetMapping("/myposts")
+    @PreAuthorize("isAuthenticated()")
     public String myPosts() {
         return "mypage/mypage_myPosts";
     }
+
     @GetMapping("/bookmark")
+    @PreAuthorize("isAuthenticated()")
     public String myPageBookmark() {
         return "mypage/mypage_bookmark";
     }
 
     @GetMapping("/allergy")
+    @PreAuthorize("isAuthenticated()")
     public String myPageAllergyFilter() {
         return "mypage/mypage_allergyFilter";
     }
 
     @GetMapping("/modify")
+    @PreAuthorize("isAuthenticated()")
     public String userModify() {
         return "mypage/mypage_userModify";
     }
 
     @GetMapping("/withdraw")
+    @PreAuthorize("isAuthenticated()")
     public String userWithdraw() {
         return "mypage/mypage_userWithdraw";
     }
