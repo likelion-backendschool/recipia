@@ -37,31 +37,33 @@ public class MyPageController {
 
     @GetMapping("/myposts")
     @PreAuthorize("isAuthenticated()")
-    public String myPosts() {
+    public String myPosts(Principal principal) {
         return "mypage/mypage_myPosts";
     }
 
     @GetMapping("/bookmark")
     @PreAuthorize("isAuthenticated()")
-    public String myPageBookmark() {
+    public String myPageBookmark(Principal principal) {
         return "mypage/mypage_bookmark";
     }
 
     @GetMapping("/allergy")
     @PreAuthorize("isAuthenticated()")
-    public String myPageAllergyFilter() {
+    public String myPageAllergyFilter(Principal principal) {
         return "mypage/mypage_allergyFilter";
     }
 
     @GetMapping("/modify")
     @PreAuthorize("isAuthenticated()")
-    public String userModify() {
+    public String userModify(Principal principal) {
         return "mypage/mypage_userModify";
     }
 
     @GetMapping("/withdraw")
     @PreAuthorize("isAuthenticated()")
-    public String userWithdraw() {
+    public String userWithdraw(Principal principal) {
+        SiteUser siteUser = Service
+
         return "mypage/mypage_userWithdraw";
     }
 

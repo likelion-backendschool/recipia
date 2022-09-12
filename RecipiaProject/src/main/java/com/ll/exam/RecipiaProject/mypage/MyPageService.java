@@ -11,7 +11,13 @@ public class MyPageService {
 
     private final UserRepository userRepository;
 
+    //id 가져오기
+    public SiteUser getUser(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("no %d user not found,".formatted(id)));
+    }
 
+    //삭제
     public void delete(SiteUser siteUser) {
         this.userRepository.delete(siteUser);
     }
