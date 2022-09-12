@@ -69,7 +69,7 @@ public class MyPageController {
 
 
         myPageService.delete(siteUser);
-        return "mypage/mypage_userWithdraw";
+        return "redirect:/mypage";
     }
 
 
