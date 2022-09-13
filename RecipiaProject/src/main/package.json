@@ -1,0 +1,7 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@yaireo/tagify": "^4.16.4"
+  }
+}
