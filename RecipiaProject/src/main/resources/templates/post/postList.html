@@ -10,7 +10,7 @@
     <div th:each="post : ${posts}">
 
         <div class="card w-100 bg-base-100 shadow-xl">
-            <figure ><img th:src="${post.imgUrl}" alt="Shoes"/></figure>
+            <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
             <div class="card-body">
                 <h2 class="card-title">
                     <p th:text="${post.title}"></p>
