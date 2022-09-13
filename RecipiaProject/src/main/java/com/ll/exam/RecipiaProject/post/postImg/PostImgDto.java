@@ -1,6 +1,12 @@
 package com.ll.exam.RecipiaProject.post.postImg;
 
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PostImgDto {
 
     private int id;

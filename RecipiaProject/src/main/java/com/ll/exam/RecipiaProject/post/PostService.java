@@ -46,6 +46,7 @@ public class PostService {
     }
 
     public PostDetailDto getPostDetail(int postId) {
-        return postRepository.getPostDetail(postId);
+        Post post=postRepository.getPostDetail(postId);
+        return post.createPostDetailDto();
     }
 }
