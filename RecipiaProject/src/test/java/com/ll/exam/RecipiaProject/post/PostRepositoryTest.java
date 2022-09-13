@@ -39,9 +39,7 @@ class PostRepositoryTest {
                     .views(2*i)
                     .likes(3*i)
                     .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                    .deleteDate(Timestamp.valueOf(LocalDateTime.now()))
                     .modifiedDate(Timestamp.valueOf(LocalDateTime.now()))
-                    .isBlind(true)
                     .build();
             postRepository.save(post);
         }

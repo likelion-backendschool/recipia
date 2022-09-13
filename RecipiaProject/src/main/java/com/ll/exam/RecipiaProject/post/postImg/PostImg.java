@@ -1,16 +1,15 @@
 package com.ll.exam.RecipiaProject.post.postImg;
 
 import com.ll.exam.RecipiaProject.post.Post;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class PostImg {
     @Id
@@ -28,16 +27,19 @@ public class PostImg {
     @ManyToOne
     private Post post;
 
-    @Builder
-    public PostImg(String imgName,String oriImgName,String imgUrl,boolean thumbnailYn){
-        this.imgName=imgName;
-        this.oriImgName=oriImgName;
-        this.imgUrl=imgUrl;
-        this.thumbnailYn=thumbnailYn;
-    }
     public void updatePostImg(String oriImgName,String imgName,String imgUrl){
             this.oriImgName=oriImgName;
             this.imgName=imgName;
             this.imgUrl=imgUrl;
+    }
+    public PostImgDto createPostImgDto(){
+        PostImgDto postImgDto=PostImgDto.builder()
+                .id(id)
+                .imgName(imgName)
+                .oriImgName(oriImgName)
+                .imgUrl(imgUrl)
+                .thumbnailYn(thumbnailYn)
+                .build();
+        return postImgDto;
     }
 }

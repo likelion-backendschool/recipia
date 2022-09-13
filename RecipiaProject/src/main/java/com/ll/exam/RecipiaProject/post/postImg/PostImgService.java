@@ -31,7 +31,7 @@ public class PostImgService {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                imgUrl=postImgLocation+imgName;
+                imgUrl="/images/img/"+imgName;
             }
             //DB에 이미지 정보 저장
             postImg.updatePostImg(originImgName,imgName,imgUrl);

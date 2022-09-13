@@ -36,6 +36,10 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	// 스프링 Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// 이미지 리사이즈 를 위한 라이브러리
+	implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+
 }
 
 tasks.named('test') {
