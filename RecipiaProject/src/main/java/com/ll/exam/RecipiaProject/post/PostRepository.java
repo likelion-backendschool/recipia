@@ -17,12 +17,8 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
     @Query(value = "ALTER TABLE Post AUTO_INCREMENT=1",nativeQuery = true)
     public void truncate();
 
-    @Query("select new com.ll.exam.RecipiaProject.post.PostDetailDto(p.id ,p.title ,p.content,p.score ,p.views,p.likes ,pi.imgUrl )  " +
-            "from PostImg pi " +
-            "join pi.post p " +
-            "where p.id = :postId " +
-            "and pi.thumbnailYn = true ")
-    PostDetailDto getPostDetail(@Param("postId") int postId);
+    @Query("select p from PostImg pi inner join pi.post p where p.id=:postId")
+    Post getPostDetail(@Param("postId") int postId);
     @Query("select new com.ll.exam.RecipiaProject.post.PostMainDto(p.id ,p.title ,p.score,p.views ,p.likes,pi.imgUrl) " +
             "from PostImg pi " +
             "join pi.post p " +
