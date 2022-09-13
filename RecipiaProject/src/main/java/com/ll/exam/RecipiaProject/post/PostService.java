@@ -13,6 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
+
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -21,25 +22,26 @@ public class PostService {
     private final UserRepository userRepository;
 
     private final PostImgService postImgService;
-    public  List<Post> getPostList(){
+
+    public List<Post> getPostList() {
         return postRepository.findAll();
     }
 
-    public void createPost(PostFormDto postFormDto,List<MultipartFile> files,Principal principal) {
+    public void createPost(PostFormDto postFormDto, List<MultipartFile> files, Principal principal) {
         //로그인 기능 추가시 여기에 principal 로 SiteUser 불러오기
-        SiteUser user=userRepository.findByUsername("user1").orElseThrow(()->new EntityNotFoundException());
-        Post post=postFormDto.createPost(user);
+        SiteUser user = userRepository.findByUsername("user1").orElseThrow(() -> new EntityNotFoundException());
+        Post post = postFormDto.createPost(user);
         postRepository.save(post);
-        for(int i=0;i<files.size();i++){
-            PostImg postImg=new PostImg();
+        for (int i = 0; i < files.size(); i++) {
+            PostImg postImg = new PostImg();
             postImg.setPost(post);
 
-            if(i==0){
+            if (i == 0) {
                 postImg.setThumbnailYn(true);
-            }else {
+            } else {
                 postImg.setThumbnailYn(false);
             }
-            postImgService.createPostImg(postImg,files.get(i));
+            postImgService.createPostImg(postImg, files.get(i));
         }
     }
 }
