@@ -14,22 +14,24 @@ import java.util.Optional;
 @Setter
 @NoArgsConstructor
 public class PostFormDto {
-private int id;
+    private int id;
 
-private String title;
+    private String title;
 
-private String content;
+    private String content;
+
 
 //작성폼 수정시 사용
 private List<PostImgDto> postImgDtoList=new ArrayList<>();
 //작성폼 수정시 사용
 private List<Integer>postImgIds =new ArrayList<>();
 
-public Post createPost(SiteUser siteUser){
-    return Post.builder()
-            .title(title)
-            .content(content)
-            .siteUser(siteUser)
-            .build();
-}
+
+    public Post createPost(SiteUser siteUser) {
+        return Post.builder()
+                .title(title)
+                .content(content)
+                .siteUser(siteUser)
+                .build();
+    }
 }
