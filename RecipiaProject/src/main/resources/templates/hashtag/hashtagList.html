@@ -6,25 +6,9 @@
       layout:decorate="~{layout}">
 
 <th:bloack layout:fragment="content">
-    <!--    <h1>해시태그 페이지</h1>-->
-    <!--    <div>-->
-    <!--        <input type="text">-->
-    <!--    </div>-->
-    <!--    <div>-->
-    <!--        <button>검색</button>-->
-    <!--    </div>-->
 
-    <!--    <form method="post" th:object="${HashtagFormDto}" enctype="multipart/form-data">-->
-    <!--        <input type="hidden"  th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-    <!--        <div class="flex flex-col border-black border-4 m-3">-->
-    <!--            <label>tagContent</label>-->
-    <!--            <input  type="text"  th:field="*{tagContent}">-->
-    <!--        </div>-->
 
-    <!--        <div>-->
-    <!--            <button>검색</button>-->
-    <!--        </div>-->
-    <!--    </form>-->
+    <form th:method="post" th:object="${HashtagFormDto}" enctype="multipart/form-data">
     <table>
         <thead>
         <tr>
@@ -32,6 +16,7 @@
         </tr>
         </thead>
         <tbody>
+        <input th:type="hidden" th:name = "_method" th:value = "delete"/>
         <tr th:each="hash_tag : ${hashtagList}">
             <td th:text="${hash_tag.tagId}"></td>
             <td th:text = "${hash_tag.tagContent}"></td>
@@ -42,6 +27,7 @@
         </tr>
         </tbody>
     </table>
+    </form>
 </th:bloack>
 </html>
 

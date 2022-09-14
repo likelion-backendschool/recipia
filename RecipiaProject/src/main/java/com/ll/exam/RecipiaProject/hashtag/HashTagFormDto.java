@@ -29,5 +29,14 @@ public class HashTagFormDto {
                 .build();
     }
 
+    public HashTag deleteHashTag(SiteUser siteUser){
+        return HashTag.builder()
+                .tagId(tagId)
+                .tagContent(tagContent)
+                .tagView(tagView)
+                .tagCategory(tagCategory)
+                .siteUser(siteUser)
+                .build();
+    }
 
 }
