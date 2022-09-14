@@ -125,12 +125,12 @@ public class UserAndPostTestData {
 
         String fileName="test1";
         String contentType="jpg";
-        String filePath="C:/post/img/"+fileName+"."+contentType;
+        String filePath="src/main/resources/static/sampleImg/"+fileName+"."+contentType;
         MockMultipartFile image1=new MockMultipartFile("imgFile",fileName+"."+contentType,"image/"+contentType,new FileInputStream(filePath));
 
         String fileName2="test2";
         String contentType2="jpg";
-        String filePath2="C:/post/img/"+fileName2+"."+contentType2;
+        String filePath2="src/main/resources/static/sampleImg/"+fileName2+"."+contentType2;
         MockMultipartFile image2=new MockMultipartFile("imgFile",fileName2+"."+contentType2,"image/"+contentType,new FileInputStream(filePath2));
 
         mockMvc.perform(
