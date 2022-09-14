@@ -1,35 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link
-    href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css"
-    rel="stylesheet"
-    type="text/css"
-  />
-  <script src="https://cdn.tailwindcss.com"></script>
-    <title>Title</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<th:bloack layout:fragment="content">
 <main class="min-h-screen ">
     <div class="flex flex-wrap m-10 justify-center gap-4">
     <div th:each="post : ${posts}">
 
         <div class="card w-100 bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+            <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
             <div class="card-body">
                 <h2 class="card-title">
                     <p th:text="${post.title}"></p>
-                    <div class="badge badge-secondary">NEW</div>
+                    <div class="badge badge-secondary">tag1</div>
+                    <div class="badge badge-secondary">tag2</div>
                 </h2>
-                <p th:text="${post.content}"></p>
                 <div class="card-actions justify-end">
                     <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
                     <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
                     <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
-                </div>
-                <div class="card-actions justify-end ">
-                    <div class="badge badge-outline " th:text="|created : ${post.createdDate}|"></div>
                 </div>
             </div>
         </div>
@@ -39,5 +30,5 @@
     </div>
     </div>
 </main>
-</body>
+</th:bloack>
 </html>

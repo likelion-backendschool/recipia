@@ -1,5 +1,10 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment="content" class="container mx-auto max-w-screen-md flex justify-center flex-wrap">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<th:bloack layout:fragment="content"  class="container mx-auto max-w-screen-md flex justify-center flex-wrap">
     <div class="w-full border-b-4 border-indigo-500">
         <div>
             <h1 class="font-bold">회원 가입 페이지야!!</h1>
@@ -102,6 +107,6 @@
       duration-150
       ease-in-out">Sign up</button>
                 </form>
-    </div>
-</div>
+        </div>
+</th:bloack>
 </html>
