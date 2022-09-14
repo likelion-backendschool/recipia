@@ -2,24 +2,23 @@ package com.ll.exam.RecipiaProject.testData;
 
 import com.ll.exam.RecipiaProject.post.PostController;
 import com.ll.exam.RecipiaProject.post.PostFormDto;
+import com.ll.exam.RecipiaProject.post.PostRepository;
+import com.ll.exam.RecipiaProject.post.postImg.PostImgRepository;
 import com.ll.exam.RecipiaProject.user.UserController;
 import com.ll.exam.RecipiaProject.user.UserFormDto;
+import com.ll.exam.RecipiaProject.user.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import javax.transaction.Transactional;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +26,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -41,6 +38,13 @@ public class UserAndPostTestData {
 
     @Autowired
     private PostController postController;
+
+    @Autowired
+    private  PostRepository postRepository;
+    @Autowired
+    private  PostImgRepository postImgRepository;
+    @Autowired
+    private  UserRepository userRepository;
 
     @Autowired
     private MockMvc mockMvc;
@@ -78,10 +82,18 @@ public class UserAndPostTestData {
                 .build();
         posts.add(post1);
         posts.add(post2);
+
+
+
     }
     @Test
     @Rollback(value = false)
+    @Order(1)
     public void userInitUsingController() throws Exception {
+        userRepository.disableForeignKeyCheck();
+        userRepository.truncate();
+        userRepository.enableForeignKeyCheck();
+
         mockMvc.perform(post("/user/sign-up")
                         .with(csrf())
                         .param("username",users.get(0).getUsername())
@@ -100,11 +112,17 @@ public class UserAndPostTestData {
                 .andExpect(status().is3xxRedirection())
                 .andDo(print());
 
-
     }
+
     @Test
     @Rollback(value = false)
+    @Order(2)
     public void postInitUsingController() throws Exception {
+        postRepository.disableForeignKeyCheck();
+        postRepository.truncate();
+        postImgRepository.truncate();
+        postRepository.enableForeignKeyCheck();
+
         String fileName="test1";
         String contentType="jpg";
         String filePath="C:/post/img/"+fileName+"."+contentType;
