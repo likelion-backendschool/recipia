@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional
 public class UserAndPostTestData {
     @Autowired
     private UserController userController;
@@ -88,6 +87,7 @@ public class UserAndPostTestData {
     }
     //2명의 회원생성 user1,user2
     @Test
+    @Transactional
     @Rollback(value = false)
     @Order(1)
     public void userInitUsingController() throws Exception {
@@ -119,6 +119,7 @@ public class UserAndPostTestData {
     //user2 에 post_img 2개를 가진 post 생성
     //이미지 경로는 내부경로에 있는 src/main/resources/static/sampleImg/test1.png,src/main/resources/static/sampleImg/test2.png
     @Test
+    @Transactional
     @Rollback(value = false)
     @Order(2)
     public void postInitUsingController() throws Exception {

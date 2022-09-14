@@ -58,7 +58,8 @@ public class PostController {
 
     //게시글 수정 페이지로 이동
     @GetMapping("/{postId}/modify")
-    public String postModifyForm(@PathVariable("postId") int postId, Model model) {
+    public String postModifyForm(@PathVariable("postId") int postId, Principal principal,Model model) {
+
         return "post/postModifyForm";
     }
 

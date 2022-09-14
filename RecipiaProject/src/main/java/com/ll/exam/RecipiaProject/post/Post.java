@@ -63,6 +63,7 @@ public class Post {
                 .score(score)
                 .views(views)
                 .likes(likes)
+                .username(siteUser.getUsername())
                 .postImgDtoList(postImgDtoList)
                 .build();
         return postDetailDto;
