@@ -86,6 +86,7 @@ public class UserAndPostTestData {
 
 
     }
+    //2명의 회원생성 user1,user2
     @Test
     @Rollback(value = false)
     @Order(1)
@@ -114,6 +115,8 @@ public class UserAndPostTestData {
 
     }
 
+    //2명의 회원중 user1 에 post_img 2개를 가진 post 생성
+    //이미지 경로는 내부경로에 있는 src/main/resources/static/sampleImg/test1.png,src/main/resources/static/sampleImg/test2.png
     @Test
     @Rollback(value = false)
     @Order(2)
@@ -142,6 +145,7 @@ public class UserAndPostTestData {
                         .with(csrf())
                         .with(user("user1").password("user1").roles("USER")))
                 .andExpect(status().is3xxRedirection());
+
 
     }
 }
