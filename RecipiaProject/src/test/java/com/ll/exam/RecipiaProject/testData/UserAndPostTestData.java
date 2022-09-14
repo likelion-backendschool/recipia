@@ -11,16 +11,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import javax.transaction.Transactional;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -95,6 +100,30 @@ public class UserAndPostTestData {
                 .andExpect(status().is3xxRedirection())
                 .andDo(print());
 
+
+    }
+    @Test
+    @Rollback(value = false)
+    public void postInitUsingController() throws Exception {
+        String fileName="test1";
+        String contentType="jpg";
+        String filePath="C:/post/img/"+fileName+"."+contentType;
+        MockMultipartFile image1=new MockMultipartFile("imgFile",fileName+"."+contentType,"image/"+contentType,new FileInputStream(filePath));
+
+        String fileName2="test2";
+        String contentType2="jpg";
+        String filePath2="C:/post/img/"+fileName2+"."+contentType2;
+        MockMultipartFile image2=new MockMultipartFile("imgFile",fileName2+"."+contentType2,"image/"+contentType,new FileInputStream(filePath2));
+
+        mockMvc.perform(
+                multipart("/posts")
+                        .file(image1)
+                        .file(image2)
+                        .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
+                        .param("title","title1").param("content","content1")
+                        .with(csrf())
+                        .with(user("user1").password("user1").roles("USER")))
+                .andExpect(status().is3xxRedirection());
 
     }
 }
