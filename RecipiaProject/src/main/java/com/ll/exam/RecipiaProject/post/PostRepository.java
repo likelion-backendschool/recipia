@@ -16,6 +16,11 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
     @Query(value = "ALTER TABLE Post AUTO_INCREMENT=1",nativeQuery = true)
     public void truncate();
 
-    //제목 + 내용 + 글쓴이 정보 찾기
-    Page<Post> findByTitleOrContentOrSiteUser(String kw, String kw_, String kw__, Pageable pageable);
+    @Query("select p from PostImg pi inner join pi.post p where p.id=:postId")
+    Post getPostDetail(@Param("postId") int postId);
+    @Query("select new com.ll.exam.RecipiaProject.post.PostMainDto(p.id ,p.title ,p.score,p.views ,p.likes,pi.imgUrl) " +
+            "from PostImg pi " +
+            "join pi.post p " +
+            "where pi.thumbnailYn = true ")
+    Page<PostMainDto> getPostList(Pageable pageable);
 }

@@ -14,7 +14,7 @@
         <div class="row my-3">
 
             <div class="col-6">
-                <form class="input-group">
+                <form class="input-group" th:action="@{/posts/list}">
                     <input class="form-control" type="text" name="kw" placeholder="검색어를 입력해주세요." th:value="${param.kw}">
                     <button type="submit" class="btn btn-outline">검색</button>
                 </form>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="container mx-auto">
-        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[20px]">
+        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[10px]">
             <li>
                 <a href="#">
                     <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">

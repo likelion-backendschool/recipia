@@ -7,9 +7,7 @@ import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,21 +25,9 @@ public class PostService {
 
     private final PostImgService postImgService;
 
-    public Page<Post> getPostList(String kw, int page) {
-        List<Sort.Order> sorts = new ArrayList<>();
+    public Page<PostMainDto> getPostList(Pageable pageable){
+        return postRepository.getPostList(pageable);
 
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // 한 페이지에 10까지 가능
-
-        if ( kw == null || kw.trim().length() == 0 ) {
-            return postRepository.findAll(pageable);
-        }
-
-        return postRepository.findByTitleOrContentOrSiteUser(kw, kw, kw, pageable);
-    }
-
-    public Post getPost(int id) {
-        return postRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("no %d question not found,".formatted(id)));
     }
 
     public void createPost(PostFormDto postFormDto,List<MultipartFile> files,Principal principal) {
