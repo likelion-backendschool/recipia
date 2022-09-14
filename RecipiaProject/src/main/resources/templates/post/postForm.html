@@ -35,23 +35,35 @@
             </div>
             <div id="preview_image_container" class="flex flex-col w-full  border-red border-4 mt-5 hidden">
             </div>
-            <div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 등록</button>
+            <div th:if="${postFormDto.id != null}" id="preview_image_container_modify" class="flex flex-col w-full  border-red border-4 mt-5 ">
+                <div th:each="pid : ${postFormDto.postImgDtoList}" class="flex items-center justify-center">
+                    <img th:src="${pid.imgUrl}" class="rm object-cover w-96 h-96">
+                </div>
+            </div>
+
+            <div th:if="${postFormDto.id == null}">
+                <button type="submit" formaction="/posts"class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 등록</button>
+            </div>
+
+            <div th:if="${postFormDto.id != null}">
+                <button type="submit" th:formaction="@{|/posts/${postFormDto.id}/modify|}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 수정</button>
             </div>
         </div>
     </form>
 
     <script>
-   function image_check(){
-   if(document.getElementById("imgFile").value==''){
-	alert("이미지를 1개이상 넣어주세요.");
-	return false;
-    }
-    return true;
-   }
+<!--   function image_check(){-->
+<!--   if(document.getElementById("imgFile").value==''){-->
+<!--	alert("이미지를 1개이상 넣어주세요.");-->
+<!--	return false;-->
+<!--    }-->
+<!--    return true;-->
+<!--   }-->
       function setThumbnail(event) {
       $('#preview_image_container').show();
       $('img').remove();
+      $('div').remove('.rm');
+      $('img').remove('.rm');
         for (let image of event.target.files) {
           let reader = new FileReader();
 

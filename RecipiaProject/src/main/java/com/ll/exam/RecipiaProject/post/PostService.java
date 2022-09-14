@@ -1,6 +1,7 @@
 package com.ll.exam.RecipiaProject.post;
 
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
+import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
@@ -53,5 +54,17 @@ public class PostService {
     public PostDetailDto getPostDetail(int postId) {
         Post post=postRepository.getPostDetail(postId);
         return post.createPostDetailDto();
+    }
+
+    public SiteUser getSiteUser(int postId) {
+        return postRepository.getSiteUser(postId);
+    }
+
+    public PostFormDto getPostForm(int postId) {
+        return postRepository.getPostForm(postId);
+    }
+
+    public Post getPostById(int postId) {
+        return postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException());
     }
 }

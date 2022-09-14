@@ -68,4 +68,13 @@ public class Post {
                 .build();
         return postDetailDto;
     }
+
+    public List<PostImgDto> createPostImgDtoList() {
+        List<PostImgDto> pids=new ArrayList<>();
+        for(PostImg pi : postImgList){
+           PostImgDto pid= pi.createPostImgDto();
+           pids.add(pid);
+        }
+        return pids;
+    }
 }
