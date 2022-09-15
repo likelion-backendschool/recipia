@@ -4,8 +4,8 @@
         layout:decorate="~{layout}">
 
 <div layout:fragment="content" class="container mx-auto">
-    <div>
-        <img src="/ui/banner.png">
+    <div class="h-96">
+        <img src="/ui/banner.png" >
     </div>
     <div class="flex justify-center mx-auto">
         <form class="flex items-center w-96" th:action="@{/posts/list}">
@@ -22,13 +22,7 @@
             </button>
         </form>
     </div>
-
-    <div class="w-25 p-3 card my-20 ">
-        <div>
-
-        </div>
-    </div>
-
+</div>
 <!--    <div class="container mx-auto">-->
 <!--        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[10px]">-->
 <!--            <li>-->
@@ -163,8 +157,5 @@
 <!--            </li>-->
 <!--        </ul>-->
 <!--    </div>-->
-
-
-</div>
 
 </html>
