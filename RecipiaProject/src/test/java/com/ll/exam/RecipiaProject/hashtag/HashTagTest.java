@@ -58,7 +58,7 @@ class HashTagTest {
     @Transactional
     @Rollback(value = false)
     public void post_hashTag(){
-        HashTag hashTag = hashTagRepository.findByTagContent("감자");
+        HashTag hashTag = hashTagRepository.findByTagContent("tagContent1");
         Assertions.assertEquals("tagContent1", hashTag.getTagContent());
     }
 }
