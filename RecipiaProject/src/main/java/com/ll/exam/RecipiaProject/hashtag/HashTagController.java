@@ -26,8 +26,8 @@ public class HashTagController {
     }
 
     @PostMapping("")
-    public String hashTagCreate(HashTagFormDto hashTagFormDto, Principal principal) {
-        hashTagService.createHashTag(hashTagFormDto, principal);
+    public String hashTagCreate(String tagContent, Principal principal) {
+        hashTagService.createHashTag(tagContent, principal);
         return "redirect:/hashtag/list";
     }
 

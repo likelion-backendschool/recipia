@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class PostController {
 
     private final PostService postService;
+    private final HashTagService hashTagService;
 
 
     //게시글 작성 폼으로 이동
@@ -34,6 +36,7 @@ public class PostController {
     @PostMapping("")
     public String postCreate(PostFormDto postFormDto, @RequestParam("imgFile") List<MultipartFile> files, Principal principal) {
         postService.createPost(postFormDto, files, principal);
+        hashTagService.createHashTag(postFormDto.getTagContent(), principal);
         return "redirect:/posts/list";
     }
 

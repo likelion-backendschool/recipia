@@ -27,10 +27,10 @@ public class HashTagService {
 
 
 
-    public void createHashTag(HashTagFormDto hashTagFormDto, Principal principal){
+    public void createHashTag(String tagContent, Principal principal){
         SiteUser user=userRepository.findByUsername(principal.getName()).orElseThrow(()->new EntityNotFoundException());
-        //HashTag hashTag = hashTagFormDto.createHashTag(user);
-        String[] tags = hashTagFormDto.getTagContent().split("#");
+        //String[] tags = hashTagFormDto.getTagContent().split("#");
+        String[] tags = tagContent.split("#");
         for(String tag: tags){
             tag = tag.trim();
             if(tag.length() == 0 ) continue;

@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.hashtag.HashTagFormDto;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class PostFormDto {
 
     private String content;
 
+    private String tagContent;
+
 
 //작성폼 수정시 사용
 private List<PostImgDto> postImgDtoList=new ArrayList<>();
@@ -34,4 +37,6 @@ private List<Integer>postImgIds =new ArrayList<>();
                 .siteUser(siteUser)
                 .build();
     }
+
+
 }
