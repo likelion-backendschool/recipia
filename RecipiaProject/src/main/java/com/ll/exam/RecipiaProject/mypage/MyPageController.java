@@ -2,6 +2,7 @@ package com.ll.exam.RecipiaProject.mypage;
 
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
+import com.ll.exam.RecipiaProject.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class MyPageController {
     private final MyPageService myPageService;
 
     @GetMapping("")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated() and (( #user.name == principal.name ))")
     public String mypageHome(Model model, Principal principal) {
 
         if (principal != null) {
@@ -31,7 +32,7 @@ public class MyPageController {
             System.out.println("ID정보 : " + principal.getName());
         }
 
-        SiteUser siteUser = userRepository.findByUsername("user1").orElseThrow(() ->new EntityNotFoundException());
+        SiteUser siteUser = MyPageService.getUser(principal.getName());
         MyPageDto myPageDto = MyPageDto.createMyPageDto(siteUser);
         model.addAttribute("myPageDto", myPageDto);
 
