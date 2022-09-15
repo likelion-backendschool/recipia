@@ -2,7 +2,6 @@ package com.ll.exam.RecipiaProject.mypage;
 
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
-import com.ll.exam.RecipiaProject.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
 
 @RequestMapping("/mypage") // 여기에 적으면 MyPageController URL 상위
@@ -24,7 +22,7 @@ public class MyPageController {
     private final MyPageService myPageService;
 
     @GetMapping("")
-    @PreAuthorize("isAuthenticated() and (( #user.name == principal.name ))")
+    @PreAuthorize("isAuthenticated() and (#username == principal.name)")
     public String mypageHome(Model model, Principal principal) {
 
         if (principal != null) {
@@ -32,7 +30,7 @@ public class MyPageController {
             System.out.println("ID정보 : " + principal.getName());
         }
 
-        SiteUser siteUser = MyPageService.getUser(principal.getName());
+        SiteUser siteUser = myPageService.getUser(principal.getName());
         MyPageDto myPageDto = MyPageDto.createMyPageDto(siteUser);
         model.addAttribute("myPageDto", myPageDto);
 
@@ -66,7 +64,7 @@ public class MyPageController {
     @GetMapping("/withdraw")
     @PreAuthorize("isAuthenticated()")
     public String userWithdraw(Principal principal, @PathVariable("id") Long id) {
-        SiteUser siteUser = myPageService.getUser(id);
+        SiteUser siteUser = myPageService.getUser(principal.getName());
 
 
         myPageService.delete(siteUser);
