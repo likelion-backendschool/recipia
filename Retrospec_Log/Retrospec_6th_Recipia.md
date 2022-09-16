@@ -2,7 +2,7 @@
 
 ---
 
-• [팀장] 김지훈, 도성구, 김상훈, 이소영 서진수****
+• [팀장] 김지훈, 도성구, 김상훈, 이소영 서진수
 
 ## 회고 내용 요약 (최소 500자 이상)
 
@@ -12,6 +12,7 @@
 <details>
   <summary>지훈님 회고록</summary>
   <div markdown="1">
+
 # 인프라
 
 ## Docker
@@ -75,6 +76,7 @@ CMD ["node", "index.js"]**
 <details>
   <summary>상훈님 회고록</summary>
   <div markdown="1">
+
 # linux-volume
 
 - 이전 시간에 배웠던 exec 방식은 직접 컨테이너로 들어가서 bash 로 설정을해줬었는데
@@ -339,7 +341,8 @@ layout.html 에서 로그인 추가정보출력
 <details>
   <summary>진수님 회고록</summary>
   <div markdown="1">
-# **도커**
+
+**도커**
 
 - 리눅스 재단이 발표한 ‘2014 가장 인기 있는 클라우드 오픈 소스’에서 2위를 차지한 도커는 리눅스 컨테이너 기술을 자동화해 쉽게 사용할 수 있게 하는 오픈소스 프로젝트
 
@@ -372,7 +375,7 @@ layout.html 에서 로그인 추가정보출력
 
 - 반면, **도커는 격리된 공간에 필요한 라이브러리, 실행파일만 담아놓고 사용하기 때문에 부담이 줄어듭니다.**
 
-- 위 사진에서 가장 큰 틀을 **호스트(Host)**라고 칭하고, DB나 Web Server를 담고 있는 빨간색 네모칸을 **컨테이너(Container)**라고 칭합니다. 컨테이너 안에 담겨있는 프로그램들을 **이미지(Image)**
+- 위 사진에서 가장 큰 틀을 **호스트(Host)** 라고 칭하고, DB나 Web Server를 담고 있는 빨간색 네모칸을 **컨테이너(Container)** 라고 칭합니다. 컨테이너 안에 담겨있는 프로그램들을 **이미지(Image)**
 라고 합니다.
 
 단축키
@@ -449,6 +452,7 @@ docekr rm 컨테이너이름 // 컨테이너삭제
 <details>
   <summary>소영님 회고록</summary>
   <div markdown="1">
+
 # 인프라
 
 ## 이미지와 컨테이너
@@ -635,27 +639,29 @@ public void setProfileImgByUrl(Member member, String url) {
 <details>
   <summary>성구님 회고록</summary>
   <div markdown="1">
+
 ### 도커
 
 ***7강 부터~~ 22강까지***
 
 [위캔 | Ken 10274](https://wiken.io/ken/10274)
+---
 
 - 프로그램과 프로세스
 
 1) 프로그램 (정적인 로직, 디스크) : 1
 
-2) 프로세스(동적인 로직, 메모리) : N
+2) 프로세스(동적인 로직, 메모리) : N  
 
 지뢰찾기 : 1번설치
 
-지뢰찾기 실행을 동시에 : N개 실행
+지뢰찾기 실행을 동시에 : N개 실행  
 
 도커에서도 똑같은 개념
 
 **프로그램 == 이미지**
 
-**프로세스 == 컨테이너**
+**프로세스 == 컨테이너**  
 
 - docker run hello-world
 
@@ -666,31 +672,31 @@ public void setProfileImgByUrl(Member member, String url) {
 ```bash
 docker run hello-world
 
-**조회 1)**
+조회 1)
 docker ps
 - 현재 실행중인
-**조회 2)** 
+조회 2)
 docker ps -a
 - 모든 기록을 출력
 
-**# 이미지(프로그램)**
-**다운로드**
+# 이미지(프로그램)
+다운로드
 docker pull 이미지명
-**삭제**
+삭제
 docker rmi -f 이미지명
-**목록**
+목록
 docker images
 
-**# 컨테이너(프로세스)**
-**컨테이너 조회 (현재 실행중)**
+# 컨테이너(프로세스)
+컨테이너 조회 (현재 실행중)
 - docker ps
-**컨테이너 전체조회 (모든 기록 출력)**
+컨테이너 전체조회 (모든 기록 출력)
 - docker ps -a
 
-**컨테이너 단건 로그보기**
+# 컨테이너 단건 로그보기
 - docker logs ID
 
-**컨테이너 ID와 이름은 고유합니다.**
+컨테이너 ID와 이름은 고유합니다.
 아래 명령어 3개는 전부 같은 의미 입니다.
 docker logs -> 내부적으로 쌓아뒀던 로그들을 보여준다.
 
@@ -698,17 +704,17 @@ docker logs 7daa850a1d69
 docker logs 7d
 docker logs intelligent_faraday
 
-**자세히 보기**
+# 자세히 보기
 docker inspect ID
-**마우스휠로 왔다갔다 하면서 볼 수 있음.**
+마우스휠로 왔다갔다 하면서 볼 수 있음.
 docker inspect [ps에서 조회한] | less 
 
-**컨테이너 삭제**
+# 컨테이너 삭제
 docker rm -f ID
 실행중인 경우 -> 중지 후 삭제
 이미 종료된 프로세스 -> 기록삭제
 
-**전부삭제**
+# 전부삭제
 docker rm -f $(docker ps -qa)
 ```
 
@@ -716,7 +722,7 @@ docker rm -f $(docker ps -qa)
 ![delete](image/week6/seonggu_delete.png)
 tip. 
 
-`ls, cd` : 단발성 (바로 실행하고 꺼지는 프로세스)
+`ls, cd` : 단발성 (바로 실행하고 꺼지는 프로세스)  
 `sudo systemctl start nginx` : 데몬(백그라운드 프로세스, 끄기전까지 영속적)
 
 - **도커허브에서 이미지 다운로드 후 삭제, 3개 이상**
@@ -730,46 +736,44 @@ tip.
 - **도커와 nginx  명령어 정리**
 
 ```bash
-**docker run nignx**
+# docker run nignx
 /* 문제점
 1) Ctrl + C를 하면 nginx가 꺼진다.
 2) 외부에서 접근할 방법이 없다.
 원래 도커 컨테이너는 독립적인 공간에서 실행되기 때문에 
-**접근이 안되는게 정상이다. */
+접근이 안되는게 정상이다. 
 
-docker run -d nginx**
-/*문제점
+# docker run -d nginx
+문제점
 백그라운드로 실행
-**외부에서 접근할 방법이 없다.***/
+외부에서 접근할 방법이 없다.
 
-**docker run -d -p 8031:80 nginx
-/*
-포트옵션 바깥세상에 있는 8031:80에 연결하겠다 (포트포워딩)**
+# docker run -d -p 8031:80 nginx
+포트옵션 바깥세상에 있는 8031:80에 연결하겠다 (포트포워딩)
 문제점 - 없음
-*/
 
-**http://192.168.56.109:8031/** 
+# http://192.168.56.109:8031/
 크롬에서 확인
 
-**도커 컨테이너에 이름부여, 종료시 자동 삭제 설정까지 부여**
-**실행** 
+도커 컨테이너에 이름부여, 종료시 자동 삭제 설정까지 부여
+실행
 docker run -d -p 8031:80 --name=nginx_1 --rm nginx
-**종료**
+종료
 docker stop nginx_1
 
-**exec 로 단순명령을 컨테이너에 전달, 
+exec 로 단순명령을 컨테이너에 전달, 
 exec -it 로 상호작용필요명령을 컨테이너에 전달
 
-단순명령**
+# 단순명령
 docker exec ID 명령어
 docker exec nginx_1 ls
 docker exec nginx_1 apt-get update
 
-**상호작용필요명령**
+# 상호작용필요명령
 docker exec -it ID 명령어
 docker exec -it nginx_1 apt-get install vim
 
-**nginx(os)로 들어가기**
+# nginx(os)로 들어가기
 docker exec -it nginx_1 bash
 ```
 
@@ -790,49 +794,52 @@ tip.
 run 명령어에 포트포워딩 옵션을 추가해서 가능하다.**
 
 - **exec -it ID bash 명령어로 컨테이너 내부에 진입하여
-index.html 파일 수정**
+index.html 파일 수정**  
 
 <aside>
-✅ 1) **내부 진입**
+✅ 1) 내부 진입
 
 `docker exec -it ID bash`
 
-`docker exec -it nginx_1 bash`
+`docker exec -it nginx_1 bash`  
 
 2) ****웹 루트 폴더로 이동****
 
-`cd /usr/share/nginx/html`
+`cd /usr/share/nginx/html`  
 
 3) ****리눅스 배포판 확인****
 
 `cat /etc/issue`
 
-데비안 계열은 yum이 아닌 apt-get을 사용함
+데비안 계열은 yum이 아닌 apt-get을 사용함  
 
 4) ****vim 설치****
 
 `apt-get update`
 
-`apt-get install vim -y`
+`apt-get install vim -y`  
 
 5) ****수정할 파일에 대해서 백업****
 
-`cp index.html index.html.origin`
+`cp index.html index.html.origin`  
 
 6) ****파일 수정****
 `vim index.html`
 
-d 키 누르고 있기
-a 키 여러번 눌러서 insert 모드로 변경
-`<h1>Hello World</h1>` 입력
+d 키 누르고 있기  
+a 키 여러번 눌러서 insert 모드로 변경  
+`<h1>Hello World</h1>` 입력  
 
 7) **크롬에서 확인**
 
 ****`http://192.168.56.109:8031/`****
 
 </aside>
-![hello_world](image/week6/seonggu_hello_world.png)
+
+
+![seonggu](image/week6/seonggu_nginx.png)
 ---
+
 
 ### 스프링 시큐리티
 
@@ -864,6 +871,8 @@ mypage에 인가된? 현재 로그인된 사용자만 접근할 수 있도록 �
 
 이외에도 아래와 같은 여러가지 **시큐리티 어노테이션 옵션**을 사용할 수 있다.
 
+
+
 <aside>
 ✅ hasRole([role]) : 현재 사용자의 권한이 파라미터의 권한과 동일한 경우 true
 
@@ -887,9 +896,13 @@ isFullyAuthenticated() : 현재 사용자가 익명이거나 RememberMe 사용�
 
 </aside>
 
+
+
 프로젝트에 RememberMe가 적용될 예정이라고 하니 이 부분도 고려해야할 것 같고 
 현재 어노테이션(`isAuthenticated()`) 로그인 상태이면 접근이 가능하지만 
 다른 로그인 된 사용자? 가 접근하면 어떡할지는 좀 더 알아보아야 할 것 같다.
+
+
 
 ---
 
@@ -934,11 +947,13 @@ isFullyAuthenticated() : 현재 사용자가 익명이거나 RememberMe 사용�
 
 ---
 
-- 필수) 팀원들과 함께 찍은 인증샷(온라인 만남시 스크린 캡쳐)도 함께 업로드 해주세요 🙂
-
+### 필수) 팀원들과 함께 찍은 인증샷(온라인 만남시 스크린 캡쳐)도 함께 업로드 해주세요 🙂
+ 
 ![team_image](image/week6/1.png)
 
-- 필수) 자랑 멘트는 **‘팀 내에서 어떻게 복습을 하고 있고, 해당 복습 과정으로 인해 어떤 긍정적인 효과가 발생했는지’**에 대해 간단하게 작성해 주시면 됩니다 😊
+### 필수) 자랑 멘트는 ‘팀 내에서 어떻게 복습을 하고 있고, 해당 복습 과정으로 인해 어떤 긍정적인 효과가 발생했는지’에 대해 간단하게 작성해 주시면 됩니다 😊
+
+
 - 현재 한 주당 1회 회고를 필수로 작성하고 있는데 이 회고를 다른 팀원들이 읽고 댓글을 자유롭게 남기는 형태로 진행하고 있습니다! 📝
 - 팀원들의 회고는 하루동안 혹은 중요한 부분을 기술하고 있으며, 팀원들의 댓글은 피드백과 배운 점을 남김으로써 
 서로서로 **공부하고 있는 내용이나 강의에 대한 정확한 이해를 돕는 점이** 
