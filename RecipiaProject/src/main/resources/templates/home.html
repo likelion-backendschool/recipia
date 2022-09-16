@@ -4,10 +4,10 @@
         layout:decorate="~{layout}">
 
 <div layout:fragment="content" class="container mx-auto">
-    <div class="h-96">
-        <img src="/ui/banner.png" >
-    </div>
-    <div class="flex justify-center mx-auto">
+    <div class="flex flex-wrap justify-center mx-auto">
+        <div>
+            <img srcset="/ui/banner.png 960w, /ui/banner.png 960h">
+        </div>
         <form class="flex items-center w-96" th:action="@{/posts/list}">
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">
