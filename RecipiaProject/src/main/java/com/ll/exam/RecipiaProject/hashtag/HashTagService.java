@@ -30,23 +30,14 @@ public class HashTagService {
     public void createHashTag(String tagContent, Principal principal){
         SiteUser user=userRepository.findByUsername(principal.getName()).orElseThrow(()->new EntityNotFoundException());
         //String[] tags = hashTagFormDto.getTagContent().split("#");
-        String[] tags = tagContent.split("#");
-        for(String tag: tags){
-            tag = tag.trim();
-            if(tag.length() == 0 ) continue;
-            HashTag h = HashTag.builder()
-                    .tagContent(tag)
-                    .siteUser(user)
-                    .build();
-            hashTagRepository.save(h);
-        }
+
 
     }
 
 
     public void deleteHashTag(HashTagFormDto hashTagFormDto, Principal principal){
         SiteUser user=userRepository.findByUsername("user1").orElseThrow(()->new EntityNotFoundException());
-        HashTag hashTag = hashTagFormDto.deleteHashTag(user);
+        HashTag hashTag = hashTagFormDto.deleteHashTag(user, Post.builder().build());
         hashTagRepository.delete(hashTag);
     }
 

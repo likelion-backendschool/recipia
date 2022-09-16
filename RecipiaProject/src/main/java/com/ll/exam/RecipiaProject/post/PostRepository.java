@@ -24,4 +24,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "join pi.post p " +
             "where pi.thumbnailYn = true ")
     Page<PostMainDto> getPostList(Pageable pageable);
+
 }
