@@ -22,8 +22,8 @@ public class MyPageController {
     private final MyPageService myPageService;
 
     @GetMapping("")
-    @PreAuthorize("isAuthenticated() and (#username == principal.name)")
-    public String mypageHome(Model model, Principal principal) {
+    @PreAuthorize("isAuthenticated() and (#myPageDto.username == principal.username)")
+    public String mypageHome(Model model, MyPageDto myPageDto, Principal principal) {
 
         if (principal != null) {
             System.out.println("타입정보 : " + principal.getClass());
@@ -31,8 +31,8 @@ public class MyPageController {
         }
 
         SiteUser siteUser = myPageService.getUser(principal.getName());
-        MyPageDto myPageDto = MyPageDto.createMyPageDto(siteUser);
-        model.addAttribute("myPageDto", myPageDto);
+        MyPageDto _myPageDto = MyPageDto.createMyPageDto(siteUser);
+        model.addAttribute("myPageDto", _myPageDto);
 
         return "mypage/mypage_home";
     }
