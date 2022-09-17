@@ -2,6 +2,7 @@ package com.ll.exam.RecipiaProject.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,11 +62,12 @@ public class UserController {
     }
 
     @PostMapping("/find-password")
-    public String findPasswordPost(@RequestParam("email") String email){
+    public String findPasswordPost(Model model, @RequestParam("email") String email){
         if (!userService.checkEmail(email)){
             return "user/find_pw_form";
         }
-        userService.sendEmail(email);
+        int tempNum = userService.sendEmail(email);
+        model.addAttribute("tempNum", tempNum);
         return "user/certification_num";
     }
 

@@ -8,6 +8,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -40,10 +42,13 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public void sendEmail(String email) {
+    public int sendEmail(String email) {
+        Random r = new Random();
+        int num = r.nextInt(999999);
+
         String addr = "gi020477@gmail.com";
-        String subject = "[😀😀] 알림메일 입니다.";
-        String body = "안녕하세요?\r\n소통해요~\r\n SMTP메일 테스트입니다.";
+        String subject = "[Recipia🔑] 임시번호 발송 메일입니다.";
+        String body = "임시번호: %d".formatted(num);
 
         SimpleMailMessage smm = new SimpleMailMessage();
         smm.setFrom(addr);
@@ -51,5 +56,7 @@ public class UserService {
         smm.setSubject(subject);
         smm.setText(body);
         mailSender.send(smm);
+
+        return num;
     }
 }
