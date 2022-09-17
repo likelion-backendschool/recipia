@@ -84,4 +84,9 @@ public class UserController {
         }
         return "user/modify_pw";
     }
+
+    @GetMapping("/modify-pw")
+    public String modifyPW(){
+        return "user/modify_pw";
+    }
 }
