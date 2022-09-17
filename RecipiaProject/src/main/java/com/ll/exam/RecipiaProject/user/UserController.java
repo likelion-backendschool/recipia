@@ -57,14 +57,14 @@ public class UserController {
 
     @GetMapping("/find-password")
     public String findPassword(){
-        return "user/find_password_form";
+        return "user/find_pw_form";
     }
 
     @PostMapping("/find-password")
     public String findPasswordPost(@RequestParam("email") String email){
         if (!userService.checkEmail(email)){
-            return "user/find_password_form";
+            return "user/find_pw_form";
         }
-        return "user/send_mail_form";
+        return "user/certification_num";
     }
 }
