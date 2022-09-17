@@ -1,6 +1,5 @@
 package com.ll.exam.RecipiaProject.post;
 
-import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

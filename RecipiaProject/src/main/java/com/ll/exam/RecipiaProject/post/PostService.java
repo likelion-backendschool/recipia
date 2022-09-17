@@ -4,7 +4,6 @@ import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
