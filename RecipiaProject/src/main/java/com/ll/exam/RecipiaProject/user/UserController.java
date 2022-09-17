@@ -65,6 +65,7 @@ public class UserController {
         if (!userService.checkEmail(email)){
             return "user/find_pw_form";
         }
+        userService.sendEmail(email);
         return "user/certification_num";
     }
 }

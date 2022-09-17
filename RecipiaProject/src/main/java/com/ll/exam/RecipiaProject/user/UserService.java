@@ -2,6 +2,8 @@ package com.ll.exam.RecipiaProject.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailSender mailSender;
 
     public void create(String username, String password, String email)
             throws UsernameDuplicatedException, EmailDuplicatedException{
@@ -34,5 +37,19 @@ public class UserService {
 
     public boolean checkEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public void sendEmail(String email) {
+        String addr = "gi020477@gmail.com";
+        String subject = "[😀😀] 알림메일 입니다.";
+        String body = "안녕하세요?\r\n소통해요~\r\n SMTP메일 테스트입니다.";
+
+        SimpleMailMessage smm = new SimpleMailMessage();
+        smm.setFrom(addr);
+        smm.setTo(email);
+        smm.setSubject(subject);
+        smm.setText(body);
+
+        mailSender.send(smm);
     }
 }
