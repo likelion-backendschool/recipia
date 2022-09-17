@@ -68,4 +68,9 @@ public class UserController {
         userService.sendEmail(email);
         return "user/certification_num";
     }
+
+    @GetMapping("/temp-num")
+    public String tempNum(){
+        return "user/certification_num";
+    }
 }

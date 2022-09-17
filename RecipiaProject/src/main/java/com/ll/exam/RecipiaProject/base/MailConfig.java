@@ -1,10 +1,10 @@
 package com.ll.exam.RecipiaProject.base;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.mail.MailProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
@@ -12,18 +12,22 @@ import java.util.Properties;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableConfigurationProperties(MailProperties.class)
+@PropertySource("classpath:google-smtp.properties")
 public class MailConfig {
 
-    private final MailProperties mailProperties;
+    @Value("${spring.mail.username}")
+    String username;
+    @Value("${spring.mail.password}")
+    String password;
+
     @Bean
     public JavaMailSender javaMailSender(){
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername(mailProperties.getUsername());
-        mailSender.setPassword(mailProperties.getPassword());
+        mailSender.setUsername(username);
+        mailSender.setPassword(password);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
