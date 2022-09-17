@@ -1,4 +1,4 @@
-package com.ll.exam.RecipiaProject;
+package com.ll.exam.RecipiaProject.base;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
