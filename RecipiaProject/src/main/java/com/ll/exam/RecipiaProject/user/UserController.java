@@ -16,6 +16,7 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
+    private int tempNum;
     private final UserService userService;
 
     @GetMapping("/home")
@@ -66,7 +67,7 @@ public class UserController {
         if (!userService.checkEmail(email)){
             return "user/find_pw_form";
         }
-        int tempNum = userService.sendEmail(email);
+        tempNum = userService.sendEmail(email);
         model.addAttribute("tempNum", tempNum);
         return "user/certification_num";
     }
@@ -74,5 +75,13 @@ public class UserController {
     @GetMapping("/temp-num")
     public String tempNum(){
         return "user/certification_num";
+    }
+
+    @PostMapping("/temp-num")
+    public String tempNumPost(Model model, @RequestParam("tempNum") String tempNum){
+        if (!(this.tempNum == Integer.parseInt(tempNum))){
+            return "user/certification_num";
+        }
+        return "user/modify_pw";
     }
 }
