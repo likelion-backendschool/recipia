@@ -15,9 +15,9 @@ public interface UserRepository extends JpaRepository<SiteUser, Long>, BaseRepos
 
     Optional<SiteUser> findByUsername(String username);
 
+    Optional<SiteUser> findByEmail(String email);
     @Query(value = "truncate table site_user",nativeQuery = true)
     @Modifying
     @Transactional
     void truncate();
-
 }
