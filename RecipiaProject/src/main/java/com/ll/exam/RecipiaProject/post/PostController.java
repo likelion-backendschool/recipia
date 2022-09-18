@@ -85,8 +85,15 @@ public class PostController {
     }
 
     //게시글 삭제
-    @DeleteMapping("/{postId}")
-    public String postDelete(@PathVariable("postId") int postId) {
+    @GetMapping("/{postId}/delete")
+    public String postDelete(@PathVariable("postId") int postId,Principal principal) {
+        SiteUser siteUser=postService.getSiteUser(postId);
+        Post post =postService.getPostById(postId);
+        if(!principal.getName().equals(siteUser.getUsername())){
+            throw new RuntimeException("접속한 유저가 다르다!!");
+        }
+        postImgService.deletePostImgList(post);
+        postService.deletePost(postId);
         return "redirect:/posts/list";
     }
 
