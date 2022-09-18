@@ -6,7 +6,6 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -23,9 +22,13 @@ public class PostFormDto {
 
 //작성폼 수정시 사용
 private List<PostImgDto> postImgDtoList=new ArrayList<>();
-//작성폼 수정시 사용
-private List<Integer>postImgIds =new ArrayList<>();
 
+private List<String> postImgDtoIds=new ArrayList<>();
+    public PostFormDto(int id,String title,String content){
+        this.id=id;
+        this.title=title;
+        this.content=content;
+    }
 
     public Post createPost(SiteUser siteUser) {
         return Post.builder()
