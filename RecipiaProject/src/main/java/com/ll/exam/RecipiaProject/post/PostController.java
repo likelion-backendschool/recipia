@@ -25,7 +25,7 @@ public class PostController {
 
     private final PostService postService;
 
-
+    private final PostImgService postImgService;
     //게시글 작성 폼으로 이동
     @GetMapping("")
     public String postForm(Model model) {
@@ -35,7 +35,7 @@ public class PostController {
 
     //게시글 작성
     @PostMapping("")
-    public String postCreate(PostFormDto postFormDto, @RequestParam("imgFile") List<MultipartFile> files, Principal principal) {
+    public String postCreate(PostFormDto postFormDto, @RequestParam("files") List<MultipartFile> files, Principal principal) {
         postService.createPost(postFormDto, files, principal);
         return "redirect:/posts/list";
     }
@@ -62,25 +62,21 @@ public class PostController {
     //게시글 수정 페이지로 이동
     @GetMapping("/{postId}/modify")
     public String postModifyForm(@PathVariable("postId") int postId, Principal principal,Model model) {
+        Post post=postService.getPostById(postId);
+        PostFormDto postFormDto=post.createPostFormDto();
         SiteUser siteUser=postService.getSiteUser(postId);
         if(!principal.getName().equals(siteUser.getUsername())){
             throw new RuntimeException("접속한 유저가 다르다!!");
         }
-        PostFormDto postFormDto=postService.getPostForm(postId);
-
-        Post post=postService.getPostById(postId);
-        List<PostImgDto>pids=post.createPostImgDtoList();
-        postFormDto.setPostImgDtoList(pids);
         model.addAttribute("postFormDto",postFormDto);
         return "post/postForm";
     }
 
     //게시글 수정
     @PostMapping("/{postId}/modify")
-    public String postModify(PostFormDto postFormDto,@RequestParam("imgFile") List<MultipartFile> files, @PathVariable("postId") int postId) {
-        if(files.isEmpty()){
-            return "redirect:/posts/list";
-        }
+    public String postModify(Principal principal,PostFormUpdateDto postFormUpdateDto,@RequestParam("files") List<MultipartFile> files, @PathVariable("postId") int postId) {
+
+      postService.modifyPost(postFormUpdateDto,files,postId,principal);
         return "redirect:/posts/list";
     }
 

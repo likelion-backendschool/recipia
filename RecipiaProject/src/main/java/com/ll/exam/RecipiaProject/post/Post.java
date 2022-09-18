@@ -48,13 +48,17 @@ public class Post {
     @ManyToOne
     private SiteUser siteUser;
 
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<PostImg> postImgList;
 
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();
         for(PostImg postImg:postImgList){
-            postImgDtoList.add( postImg.createPostImgDto());
+            if(postImg.getThumbnailYn()){
+                postImgDtoList.add(0,postImg.createPostImgDto());
+            }else{
+                postImgDtoList.add( postImg.createPostImgDto());
+            }
         }
         PostDetailDto postDetailDto=PostDetailDto.builder()
                 .id(id)
@@ -68,13 +72,32 @@ public class Post {
                 .build();
         return postDetailDto;
     }
+    //postFormDto 변환
+    public PostFormDto createPostFormDto() {
 
-    public List<PostImgDto> createPostImgDtoList() {
         List<PostImgDto> pids=new ArrayList<>();
+        List<String> pidIds=new ArrayList<>();
+
+        //List<postImgDto>로 변환해주는과정
         for(PostImg pi : postImgList){
-           PostImgDto pid= pi.createPostImgDto();
-           pids.add(pid);
+            PostImgDto pid= pi.createPostImgDto();
+            //
+            if(pi.getThumbnailYn()){
+                pids.add(0,pid);
+                pidIds.add(0,pid.getId()+"");
+            }else{
+                pids.add(pid);
+                pidIds.add(pid.getId()+"");
+            }
         }
-        return pids;
+        //postForDto 생성
+        PostFormDto postFormDto=PostFormDto.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .postImgDtoList(pids)
+                .postImgDtoIds(pidIds)
+                .build();
+        return postFormDto;
     }
 }
