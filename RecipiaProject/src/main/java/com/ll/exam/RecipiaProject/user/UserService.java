@@ -59,4 +59,10 @@ public class UserService {
 
         return num;
     }
+
+    public void updatePw(String email, String password) {
+        SiteUser updateUser = userRepository.findByEmail(email).orElse(null);
+        updateUser.setPassword(passwordEncoder.encode(password));
+        userRepository.save(updateUser);
+    }
 }

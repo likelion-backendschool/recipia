@@ -17,6 +17,7 @@ import javax.validation.Valid;
 public class UserController {
 
     private int tempNum;
+    private String tempEmail;
     private final UserService userService;
 
     @GetMapping("/home")
@@ -69,6 +70,7 @@ public class UserController {
         }
         tempNum = userService.sendEmail(email);
         model.addAttribute("tempNum", tempNum);
+        tempEmail = email;
         return "user/certification_num";
     }
 
@@ -86,7 +88,22 @@ public class UserController {
     }
 
     @GetMapping("/modify-pw")
-    public String modifyPW(){
+    public String modifyPW(PasswordDto passwordDto){
         return "user/modify_pw";
+    }
+
+    @PostMapping("/modify-pw")
+    public String modifyPWPost(Model model, @Valid PasswordDto passwordDto, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "user/modify_pw";
+        }
+        if (!passwordDto.getPassword1().equals(passwordDto.getPassword2())){
+            bindingResult.rejectValue("password2","passwordInCorrect"
+                    ,"비밀번호가 일치하지 않습니다.");
+            return "user/modify_pw";
+        }
+
+        userService.updatePw(tempEmail, passwordDto.getPassword1());
+        return "redirect:/user/home";
     }
 }
