@@ -3,17 +3,16 @@ package com.ll.exam.RecipiaProject.post;
 import com.ll.exam.RecipiaProject.hashtag.HashTagFormDto;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PostFormDto {
     private int id;
 
