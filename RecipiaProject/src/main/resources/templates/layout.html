@@ -14,11 +14,18 @@
     <!--csrf 토큰-->
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <!--tagify-->
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen bg-[#FBF27C]">
 <!-- 네비게이션바 -->
 <nav th:replace="navbar :: navbarFragment"></nav>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->

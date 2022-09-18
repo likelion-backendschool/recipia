@@ -1,19 +1,25 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.post.postImg.PostImg;
+import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Post {
     @Id
@@ -31,30 +37,34 @@ public class Post {
 
     private int likes;
 
-    @CreationTimestamp
-    private Timestamp createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdDate;
 
-    @UpdateTimestamp
-    private Timestamp modifiedDate;
-
-    private Timestamp deleteDate;
-
-    private boolean isBlind;
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date modifiedDate;
 
     @ManyToOne
     private SiteUser siteUser;
 
-    @Builder
-    public Post(String title, String content, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind,SiteUser siteUser){
-        this.title=title;
-        this.content=content;
-        this.score=score;
-        this.views=views;
-        this.likes=likes;
-        this.createdDate=createdDate;
-        this.modifiedDate=modifiedDate;
-        this.deleteDate=deleteDate;
-        this.isBlind=isBlind;
-        this.siteUser=siteUser;
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    private List<PostImg> postImgList;
+
+    public PostDetailDto createPostDetailDto(){
+        List<PostImgDto> postImgDtoList=new ArrayList<>();
+        for(PostImg postImg:postImgList){
+            postImgDtoList.add( postImg.createPostImgDto());
+        }
+        PostDetailDto postDetailDto=PostDetailDto.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .score(score)
+                .views(views)
+                .likes(likes)
+                .postImgDtoList(postImgDtoList)
+                .build();
+        return postDetailDto;
     }
 }

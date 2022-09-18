@@ -2,9 +2,7 @@ package com.ll.exam.RecipiaProject.post;
 
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,21 +10,27 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PostFormDto {
-private int id;
+    private int id;
 
-private String title;
+    private String title;
 
-private String content;
+    private String content;
 
-//상세페이지 구현시 이미지 전송 에 사용될 변수
+
+//작성폼 수정시 사용
 private List<PostImgDto> postImgDtoList=new ArrayList<>();
+//작성폼 수정시 사용
+private List<Integer>postImgIds =new ArrayList<>();
 
-public Post createPost(SiteUser siteUser){
-    return Post.builder()
-            .title(title)
-            .content(content)
-            .siteUser(siteUser)
-            .build();
-}
+
+    public Post createPost(SiteUser siteUser) {
+        return Post.builder()
+                .title(title)
+                .content(content)
+                .siteUser(siteUser)
+                .build();
+    }
 }
