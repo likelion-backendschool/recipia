@@ -22,7 +22,7 @@ public class PostImg {
 
     private String imgUrl;
 
-    private boolean thumbnailYn;
+    private Boolean thumbnailYn;
 
     @ManyToOne
     private Post post;

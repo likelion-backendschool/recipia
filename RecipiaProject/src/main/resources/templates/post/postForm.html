@@ -6,6 +6,7 @@
       layout:decorate="~{layout}">
 
 <th:bloack layout:fragment="content">
+
     <form method="post" th:object="${postFormDto}" enctype="multipart/form-data" th:onsubmit ="return image_check()">
         <input  type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" />
         <div class="flex flex-col px-60">
@@ -18,57 +19,124 @@
                 <textarea th:field="*{content}" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300" placeholder="내용" required></textarea>
             </div>
 
-            <div>
-
                 <label class="block mb-2 text-sm font-bold text-gray-900">이미지</label>
-
-                <div class="flex w-full">
-                    <label class="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer hover:bg-gray-100">
-                        <div class="flex flex-col justify-center items-center pt-5 pb-6">
-                            <svg aria-hidden="true" class="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                        </div>
-                        <input  type="file" th:id="imgFile" th:name="imgFile" multiple="multiple" class="hidden" onchange="setThumbnail(event);"/>
-                    </label>
+                <div th:if="${#lists.isEmpty(postFormDto.postImgDtoList)}">
+                    <div data-name="fileDiv">
+                        
+                            <div class="flex mb-1">
+                                <input type="text"  name="imgNames" class="imgNames text-lg  border rounded-lg font-bold flex-grow" style="background-color: rgba(209, 213, 219, 1);" value="파일"  readonly/>
+                                <label for="file_0" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20">파일선택</label>
+                                <input type="file" id="file_0" name="files" onchange="changeFilename(this,0)" accept=".jpg,.jpeg,.png,.gif,.bmp" hidden>
+                                <button type="button" onclick="addFile()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
+                                <div>
+                                    <img th:id="LoadImg_0"class="object-fill w-96 h-96">
+                                </div>
+                    
+                    </div>
                 </div>
-            </div>
-            <div id="preview_image_container" class="flex flex-col w-full  border-red border-4 mt-5 hidden">
-            </div>
-            <div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 등록</button>
-            </div>
+
+                <!--     수정폼           -->
+                <div th:if="${not #lists.isEmpty(postFormDto.postImgDtoList)}">
+                   <div th:each="postImgDto,idx:${postFormDto.postImgDtoList}">
+                       <input type="text" th:value="${postImgDto.id}" name="postImgIds" hidden>
+                        <div data-name="fileDiv">
+                            <div class="flex mb-1">
+                                <input type="text" name="imgNames"  class="imgNames text-lg  border rounded-lg font-bold flex-grow" style="background-color: rgba(209, 213, 219, 1);" th:value="${postImgDto.oriImgName}"  readonly/>
+                                <label th:for="'file_'+${idx.index}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20">파일선택</label>
+                                <input type="file" th:id="'file_'+${idx.index}" name="files" th:onchange="changeFilename(this,[[${idx.index}]])" accept=".jpg,.jpeg,.png,.gif,.bmp" hidden>
+                                <button th:if="${idx.index}==0"type="button" onclick="addFile()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <button th:if="${idx.index}>=1" type="button" onclick="removeFile(this)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                            </div>
+                                <div>
+                                    <img th:id="'LoadImg_'+${idx.index}"class="object-fill w-96 h-96" th:src="@{${postImgDto.imgUrl}}" >
+                                </div>
+                        </div>
+                   </div>
+                </div>
+
+                <div class="btnDiv"th:if="${postFormDto.id == 0}">
+                    <button type="submit" th:formaction="@{/posts}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 등록</button>
+                </div>
+
+                <div  class="btnDiv" th:if="${postFormDto.id != 0}">
+                    <button type="submit" th:formaction="@{|/posts/${postFormDto.id}/modify|}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 수정</button>
+                </div>
+                
         </div>
     </form>
 
     <script>
-   function image_check(){
-   if(document.getElementById("imgFile").value==''){
-	alert("이미지를 1개이상 넣어주세요.");
-	return false;
-    }
-    return true;
-   }
-      function setThumbnail(event) {
-      $('#preview_image_container').show();
-      $('img').remove();
-        for (let image of event.target.files) {
-          let reader = new FileReader();
+function changeFilename(file,idx) {
+	file = $(file);
+	const filename = file[0].files[0].name;
+	const target = file.prevAll("input[name=imgNames]");
+	target.val(filename);
+	LoadImg(file[0],idx);
+}
 
-          reader.onload = function(event) {
-          var div = document.createElement("div");
-            var img = document.createElement("img");
-            div.setAttribute("class", " flex items-center justify-center");
-            img.setAttribute("src", event.target.result);
-             img.setAttribute("class", " object-cover w-96 h-96 ");
-             div.appendChild(img);
-            document.querySelector("div#preview_image_container").appendChild(div);
-          };
+	function LoadImg(value,idx)
+		{
+			if(value.files && value.files[0])
+			{
+				var reader = new FileReader();
 
-          console.log(image);
-          reader.readAsDataURL(image);
-        }
-      }
+				reader.onload = function (e) {
+					$('#LoadImg_'+idx).attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(value.files[0]);
+			}
+		}
+
+
+function addFile() {
+
+	const fileDivs = $('div[data-name="fileDiv"]');
+	if (fileDivs.length > 2) {
+		alert('파일은 최대 세 개까지 업로드 할 수 있습니다.');
+		return false;
+	}
+
+	const fileHtml = `
+	   <div data-name="fileDiv">
+                    <div class="flex mb-1">
+                            <input type="text" name="imgNames" class="imgNames text-lg  border rounded-lg font-bold flex-grow" style="background-color: rgba(209, 213, 219, 1);" value="파일"  readonly/>
+                            <label for="file_${fileDivs.length}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20">파일선택</label>
+                            <input type="file" id="file_${fileDivs.length}" name="files" onchange="changeFilename(this,${fileDivs.length})" accept=".jpg,.jpeg,.png,.gif,.bmp" hidden>
+                            <button type="button" onclick="removeFile(this)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    </div>
+                    <div>
+                        <img id="LoadImg_${fileDivs.length}" class="object-fill w-96 h-96" hidden>
+                    </div>
+       </div>
+	`;
+
+	$('.btnDiv').before(fileHtml);
+}
+
+function removeFile(elem) {
+
+	const prevTag = $(elem).prev().prop('tagName');
+	if (prevTag === 'BUTTON') {
+		const file = $(elem).prevAll('input[type="file"]');
+		const filename = $(elem).prevAll('input[type="text"]');
+		file.val('');
+		filename.val('파일 찾기');
+		return false;
+	}
+	$(elem).prevAll().remove();
+	$(elem).parents('div[data-name="fileDiv"]').remove();
+	$(elem).parents('div[class="flex"]').remove();
+}
+
+function image_check(){
+if($('.imgNames').last().val() == '파일'){
+alert('이미지가 비어있습니다!! 창을 삭제해주세요!!');
+return false;
+}
+
+}
     </script>
 </th:bloack>
 

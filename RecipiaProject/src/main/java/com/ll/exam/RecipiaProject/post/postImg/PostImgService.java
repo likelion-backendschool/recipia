@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post.postImg;
 
+import com.ll.exam.RecipiaProject.post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,19 @@ public class PostImgService {
             //DB에 이미지 정보 저장
             postImg.updatePostImg(originImgName,imgName,imgUrl);
             postImgRepository.save(postImg);
+    }
+
+    public void deletePostImgList(Post post) {
+       List<PostImg>postImgList= post.getPostImgList();
+        for(int i=0;i<postImgList.size();i++){
+            PostImg postImg=postImgList.get(i);
+            postImgFileService.deleteFile(postImgLocation+"/"+postImg.getImgName());
+            postImgList.remove(postImg);
+            postImgRepository.deleteById(postImg.getId());
+        }
+    }
+
+    public void deletePostImg(int postImgId) {
+        postImgRepository.deleteById(postImgId);
     }
 }
