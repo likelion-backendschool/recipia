@@ -29,9 +29,6 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     void truncate();
     @Query("select p.siteUser from Post p where p.id = :postId ")
     SiteUser getSiteUser(@Param("postId") int postId);
-    @Query("select new com.ll.exam.RecipiaProject.post.PostFormDto(p.id,p.title,p.content) " +
-            "from Post p where p.id = :postId ")
-    PostFormDto getPostForm(@Param("postId") int postId);
 }
 
 
