@@ -16,13 +16,13 @@ import java.util.UUID;
 public class PostImgFileService {
     public String uploadFile(String originImgName,MultipartFile file,String postImgLocation) throws Exception{
         UUID uuid=UUID.randomUUID();
-        String extension=originImgName.substring(originImgName.lastIndexOf("."));
-        String savedFileName=uuid.toString()+extension;
+        String extension=originImgName.substring(originImgName.lastIndexOf(".")+1);
+        String savedFileName=uuid.toString()+"."+extension;
         String fileUploadUrl=postImgLocation+savedFileName;
 
         BufferedImage bi=ImageIO.read(file.getInputStream());
         bi=resizeImage(bi,450,450);
-        ImageIO.write(bi,"jpg",new File(fileUploadUrl));
+        ImageIO.write(bi,extension,new File(fileUploadUrl));
         return savedFileName;
     }
 
@@ -30,5 +30,10 @@ public class PostImgFileService {
     BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws Exception {
         return Scalr.resize(originalImage, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, targetWidth, targetHeight, Scalr.OP_ANTIALIAS);
     }
-
+    public void deleteFile(String filePath){
+        File deleteFile=new File(filePath);
+        if(deleteFile.exists()){
+            deleteFile.delete();
+        }
+    }
 }
