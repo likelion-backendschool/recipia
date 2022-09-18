@@ -36,13 +36,13 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	// 스프링 Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
+	// 스프링 부트 이메일 전송
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	// 이미지 리사이즈 를 위한 라이브러리
 	implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
 
 	//스프링시큐리티 환경에서 MockMvc테스트를 위한 라이브러리(csrf)
 	testImplementation 'org.springframework.security:spring-security-test:5.7.3'
-
 }
 
 tasks.named('test') {
