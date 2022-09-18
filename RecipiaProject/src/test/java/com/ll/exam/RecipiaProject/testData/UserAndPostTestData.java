@@ -131,12 +131,12 @@ public class UserAndPostTestData {
         String fileName="test1";
         String contentType="jpg";
         String filePath="src/main/resources/static/sampleImg/"+fileName+"."+contentType;
-        MockMultipartFile image1=new MockMultipartFile("imgFile",fileName+"."+contentType,"image/"+contentType,new FileInputStream(filePath));
+        MockMultipartFile image1=new MockMultipartFile("files",fileName+"."+contentType,"image/"+contentType,new FileInputStream(filePath));
 
         String fileName2="test2";
         String contentType2="jpg";
         String filePath2="src/main/resources/static/sampleImg/"+fileName2+"."+contentType2;
-        MockMultipartFile image2=new MockMultipartFile("imgFile",fileName2+"."+contentType2,"image/"+contentType,new FileInputStream(filePath2));
+        MockMultipartFile image2=new MockMultipartFile("files",fileName2+"."+contentType2,"image/"+contentType,new FileInputStream(filePath2));
 
         mockMvc.perform(
                 multipart("/posts")
@@ -152,12 +152,12 @@ public class UserAndPostTestData {
         String fileName3="test3";
         String contentType3="jpg";
         String filePath3="src/main/resources/static/sampleImg/"+fileName3+"."+contentType3;
-        MockMultipartFile image3=new MockMultipartFile("imgFile",fileName3+"."+contentType3,"image/"+contentType3,new FileInputStream(filePath3));
+        MockMultipartFile image3=new MockMultipartFile("files",fileName3+"."+contentType3,"image/"+contentType3,new FileInputStream(filePath3));
 
         String fileName4="test4";
         String contentType4="jpg";
         String filePath4="src/main/resources/static/sampleImg/"+fileName4+"."+contentType4;
-        MockMultipartFile image4=new MockMultipartFile("imgFile",fileName4+"."+contentType4,"image/"+contentType4,new FileInputStream(filePath4));
+        MockMultipartFile image4=new MockMultipartFile("files",fileName4+"."+contentType4,"image/"+contentType4,new FileInputStream(filePath4));
 
         mockMvc.perform(
                         multipart("/posts")
