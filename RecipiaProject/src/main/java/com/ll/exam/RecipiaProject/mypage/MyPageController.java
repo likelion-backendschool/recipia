@@ -22,7 +22,7 @@ public class MyPageController {
     private final MyPageService myPageService;
 
     @GetMapping("")
-    @PreAuthorize("isAuthenticated() and (#myPageDto.username == principal.username)")
+    @PreAuthorize("isAuthenticated()")
     public String mypageHome(Model model, MyPageDto myPageDto, Principal principal) {
 
         if (principal != null) {
