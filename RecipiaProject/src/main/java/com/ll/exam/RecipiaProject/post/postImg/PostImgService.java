@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.transaction.Transactional;
+import java.util.List;
+
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -35,7 +37,7 @@ public class PostImgService {
     }
 
     public void deletePostImgList(Post post) {
-       List<PostImg>postImgList= post.getPostImgList();
+       List<PostImg> postImgList= post.getPostImgList();
         for(int i=0;i<postImgList.size();i++){
             PostImg postImg=postImgList.get(i);
             postImgFileService.deleteFile(postImgLocation+"/"+postImg.getImgName());
