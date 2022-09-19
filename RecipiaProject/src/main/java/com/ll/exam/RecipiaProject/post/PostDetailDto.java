@@ -33,5 +33,7 @@ public class PostDetailDto {
 
     private int likes;
 
+    private String username;
+
     private List<PostImgDto>postImgDtoList=new ArrayList<>();
 }

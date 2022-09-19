@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional
 public class UserAndPostTestData {
     @Autowired
     private UserController userController;
@@ -88,6 +87,7 @@ public class UserAndPostTestData {
     }
     //2명의 회원생성 user1,user2
     @Test
+    @Transactional
     @Rollback(value = false)
     @Order(1)
     public void userInitUsingController() throws Exception {
@@ -119,6 +119,7 @@ public class UserAndPostTestData {
     //user2 에 post_img 2개를 가진 post 생성
     //이미지 경로는 내부경로에 있는 src/main/resources/static/sampleImg/test1.png,src/main/resources/static/sampleImg/test2.png
     @Test
+    @Transactional
     @Rollback(value = false)
     @Order(2)
     public void postInitUsingController() throws Exception {
@@ -130,12 +131,12 @@ public class UserAndPostTestData {
         String fileName="test1";
         String contentType="jpg";
         String filePath="src/main/resources/static/sampleImg/"+fileName+"."+contentType;
-        MockMultipartFile image1=new MockMultipartFile("imgFile",fileName+"."+contentType,"image/"+contentType,new FileInputStream(filePath));
+        MockMultipartFile image1=new MockMultipartFile("files",fileName+"."+contentType,"image/"+contentType,new FileInputStream(filePath));
 
         String fileName2="test2";
         String contentType2="jpg";
         String filePath2="src/main/resources/static/sampleImg/"+fileName2+"."+contentType2;
-        MockMultipartFile image2=new MockMultipartFile("imgFile",fileName2+"."+contentType2,"image/"+contentType,new FileInputStream(filePath2));
+        MockMultipartFile image2=new MockMultipartFile("files",fileName2+"."+contentType2,"image/"+contentType,new FileInputStream(filePath2));
 
         mockMvc.perform(
                 multipart("/posts")
@@ -151,12 +152,12 @@ public class UserAndPostTestData {
         String fileName3="test3";
         String contentType3="jpg";
         String filePath3="src/main/resources/static/sampleImg/"+fileName3+"."+contentType3;
-        MockMultipartFile image3=new MockMultipartFile("imgFile",fileName3+"."+contentType3,"image/"+contentType3,new FileInputStream(filePath3));
+        MockMultipartFile image3=new MockMultipartFile("files",fileName3+"."+contentType3,"image/"+contentType3,new FileInputStream(filePath3));
 
         String fileName4="test4";
         String contentType4="jpg";
         String filePath4="src/main/resources/static/sampleImg/"+fileName4+"."+contentType4;
-        MockMultipartFile image4=new MockMultipartFile("imgFile",fileName4+"."+contentType4,"image/"+contentType4,new FileInputStream(filePath4));
+        MockMultipartFile image4=new MockMultipartFile("files",fileName4+"."+contentType4,"image/"+contentType4,new FileInputStream(filePath4));
 
         mockMvc.perform(
                         multipart("/posts")
