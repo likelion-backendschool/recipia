@@ -30,6 +30,8 @@ public class PostService {
     private final PostImgService postImgService;
     private final PostImgRepository postImgRepository;
 
+    private final HashTagRepository hashTagRepository;
+
     public Page<PostMainDto> getPostList(Pageable pageable){
         Page<Post> posts = postRepository.findAll(pageable);
         Page<PostMainDto> map = posts.map(post ->
@@ -129,6 +131,7 @@ public class PostService {
                    postImgService.deletePostImg(Integer.parseInt(postFormUpdateDto.getPostImgIds().get(j)));
                }
             }
+            hashTagService.modifyHashTag(postFormUpdateDto.getTagContent(),post,principal);
         }
 
     public void deletePost(int postId) {
