@@ -27,10 +27,22 @@ public class HashTagService {
 
 
 
-    public void createHashTag(String tagContent, Principal principal){
+    public void createHashTag(String tagContent, Principal principal,Post post){
         SiteUser user=userRepository.findByUsername(principal.getName()).orElseThrow(()->new EntityNotFoundException());
-        //String[] tags = hashTagFormDto.getTagContent().split("#");
-
+        String[] tags = tagContent.split("#");
+        for(String tag: tags){
+            tag = tag.trim();
+            if(tag.length() == 0 ) continue;
+            HashTag h = HashTag.builder()
+                    .tagContent(tag)
+                    .siteUser(user)
+                    .post(post)
+                    .build();
+            post.getHashTagList().add(h);
+            System.out.println("=============================");
+            System.out.println("tag:"+tag);
+            System.out.println("=============================");
+        }
 
     }
 
