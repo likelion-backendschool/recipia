@@ -31,9 +31,4 @@ public class HashTagController {
         return "hashtag/hashtagList";
     }
 
-    @GetMapping("/{tagId}")
-    public String hashTagDelete(HashTagFormDto hashTagFormDto, Principal principal) {
-        hashTagService.deleteHashTag(hashTagFormDto, principal);
-        return "redirect:/hashtag/list";
-    }
 }
