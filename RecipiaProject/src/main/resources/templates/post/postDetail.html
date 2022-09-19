@@ -9,13 +9,22 @@
 
 <div class="flex flex-col px-60">
     <div class="p-6  bg-white rounded-lg border border-gray-200 shadow-md">
-        <div>
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900" th:text="${postDetailDto.title}">제목</h5>
+
+        <div class="flex flex-col w-full">
+           <div class="flex">
+               <div  th:each="hashTagContent : ${postDetailDto.hashTagContentList}">
+                   <a class="badge badge-secondary mr-1" th:text="${hashTagContent}"></a>
+               </div>
+           </div>
+            <div >
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900" th:text="${postDetailDto.title}">제목</h5>
+            </div>
         </div>
 
         <div>
             <p class="mb-3 font-normal text-gray-700" th:text="${postDetailDto.content}">내용</p>
         </div>
+
 
         <div class="flex justify-end">
             <a th:href="@{|/posts/${postDetailDto.id}/modify|}" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == postDetailDto.username}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">

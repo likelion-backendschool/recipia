@@ -27,7 +27,6 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final HashTagService hashTagService;
-
     private final PostImgService postImgService;
     private final PostImgRepository postImgRepository;
 
@@ -72,7 +71,7 @@ public class PostService {
     }
 
     public PostDetailDto getPostDetail(int postId) {
-        Post post=postRepository.getPostDetail(postId);
+        Post post=postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException("getPostDetail 과정 중 post가 없음!! "));
         return post.createPostDetailDto();
     }
 

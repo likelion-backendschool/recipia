@@ -58,12 +58,16 @@ public class Post {
 
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();
+        List<String> tageContentList=new ArrayList<>();
         for(PostImg postImg:postImgList){
             if(postImg.getThumbnailYn()){
                 postImgDtoList.add(0,postImg.createPostImgDto());
             }else{
                 postImgDtoList.add( postImg.createPostImgDto());
             }
+        }
+        for(HashTag hashTag:hashTagList){
+            tageContentList.add(hashTag.getTagContent());
         }
         PostDetailDto postDetailDto=PostDetailDto.builder()
                 .id(id)
@@ -74,6 +78,7 @@ public class Post {
                 .likes(likes)
                 .username(siteUser.getUsername())
                 .postImgDtoList(postImgDtoList)
+                .hashTagContentList(tageContentList)
                 .build();
         return postDetailDto;
     }
