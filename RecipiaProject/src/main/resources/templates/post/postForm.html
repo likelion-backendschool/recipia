@@ -20,7 +20,7 @@
             </div>
              <div>
                 <label>태그</label>
-                <input th:type="text"  th:field="*{tagContent}" placeholder="재료를 입력하시오.">
+                <input th:type="text"  th:name="tagContent" th:value="${postFormDto.tagContent}"  placeholder="재료를 입력하시오.">
             </div>
 
 
