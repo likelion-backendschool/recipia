@@ -7,7 +7,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -63,12 +62,12 @@ public class MyPageController {
 
     @GetMapping("/withdraw")
     @PreAuthorize("isAuthenticated()")
-    public String userWithdraw(Principal principal, @PathVariable("id") Long id) {
+    public String userWithdraw(Principal principal) {
         SiteUser siteUser = myPageService.getUser(principal.getName());
 
 
         myPageService.delete(siteUser);
-        return "redirect:/mypage";
+        return "redirect:/";
     }
 
 
