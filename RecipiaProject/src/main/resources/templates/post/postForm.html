@@ -20,7 +20,7 @@
             </div>
              <div class="flex flex-col">
                 <label class="block mb-2 text-sm font-bold text-gray-900">태그</label>
-                <input class="w-6/12 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300" th:type="text"  th:name="tagContent" th:value="${postFormDto.tagContent}"  placeholder="재료를 입력하시오.">
+                <input class="w-6/12 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300" th:type="text" th:id="tagContent" th:name="tagContent" th:value="${postFormDto.tagContent}"  placeholder="재료를 입력하시오.">
             </div>
 
 
@@ -136,8 +136,22 @@ function removeFile(elem) {
 
 function image_check(){
 if($('.imgNames').last().val() == '파일'){
-alert('이미지가 비어있습니다!! 창을 삭제해주세요!!');
+alert('이미지가 비어있습니다!! 1개이상 입력해주세요!');
 return false;
+}
+if( $("#tagContent").val().trim() == '' || $("#tagContent").val().trim() == null ){
+    alert( '해시태그 값을 1개 이상 입력해주세요!' );
+    return false;
+}
+if( !$("#tagContent").val().startsWith("#") ){
+    alert( '해시태그는 # 으로 시작해야합니다!' );
+      $("#tagContent").val('');
+    return false;
+}
+if( $("#tagContent").val().endsWith("#") ){
+    alert( '해시태그는 # 으로 끝나면 안됩니다!' );
+      $("#tagContent").val('');
+    return false;
 }
 
 }
