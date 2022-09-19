@@ -25,12 +25,6 @@ public class HashTagController {
         return "hashtag/hashtagForm";
     }
 
-    @PostMapping("")
-    public String hashTagCreate(String tagContent, Principal principal) {
-        hashTagService.createHashTag(tagContent, principal);
-        return "redirect:/hashtag/list";
-    }
-
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("hashtagList", hashTagService.getHashTagList());
