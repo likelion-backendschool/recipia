@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.hashtag;
 
+import com.ll.exam.RecipiaProject.post.Post;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,12 +22,16 @@ public class HashTag {
     @ManyToOne
     private SiteUser siteUser;
 
+    @ManyToOne
+    private Post post;
+
     @Builder
-    public HashTag(int tagId, String tagContent, int tagView, String tagCategory, SiteUser siteUser){
+    public HashTag(int tagId, String tagContent, int tagView, String tagCategory, SiteUser siteUser, Post post){
         this.tagId = tagId;
         this.tagContent= tagContent;
         this.tagView= tagView;
         this.tagCategory = tagCategory;
         this.siteUser = siteUser;
+        this.post = post;
     }
 }

@@ -19,23 +19,25 @@ public class HashTagFormDto {
     private int tagView;
     private String tagCategory;
 
-    public HashTag createHashTag(SiteUser siteUser){
+    public HashTag createHashTag(SiteUser siteUser, Post post){
         return HashTag.builder()
                 .tagId(tagId)
                 .tagContent(tagContent)
                 .tagView(tagView)
                 .tagCategory(tagCategory)
                 .siteUser(siteUser)
+                .post(post)
                 .build();
     }
 
-    public HashTag deleteHashTag(SiteUser siteUser){
+    public HashTag deleteHashTag(SiteUser siteUser, Post post){
         return HashTag.builder()
                 .tagId(tagId)
                 .tagContent(tagContent)
                 .tagView(tagView)
                 .tagCategory(tagCategory)
                 .siteUser(siteUser)
+                .post(post)
                 .build();
     }
 

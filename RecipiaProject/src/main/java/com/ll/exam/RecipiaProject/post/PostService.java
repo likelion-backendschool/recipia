@@ -1,5 +1,7 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.hashtag.HashTag;
+import com.ll.exam.RecipiaProject.hashtag.HashTagRepository;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgRepository;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
@@ -15,6 +17,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @RequiredArgsConstructor
@@ -22,14 +25,29 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final HashTagRepository hashTagRepository;
 
     private final PostImgService postImgService;
     private final PostImgRepository postImgRepository;
 
 
     public Page<PostMainDto> getPostList(Pageable pageable){
-        return postRepository.getPostList(pageable);
+        Page<Post> posts = postRepository.findAll(pageable);
+        Page<PostMainDto> map = posts.map(post ->
+                PostMainDto.builder()
+                        .title(post.getTitle())
+                        .id(post.getId())
+                        .hashTagContentList(post.getHashTagList().stream().map(hashTag ->
+                                hashTag.getTagContent()).collect(Collectors.toList()))
+                        .imgUrl(post.getPostImgList().get(0).getImgUrl())
+                        .score(post.getScore())
+                        .likes(post.getLikes())
+                        .views(post.getViews())
+                        .build()
+        );
 
+
+        return map;
     }
 
     public void createPost(PostFormDto postFormDto, List<MultipartFile> files, Principal principal) {
@@ -49,6 +67,19 @@ public class PostService {
                 postImg.setThumbnailYn(false);
             }
             postImgService.createPostImg(postImg, files.get(i));
+        }
+
+
+        String[] tags = postFormDto.getTagContent().split("#");
+        for(String tag: tags){
+            tag = tag.trim();
+            if(tag.length() == 0 ) continue;
+            HashTag h = HashTag.builder()
+                    .tagContent(tag)
+                    .siteUser(user)
+                    .post(post)
+                    .build();
+            post.getHashTagList().add(h);
         }
     }
 

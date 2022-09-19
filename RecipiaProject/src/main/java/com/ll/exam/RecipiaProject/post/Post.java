@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.hashtag.HashTag;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
@@ -50,6 +51,10 @@ public class Post {
 
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<PostImg> postImgList;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<HashTag> hashTagList = new ArrayList<>();
 
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();

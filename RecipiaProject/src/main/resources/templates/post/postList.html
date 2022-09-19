@@ -29,8 +29,9 @@
             <div class="card-body">
                 <h2 class="card-title">
                     <p th:text="${post.title}"></p>
-                    <div class="badge badge-secondary">tag1</div>
-                    <div class="badge badge-secondary">tag2</div>
+                    <div th:each="hashTagContent : ${post.hashTagContentList}">
+                        <span class="badge badge-secondary" th:text="${hashTagContent}"></span>
+                    </div>
                 </h2>
                 <div class="card-actions justify-end">
                     <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>

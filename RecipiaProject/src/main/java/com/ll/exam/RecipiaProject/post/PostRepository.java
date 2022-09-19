@@ -23,6 +23,8 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
             "where pi.thumbnailYn = true ")
     Page<PostMainDto> getPostList(Pageable pageable);
 
+
+
     @Query(value = "truncate table post",nativeQuery = true)
     @Modifying
     @Transactional
@@ -30,6 +32,3 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     @Query("select p.siteUser from Post p where p.id = :postId ")
     SiteUser getSiteUser(@Param("postId") int postId);
 }
-
-
-
