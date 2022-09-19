@@ -6,7 +6,7 @@
       layout:decorate="~{layout}">
 
 <th:bloack layout:fragment="content">
-
+<div class="border rounded-lg bg-white w-full container mx-auto p-2">
     <form method="post" th:object="${postFormDto}" enctype="multipart/form-data" th:onsubmit ="return image_check()">
         <input  type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" />
         <div class="flex flex-col px-60">
@@ -18,9 +18,9 @@
                 <label class="block mb-2 text-sm font-bold text-gray-900">내용</label>
                 <textarea th:field="*{content}" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300" placeholder="내용" required></textarea>
             </div>
-             <div>
-                <label>태그</label>
-                <input th:type="text"  th:name="tagContent" th:value="${postFormDto.tagContent}"  placeholder="재료를 입력하시오.">
+             <div class="flex flex-col">
+                <label class="block mb-2 text-sm font-bold text-gray-900">태그</label>
+                <input class="w-6/12 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300" th:type="text"  th:name="tagContent" th:value="${postFormDto.tagContent}"  placeholder="재료를 입력하시오.">
             </div>
 
 
@@ -69,7 +69,7 @@
                 </div>
         </div>
     </form>
-
+</div>
     <script>
 function changeFilename(file,idx) {
 	file = $(file);
