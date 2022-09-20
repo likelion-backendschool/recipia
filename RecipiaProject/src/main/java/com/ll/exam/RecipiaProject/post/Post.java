@@ -49,21 +49,24 @@ public class Post {
     @ManyToOne
     private SiteUser siteUser;
 
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<PostImg> postImgList;
+    @OneToMany(mappedBy = "post")
+    private List<PostImg> postImgList=new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "post")
     private List<HashTag> hashTagList = new ArrayList<>();
 
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();
+        List<String> tageContentList=new ArrayList<>();
         for(PostImg postImg:postImgList){
             if(postImg.getThumbnailYn()){
                 postImgDtoList.add(0,postImg.createPostImgDto());
             }else{
                 postImgDtoList.add( postImg.createPostImgDto());
             }
+        }
+        for(HashTag hashTag:hashTagList){
+            tageContentList.add(hashTag.getTagContent());
         }
         PostDetailDto postDetailDto=PostDetailDto.builder()
                 .id(id)
@@ -74,6 +77,7 @@ public class Post {
                 .likes(likes)
                 .username(siteUser.getUsername())
                 .postImgDtoList(postImgDtoList)
+                .hashTagContentList(tageContentList)
                 .build();
         return postDetailDto;
     }
@@ -95,13 +99,19 @@ public class Post {
                 pidIds.add(pid.getId()+"");
             }
         }
-        //postForDto 생성
+        StringBuilder tagContent=new StringBuilder();
+        for(HashTag hashTag:hashTagList){
+
+            tagContent.append("#"+hashTag.getTagContent());
+        }
+        //postFormDto 생성
         PostFormDto postFormDto=PostFormDto.builder()
                 .id(id)
                 .title(title)
                 .content(content)
                 .postImgDtoList(pids)
                 .postImgDtoIds(pidIds)
+                .tagContent(tagContent.toString())
                 .build();
         return postFormDto;
     }

@@ -14,4 +14,5 @@ public class PostFormUpdateDto {
     private String content;
     private List<String> imgNames;
     private List<String> postImgIds;
+    private String tagContent;
 }

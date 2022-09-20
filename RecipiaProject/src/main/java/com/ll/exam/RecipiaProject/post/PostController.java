@@ -39,7 +39,6 @@ public class PostController {
     @PostMapping("")
     public String postCreate(PostFormDto postFormDto, @RequestParam("files") List<MultipartFile> files, Principal principal) {
         postService.createPost(postFormDto, files, principal);
-        hashTagService.createHashTag(postFormDto.getTagContent(), principal);
         return "redirect:/posts/list";
     }
 
