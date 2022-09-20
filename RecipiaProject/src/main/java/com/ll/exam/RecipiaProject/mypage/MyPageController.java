@@ -67,7 +67,7 @@ public class MyPageController {
 
 
         myPageService.delete(siteUser);
-        return "redirect:/";
+        return "redirect:/user/logout";
     }
 
 
