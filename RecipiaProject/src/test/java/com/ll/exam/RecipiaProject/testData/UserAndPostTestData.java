@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.testData;
 
+import com.ll.exam.RecipiaProject.hashtag.HashTagRepository;
 import com.ll.exam.RecipiaProject.post.PostController;
 import com.ll.exam.RecipiaProject.post.PostFormDto;
 import com.ll.exam.RecipiaProject.post.PostRepository;
@@ -45,6 +46,8 @@ public class UserAndPostTestData {
     @Autowired
     private  UserRepository userRepository;
 
+    @Autowired
+    private HashTagRepository hashTagRepository;
     @Autowired
     private MockMvc mockMvc;
 
@@ -124,6 +127,7 @@ public class UserAndPostTestData {
     @Order(2)
     public void postInitUsingController() throws Exception {
         postRepository.disableForeignKeyCheck();
+        hashTagRepository.truncate();
         postRepository.truncate();
         postImgRepository.truncate();
         postRepository.enableForeignKeyCheck();
@@ -144,6 +148,7 @@ public class UserAndPostTestData {
                         .file(image2)
                         .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
                         .param("title","title1").param("content","content1")
+                        .param("tagContent","#토마토#계란")
                         .with(csrf())
                         .with(user("user1").password("user1").roles("USER")))
                 .andExpect(status().is3xxRedirection());
@@ -165,6 +170,7 @@ public class UserAndPostTestData {
                                 .file(image4)
                                 .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
                                 .param("title","title2").param("content","content2")
+                                .param("tagContent","#감자#고구마")
                                 .with(csrf())
                                 .with(user("user2").password("user2").roles("USER")))
                 .andExpect(status().is3xxRedirection());

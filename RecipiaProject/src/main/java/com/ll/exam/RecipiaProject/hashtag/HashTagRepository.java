@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.hashtag;
 
+import com.ll.exam.RecipiaProject.base.BaseRepository;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,10 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-public interface HashTagRepository extends JpaRepository<HashTag, Integer> {
+public interface HashTagRepository extends JpaRepository<HashTag, Integer>, BaseRepository {
     HashTag findByTagContent(String tagContent);
-    @Transactional
+    @Query(value = "truncate table hash_tag",nativeQuery = true)
     @Modifying
-    @Query(value = "ALTER TABLE hash_tag AUTO_INCREMENT=1", nativeQuery = true)
-    public void truncate();
+    @Transactional
+    void truncate();
 }

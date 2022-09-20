@@ -55,7 +55,10 @@
           <a th:href="@{/mypage/bookmark}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">즐겨찾기</a>
           <a th:href="@{/mypage/allergy}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
           <a th:href="@{/mypage/modify}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
-          <a th:href="@{/mypage/withdraw}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원탈퇴</a>
+          <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');"
+             class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">
+              회원탈퇴
+          </a>
         </div>
       </div>
   </th:block>

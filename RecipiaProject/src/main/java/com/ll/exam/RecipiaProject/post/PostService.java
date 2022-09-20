@@ -1,5 +1,8 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.hashtag.HashTag;
+import com.ll.exam.RecipiaProject.hashtag.HashTagRepository;
+import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgRepository;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
@@ -15,6 +18,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @RequiredArgsConstructor
@@ -22,14 +26,29 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-
+    private final HashTagService hashTagService;
     private final PostImgService postImgService;
     private final PostImgRepository postImgRepository;
 
+    private final HashTagRepository hashTagRepository;
 
     public Page<PostMainDto> getPostList(Pageable pageable){
-        return postRepository.getPostList(pageable);
+        Page<Post> posts = postRepository.findAll(pageable);
+        Page<PostMainDto> map = posts.map(post ->
+                PostMainDto.builder()
+                        .title(post.getTitle())
+                        .id(post.getId())
+                        .hashTagContentList(post.getHashTagList().stream().map(hashTag ->
+                                hashTag.getTagContent()).collect(Collectors.toList()))
+                        .imgUrl(post.getPostImgList().get(0).getImgUrl())
+                        .score(post.getScore())
+                        .likes(post.getLikes())
+                        .views(post.getViews())
+                        .build()
+        );
 
+
+        return map;
     }
 
     public void createPost(PostFormDto postFormDto, List<MultipartFile> files, Principal principal) {
@@ -50,10 +69,11 @@ public class PostService {
             }
             postImgService.createPostImg(postImg, files.get(i));
         }
+        hashTagService.createHashTag(postFormDto.getTagContent(),principal,post);
     }
 
     public PostDetailDto getPostDetail(int postId) {
-        Post post=postRepository.getPostDetail(postId);
+        Post post=postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException("getPostDetail 과정 중 post가 없음!! "));
         return post.createPostDetailDto();
     }
 
@@ -111,6 +131,7 @@ public class PostService {
                    postImgService.deletePostImg(Integer.parseInt(postFormUpdateDto.getPostImgIds().get(j)));
                }
             }
+            hashTagService.modifyHashTag(postFormUpdateDto.getTagContent(),post,principal);
         }
 
     public void deletePost(int postId) {

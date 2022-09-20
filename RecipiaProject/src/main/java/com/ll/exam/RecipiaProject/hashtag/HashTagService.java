@@ -3,10 +3,7 @@ package com.ll.exam.RecipiaProject.hashtag;
 import com.ll.exam.RecipiaProject.post.Post;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -27,22 +24,32 @@ public class HashTagService {
 
 
 
-    public void createHashTag(HashTagFormDto hashTagFormDto, Principal principal){
-        SiteUser user=userRepository.findByUsername("user1").orElseThrow(()->new EntityNotFoundException());
-        HashTag hashTag = hashTagFormDto.createHashTag(user);
-        hashTagRepository.save(hashTag);
+    public void createHashTag(String tagContent, Principal principal,Post post){
+        SiteUser user=userRepository.findByUsername(principal.getName()).orElseThrow(()->new EntityNotFoundException());
+        String[] tags = tagContent.split("#");
+        for(String tag: tags){
+            HashTag hashTag=new HashTag();
+            tag = tag.trim();
+            if(tag.length() == 0||tag.isEmpty() ) continue;
+            hashTag.setTagContent(tag);
+            hashTag.setSiteUser(user);
+            hashTag.setPost(post);
+            hashTagRepository.save(hashTag);
+        }
+
     }
 
-//    public void deleteHashTag(int tagId){
-//        SiteUser user=userRepository.findByUsername("user1").orElseThrow(()->new EntityNotFoundException());
-//        hashTagRepository.deleteById(tagId);
-//    }
 
-    public void deleteHashTag(HashTagFormDto hashTagFormDto, Principal principal){
-        SiteUser user=userRepository.findByUsername("user1").orElseThrow(()->new EntityNotFoundException());
-        HashTag hashTag = hashTagFormDto.deleteHashTag(user);
-        hashTagRepository.delete(hashTag);
+    public void modifyHashTag(String tagContent,Post post,Principal principal){
+        deleteHashTag(post.getHashTagList());
+       createHashTag(tagContent,principal,post);
     }
 
+    @Transactional
+    private void deleteHashTag(List<HashTag> hashTags) {
+        for(HashTag hashTag:hashTags){
+            hashTagRepository.deleteById(hashTag.getTagId());
+        }
+    }
 
 }

@@ -14,14 +14,13 @@ import javax.transaction.Transactional;
 public interface PostRepository extends JpaRepository<Post, Integer>, BaseRepository {
     public Post findByTitle(String title);
 
-
-    @Query("select p from PostImg pi inner join pi.post p where p.id=:postId")
-    Post getPostDetail(@Param("postId") int postId);
     @Query("select new com.ll.exam.RecipiaProject.post.PostMainDto(p.id ,p.title ,p.score,p.views ,p.likes,pi.imgUrl) " +
             "from PostImg pi " +
             "join pi.post p " +
             "where pi.thumbnailYn = true ")
     Page<PostMainDto> getPostList(Pageable pageable);
+
+
 
     @Query(value = "truncate table post",nativeQuery = true)
     @Modifying
@@ -30,6 +29,3 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     @Query("select p.siteUser from Post p where p.id = :postId ")
     SiteUser getSiteUser(@Param("postId") int postId);
 }
-
-
-

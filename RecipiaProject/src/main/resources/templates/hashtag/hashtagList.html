@@ -5,10 +5,23 @@
 
       layout:decorate="~{layout}">
 
+<head>
+    <style>
+        .td{
+            order: -1;
+            flex: 100%;
+            border: 1px solid var(--tags-border-color);
+            margin-bottom: 1em;
+            transition: .1s;
+        }
+    </style>
+</head>
+
 <th:bloack layout:fragment="content">
 
 
     <form th:method="post" th:object="${HashtagFormDto}" enctype="multipart/form-data">
+
     <table>
         <thead>
         <tr>
@@ -17,7 +30,7 @@
         </thead>
         <tbody>
         <input th:type="hidden" th:name = "_method" th:value = "delete"/>
-        <tr th:each="hash_tag : ${hashtagList}">
+        <tr th:name = "tagList" th:each="hash_tag : ${hashtagList}">
             <td th:text="${hash_tag.tagId}"></td>
             <td th:text = "${hash_tag.tagContent}"></td>
             <td>
@@ -28,6 +41,7 @@
         </tbody>
     </table>
     </form>
+
 </th:bloack>
 </html>
 
