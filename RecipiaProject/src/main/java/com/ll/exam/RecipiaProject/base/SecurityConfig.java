@@ -1,4 +1,4 @@
-package com.ll.exam.RecipiaProject;
+package com.ll.exam.RecipiaProject.base;
 
 import com.ll.exam.RecipiaProject.user.UserSecurityService;
 import lombok.RequiredArgsConstructor;

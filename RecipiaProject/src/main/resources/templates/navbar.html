@@ -4,6 +4,7 @@
                 <a class="btn btn-ghost normal-case text-xl" href="/user/home">Recipia</a>
             </div>
 <!--            <a class="btn btn-ghost normal-case text-xl" href="/user/login">Login</a>-->
+            <a class="nav-link btn btn-ghost normal-case text-xl" sec:authorize="isAuthenticated()" th:href="@{/posts}">글작성</a>
             <a class="nav-link btn btn-ghost normal-case text-xl" sec:authorize="isAnonymous()" th:href="@{/user/login}">Login</a>
             <a class="nav-link btn btn-ghost normal-case text-xl" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">Logout</a>
             <a class="btn btn-ghost normal-case text-xl" href="/user/sign-up">SignUp</a>
