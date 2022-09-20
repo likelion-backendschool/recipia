@@ -152,5 +152,8 @@
 
 ## 개발 결과물 공유
 
+- 비밀번호 찾기 기능 구현
+<img width="611" alt="스크린샷 2022-09-20 오후 2 09 02" src="https://user-images.githubusercontent.com/55697125/191172386-1bf2da66-6d7f-4162-817e-df070bf95f88.png">
+<img width="296" alt="스크린샷 2022-09-20 오후 2 09 31" src="https://user-images.githubusercontent.com/55697125/191172436-2f93cf5e-55c4-482f-949b-a4b1abbb8760.png">
 
 
