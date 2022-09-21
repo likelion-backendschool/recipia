@@ -48,15 +48,16 @@ public class PostController {
     public String posts(@PathVariable(value = "page") Optional<Integer> page,@RequestParam(value = "keyword")Optional<String> keyword ,Model model){
         Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6);
         Page<PostMainDto> posts=null;
-
+        String[] keywords=null;
         //검색어가 있는 경우와 없는경우 분기
         if(keyword.isPresent()){
-            String[] keywords=keyword.get().split(",");
+            keywords=keyword.get().split(",");
             posts=postService.getPostListBykeyword(keywords,pageable);
         }else{
            posts=postService.getPostList(pageable);
         }
         model.addAttribute("posts",posts);
+        model.addAttribute("keywords",keywords);
         return "post/postList";
     }
 
