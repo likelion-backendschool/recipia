@@ -10,7 +10,7 @@
             };
             $.ajax({
                 url: "/comment",
-                data: commentDTO,
+                data: commentDto,
                 type:"POST",
             }).done(function (fragment) {
             $("#resultDiv").replaceWith(fragment);
