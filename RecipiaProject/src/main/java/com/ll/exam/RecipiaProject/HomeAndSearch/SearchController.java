@@ -25,6 +25,7 @@ public class SearchController {
 
     }
 
+    //메인과 list에서 검색어 입력시 json 형태를 가진 String 입력을 검색쿼리로 변경해서 list 에 넘겨줌
     @PostMapping("/")
     public String  search(@RequestParam String searchInput) throws UnsupportedEncodingException {
         List<String> searchKeyword=new ArrayList<>();

@@ -6,6 +6,7 @@
 
 <th:bloack layout:fragment="content">
 <main class="min-h-screen ">
+
     <div class="flex justify-center text-center">
         <form class="flex items-center w-3/5"  action="/" method="post">
             <input  type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" />
@@ -17,34 +18,49 @@
             </button>
         </form>
     </div>
+
     <div  class=" text-center" th:if="${!#lists.isEmpty(keywords)}">
         <p class="font-bold text-2xl">검색결과</p>
         <th  th:each="keyword : ${keywords}">
             <p class="text-xl" th:text="${keyword}"></p>
         </th>
     </div>
-    <div class="flex flex-wrap m-10 justify-center gap-4">
-    <div th:each="post : ${posts}">
 
-        <div class="card w-100 bg-base-100 shadow-xl">
-            <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
-            <div class="card-body">
-                <h2 class="card-title">
-                    <p th:text="${post.title}"></p>
-                    <div th:each="hashTagContent : ${post.hashTagContentList}">
-                        <span class="badge badge-secondary" th:text="${hashTagContent}"></span>
+    <div class="flex flex-wrap m-10 justify-center gap-4">
+        <div th:each="post : ${posts}">
+
+            <div class="card w-100 bg-base-100 shadow-xl">
+                <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <p th:text="${post.title}"></p>
+                        <div th:each="hashTagContent : ${post.hashTagContentList}">
+                            <span class="badge badge-secondary" th:text="${hashTagContent}"></span>
+                        </div>
+                    </h2>
+                    <div class="card-actions justify-end">
+                        <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
+                        <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
+                        <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
                     </div>
-                </h2>
-                <div class="card-actions justify-end">
-                    <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
-                    <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
-                    <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
                 </div>
             </div>
         </div>
-    </th:each>
     </div>
-    </div>
+    <nav th:if="${!posts.isEmpty()}"class="flex justify-center" aria-label="Page navigation example">
+        <ul class="inline-flex -space-x-px ">
+            <li th:classappend="${!posts.hasPrevious} ? 'invisible' ">
+                <a th:href="@{|/posts/list/${posts.number-1}|}" class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, posts.totalPages-1)}" th:if="${page >= posts.number-5 and page <= posts.number+5}"  th:classappend="${page == posts.number} ? 'font-bold'">
+                <a href="#" th:text="${page+1}"  th:href="@{|/posts/list/${page}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"></a>
+            </li>
+
+            <li th:classappend="${!posts.hasNext} ? 'invisible' ">
+                <a th:href="@{|/posts/list/${posts.number+1}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+            </li>
+        </ul>
+    </nav>
 </main>
     <script>
                 var input = document.querySelector('input[name=searchInput]');
