@@ -3,162 +3,29 @@
         xmlns:th="http://www.thymeleaf.org"
         layout:decorate="~{layout}">
 
+
 <div layout:fragment="content" class="container my-0 mx-auto relative">
     <div class="text-center flex block flex-col items-center">
         <div>
             <img width="370" height="100" src="/ui/banner2.png" alt="recipia">
-            <h2 class = "font-bold">재료 위주의 검색 사이트</h2>
+            <h2 class = "font-bold text-2xl">재료 위주의 검색 사이트</h2>
         </div>
-        <div class="text-center">
-            <form class="flex items-center w-96" >
-                <label for="simple-search" class="sr-only">Search</label>
+
+        <div class="flex justify-center text-center mt-10 w-full">
+            <form class="flex items-center w-3/5"  action="/" method="post">
+                <input  type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" />
                 <div class="relative w-full">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                    </div>
-                    <input type="text" id="simple-search" th:name="searchKeyWord" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="재료를 입력해주세요." required>
+                    <input type="text" name="searchInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="재료를 입력후 Tab을 눌러주세요.">
                 </div>
-                <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="submit" class="p-2.5 ml-2 text-xl font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <span class="sr-only">Search</span>
                 </button>
             </form>
         </div>
     </div>
+    <script>
+                var input = document.querySelector('input[name=searchInput]');
+                new Tagify(input);
+     </script>
 </div>
-<!--    <div class="container mx-auto">-->
-<!--        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[10px]">-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/231/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/100/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/230/752/440" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/211/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/110/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/577/752/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/381/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/790/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/227/752/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/271/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/140/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/231/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/100/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/230/752/440" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/211/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/110/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/577/752/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/381/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/790/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/227/752/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/271/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/140/752/302" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/237/752/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#">-->
-<!--                    <img class="aspect-[376/221] object-cover w-full" src="https://picsum.photos/id/231/802/442" alt="">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
 </html>

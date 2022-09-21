@@ -10,21 +10,20 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
     <!-- 테일윈드 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>안녕!</title>
+    <!-- tagify -->
+    <script src="https://unpkg.com/@yaireo/tagify"></script>
+    <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
     <!--csrf 토큰-->
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-
-    <!--tagify-->
-    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
     <!--i태그-->
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+    <title>안녕!</title>
 
 </head>
 <body class="flex flex-col min-h-screen bg-[#FBF27C]">
