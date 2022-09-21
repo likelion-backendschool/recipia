@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class CommentDto {
-    private String msg;
     private String result;
 }
