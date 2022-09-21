@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.comment.entity.Comment;
 import com.ll.exam.RecipiaProject.hashtag.HashTag;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
@@ -54,6 +55,9 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<HashTag> hashTagList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> commentList=new ArrayList<>();
 
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();
