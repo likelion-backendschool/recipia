@@ -27,4 +27,15 @@ public class MyPageService {
     public void delete(SiteUser siteUser) {
         this.userRepository.delete(siteUser);
     }
+
+    public void modify(SiteUser siteUser1, String password, String email, String nickname, String gender) {
+
+
+        siteUser1.setPassword(password);
+        siteUser1.setEmail(email);
+        siteUser1.setNickname(nickname);
+        siteUser1.setGender(gender);
+
+        userRepository.save(siteUser1);
+    }
 }

@@ -4,9 +4,11 @@ import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -56,10 +58,18 @@ public class MyPageController {
 
     @GetMapping("/modify")
     @PreAuthorize("isAuthenticated()")
-    public String userModify(Principal principal) {
-        return "mypage/mypage_userModify";
+    public String userModify() {
+        return "mypage/modify";
     }
 
+    @PostMapping("/modify")
+    @PreAuthorize("isAuthenticated()")
+    public String modify(@AuthenticationPrincipal SiteUser siteUser, String password, String email, String nickname, String gender) {
+        SiteUser siteUser1 = myPageService.getUser(siteUser.getUsername());
+
+        myPageService.modify(siteUser1, password, email, nickname, gender);
+        return "/mypage";
+    }
     @GetMapping("/withdraw")
     @PreAuthorize("isAuthenticated()")
     public String userWithdraw(Principal principal) {
