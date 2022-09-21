@@ -19,11 +19,11 @@
             content: $("#comment").val()
         };
         $.ajax({
-                url: "/posts/${data.postId}/reply,
-                data: data.stringify(data),
+                url: "/posts/${data.postId}/reply",
+                data: JSON.stringify(data),
                 type:"POST",
                 contentType:"application/json; charset=utf-8",
-                dataType: JSON,
+                dataType: "json",
                 beforeSend: function(xhr){
                 xhr.setRequestHeader(header, token);
                 },

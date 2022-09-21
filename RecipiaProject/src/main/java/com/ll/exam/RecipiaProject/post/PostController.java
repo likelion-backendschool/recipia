@@ -1,6 +1,7 @@
 package com.ll.exam.RecipiaProject.post;
 
 import com.ll.exam.RecipiaProject.comment.dto.CommentDto;
+import com.ll.exam.RecipiaProject.comment.service.CommentService;
 import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
@@ -27,6 +28,7 @@ public class PostController {
 
     private final PostService postService;
     private final HashTagService hashTagService;
+    private final CommentService commentService;
 
     private final PostImgService postImgService;
     //게시글 작성 폼으로 이동
@@ -97,9 +99,9 @@ public class PostController {
     }
 
     // 댓글 쓰기
-    @PostMapping("/dataSend")
-    public String postComment(Model model, CommentDto dto){
-        model.addAttribute("msg",dto.getResult() + "/ this is the value sent by the server ");
+    @PostMapping("/{postId}/reply")
+    public String postComment(CommentDto dto){
+        commentService.createComment(dto);
         return "post/postDetail :: #resultDiv";
     }
 }
