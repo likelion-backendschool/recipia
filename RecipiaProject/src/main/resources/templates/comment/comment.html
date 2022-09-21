@@ -4,7 +4,19 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
 <h1>댓글 화면(ajax)</h1>
-<script>
+
+<form>
+    <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+        <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
+            <label class="sr-only">댓글 작성하기</label>
+            <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required=""></textarea>
+        </div>
+        <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
+            <button type="button" onclick="dataSend()" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                댓글 작성
+            </button>
+        </div>
+    </div><script>
     function dataSend() {
         var header = $("meta[name='_csrf_header']").attr('content');
         var token = $("meta[name='_csrf']").attr('content');
@@ -24,18 +36,6 @@
             });
     }
 </script>
-<form>
-    <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-        <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
-            <label class="sr-only">댓글 작성하기</label>
-            <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required=""></textarea>
-        </div>
-        <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
-            <button type="button" onclick="dataSend()" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                댓글 작성
-            </button>
-        </div>
-    </div>
     <!--댓글보여질 div-->
     <div id="resultDiv">
         <p th:if="${msg}!=null" th:text="${msg}"></p>

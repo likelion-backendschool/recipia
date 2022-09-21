@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.comment.dto.CommentDto;
 import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
@@ -95,4 +96,10 @@ public class PostController {
         return "redirect:/posts/list";
     }
 
+    // 댓글 쓰기
+    @PostMapping("/dataSend")
+    public String postComment(Model model, CommentDto dto){
+        model.addAttribute("msg",dto.getResult() + "/ this is the value sent by the server ");
+        return "post/postDetail :: #resultDiv";
+    }
 }

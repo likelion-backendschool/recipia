@@ -18,7 +18,7 @@
             result:data
         };
         $.ajax({
-                url: "/comment/dataSend",
+                url: "/posts/dataSend",
                 data: commentDto,
                 type:"POST",
                 beforeSend: function(xhr){
@@ -80,9 +80,12 @@
         </form>
         <!--댓글보여질 div-->
         <div id="resultDiv">
+
             <ul class="text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">댓글 리스트</li>
-<!--                <div th:each="comment : ${postDetailDto.commentList}">-->
+                <p th:if="${msg}!=null" th:text="${msg}"></p>
+
+                <!--                <div th:each="comment : ${postDetailDto.commentList}">-->
                     <div>
                     <li id="comment--ajax" class="flex py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600">
 <!--                        <div class="flex-grow" th:text="${comment.content}">-->
