@@ -15,8 +15,27 @@
 </head>
 
 <th:bloack layout:fragment="content">
-    <body>
-    </body>
+    <form th:method="post" th:object="${AllergyFormDto}" enctype="multipart/form-data">
+
+        <table>
+            <thead>
+            <tr>
+                <th>알러지 리스트</th>
+            </tr>
+            </thead>
+            <tbody>
+            <input th:type="hidden" th:name = "_method" th:value = "delete"/>
+            <tr th:name = "allergyList" th:each="allergy : ${allergyList}">
+                <td th:text="${allergy.allergyId}"></td>
+                <td th:text = "${allergy.allergyContent}"></td>
+                <td>
+                    <a th:href="@{|/allergy/${allergy.allergyId}|}" th:text="삭제"></a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </form>
 
 </th:bloack>
 

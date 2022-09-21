@@ -34,4 +34,6 @@ public class AllergyController {
         return "allergy/allergyList";
     }
 
+
+
 }

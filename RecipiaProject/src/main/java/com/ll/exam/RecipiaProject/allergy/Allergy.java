@@ -1,14 +1,15 @@
 package com.ll.exam.RecipiaProject.allergy;
 
 import com.ll.exam.RecipiaProject.user.SiteUser;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Allergy {
     @Id
@@ -21,13 +22,5 @@ public class Allergy {
 
     @ManyToOne
     private SiteUser siteUser;
-
-    @Builder
-    public Allergy(int allergyId, String allergyContent, String allergyCategory, SiteUser siteUser){
-        this.allergyId = allergyId;
-        this.allergyContent = allergyContent;
-        this.allergyCategory = allergyCategory;
-        this.siteUser = siteUser;
-    }
 
 }

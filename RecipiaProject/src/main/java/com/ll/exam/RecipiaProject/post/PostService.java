@@ -2,6 +2,7 @@ package com.ll.exam.RecipiaProject.post;
 
 import com.ll.exam.RecipiaProject.hashtag.HashTag;
 import com.ll.exam.RecipiaProject.hashtag.HashTagRepository;
+import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgRepository;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
@@ -25,11 +26,11 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final HashTagRepository hashTagRepository;
-
+    private final HashTagService hashTagService;
     private final PostImgService postImgService;
     private final PostImgRepository postImgRepository;
 
+    private final HashTagRepository hashTagRepository;
 
     public Page<PostMainDto> getPostList(Pageable pageable){
         Page<Post> posts = postRepository.findAll(pageable);
@@ -68,23 +69,11 @@ public class PostService {
             }
             postImgService.createPostImg(postImg, files.get(i));
         }
-
-
-        String[] tags = postFormDto.getTagContent().split("#");
-        for(String tag: tags){
-            tag = tag.trim();
-            if(tag.length() == 0 ) continue;
-            HashTag h = HashTag.builder()
-                    .tagContent(tag)
-                    .siteUser(user)
-                    .post(post)
-                    .build();
-            post.getHashTagList().add(h);
-        }
+        hashTagService.createHashTag(postFormDto.getTagContent(),principal,post);
     }
 
     public PostDetailDto getPostDetail(int postId) {
-        Post post=postRepository.getPostDetail(postId);
+        Post post=postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException("getPostDetail 과정 중 post가 없음!! "));
         return post.createPostDetailDto();
     }
 
@@ -142,6 +131,7 @@ public class PostService {
                    postImgService.deletePostImg(Integer.parseInt(postFormUpdateDto.getPostImgIds().get(j)));
                }
             }
+            hashTagService.modifyHashTag(postFormUpdateDto.getTagContent(),post,principal);
         }
 
     public void deletePost(int postId) {

@@ -8,4 +8,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class AllergyFormDto {
+    private int allergyId;
+    private String allergyContent;
+    private String allergyCategory;
+
+
+
 }

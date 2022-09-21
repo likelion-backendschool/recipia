@@ -35,5 +35,7 @@ public class PostDetailDto {
 
     private String username;
 
+    private List<String> hashTagContentList;
+
     private List<PostImgDto>postImgDtoList=new ArrayList<>();
 }

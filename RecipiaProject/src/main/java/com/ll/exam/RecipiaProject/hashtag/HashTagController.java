@@ -25,21 +25,10 @@ public class HashTagController {
         return "hashtag/hashtagForm";
     }
 
-    @PostMapping("")
-    public String hashTagCreate(String tagContent, Principal principal) {
-        hashTagService.createHashTag(tagContent, principal);
-        return "redirect:/hashtag/list";
-    }
-
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("hashtagList", hashTagService.getHashTagList());
         return "hashtag/hashtagList";
     }
 
-    @GetMapping("/{tagId}")
-    public String hashTagDelete(HashTagFormDto hashTagFormDto, Principal principal) {
-        hashTagService.deleteHashTag(hashTagFormDto, principal);
-        return "redirect:/hashtag/list";
-    }
 }
