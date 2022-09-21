@@ -45,9 +45,17 @@ public class PostController {
     //게시글 리스트로 이동
 
     @GetMapping({"/list/{page}","/list"})
-    public String posts(@PathVariable(value = "page") Optional<Integer> page, Model model){
+    public String posts(@PathVariable(value = "page") Optional<Integer> page,@RequestParam(value = "keyword")Optional<String> keyword ,Model model){
         Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6);
-        Page<PostMainDto> posts=postService.getPostList(pageable);
+        Page<PostMainDto> posts=null;
+
+        //검색어가 있는 경우와 없는경우 분기
+        if(keyword.isPresent()){
+            String[] keywords=keyword.get().split(",");
+            posts=postService.getPostListBykeyword(keywords,pageable);
+        }else{
+           posts=postService.getPostList(pageable);
+        }
         model.addAttribute("posts",posts);
         return "post/postList";
     }

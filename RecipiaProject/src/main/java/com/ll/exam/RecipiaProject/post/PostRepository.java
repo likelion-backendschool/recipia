@@ -28,4 +28,6 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     void truncate();
     @Query("select p.siteUser from Post p where p.id = :postId ")
     SiteUser getSiteUser(@Param("postId") int postId);
+    @Query(value = "select p from HashTag h inner join h.post p where h.tagContent in :keywords ")
+    Page<Post> getPostListByKeyword(@Param("keywords") String[] keywords,Pageable pageable);
 }
