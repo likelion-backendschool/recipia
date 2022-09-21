@@ -1,37 +1,32 @@
-package com.ll.exam.RecipiaProject.home;
+package com.ll.exam.RecipiaProject.HomeAndSearch;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/")
 @Slf4j
-public class HomeController {
+public class SearchController {
     @GetMapping("")
     public String home() {
-        return "test";
+        return "home";
 
     }
 
     @PostMapping("/")
-    public String  home2(@RequestParam String searchInput) throws UnsupportedEncodingException {
+    public String  search(@RequestParam String searchInput) throws UnsupportedEncodingException {
         List<String> searchKeyword=new ArrayList<>();
         String searchQuery="";
         try {
