@@ -47,12 +47,12 @@ public class HomeController {
         }
         for(int i=0;i<searchKeyword.size();i++){
             if(i==0){
-                searchQuery+="query="+searchKeyword.get(i);
+                searchQuery+="keyword="+ URLEncoder.encode(searchKeyword.get(i),"UTF-8");
             }else{
-                searchQuery+="&"+searchKeyword.get(i);
+                searchQuery+=","+URLEncoder.encode(searchKeyword.get(i),"UTF-8");
             }
         }
 
-        return  "redirect:/posts/list?"+URLEncoder.encode(searchQuery,"UTF-8");
+        return  "redirect:/posts/list?"+searchQuery;
     }
 }
