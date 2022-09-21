@@ -100,8 +100,8 @@ public class PostController {
 
     // 댓글 쓰기
     @PostMapping("/{postId}/reply")
-    public String postComment(CommentDto dto){
-        commentService.createComment(dto);
+    public String postComment(@PathVariable("postId") int postId, CommentDto dto,Principal principal){
+        commentService.createComment(principal, postId, dto);
         return "post/postDetail :: #resultDiv";
     }
 }
