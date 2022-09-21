@@ -28,10 +28,16 @@ public class AllergyController {
         return "redirect:/allergy/allergyList";
     }
 
-    @GetMapping("/allergylist")
+    @GetMapping("/allergyList")
     public String list(Model model){
         model.addAttribute("allergyList", allergyService.getAllergyList());
         return "allergy/allergyList";
+    }
+
+    @GetMapping("/{allergyId}")
+    public String allergyDelete(AllergyFormDto allergyFormDto, Principal principal) {
+        allergyService.deleteAllergy(allergyFormDto.getAllergyId(), principal);
+        return "redirect:/allergy/allergyList";
     }
 
 

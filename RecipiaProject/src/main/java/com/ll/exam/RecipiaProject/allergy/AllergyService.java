@@ -42,4 +42,8 @@ public class AllergyService {
 //    }
 
     public List<Allergy> getAllergyList() { return allergyRepository.findAll();}
+
+    public void deleteAllergy(int allergyId, Principal principal) {
+        allergyRepository.deleteById(allergyId);
+    }
 }
