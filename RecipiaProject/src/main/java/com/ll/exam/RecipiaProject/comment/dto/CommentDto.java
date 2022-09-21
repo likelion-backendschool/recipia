@@ -1,10 +1,8 @@
 package com.ll.exam.RecipiaProject.comment.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class CommentDto {
     private String msg;
     private String result;
