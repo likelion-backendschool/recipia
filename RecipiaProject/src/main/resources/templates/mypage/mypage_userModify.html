@@ -7,6 +7,22 @@
 
     <title>회원 정보 수정</title>
 
+    <script>
+            function ModifyForm__submit(form) {
+                form.email.value = form.email.value.trim();
+
+                if (form.email.value.length == 0) {
+                    alert("이메일을 입력해주세요.");
+                    form.email.focus();
+                    return;
+                }
+
+                form.submit();
+            }
+
+        </script>
+
+
     <form th:action method="POST" enctype="multipart/form-data" onsubmit="ModifyForm__submit(this); return false;">
         <div>
             <span>아이디</span>
