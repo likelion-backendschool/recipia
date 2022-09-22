@@ -28,14 +28,13 @@ public class MyPageService {
         this.userRepository.delete(siteUser);
     }
 
-    public void modify(SiteUser siteUser1, String password, String email, String nickname, String gender) {
+    public void modify(SiteUser siteUser, String password, String email, String nickname, String gender) {
 
+        siteUser.setPassword(password);
+        siteUser.setEmail(email);
+        siteUser.setNickname(nickname);
+        siteUser.setGender(gender);
 
-        siteUser1.setPassword(password);
-        siteUser1.setEmail(email);
-        siteUser1.setNickname(nickname);
-        siteUser1.setGender(gender);
-
-        userRepository.save(siteUser1);
+        userRepository.save(siteUser);
     }
 }

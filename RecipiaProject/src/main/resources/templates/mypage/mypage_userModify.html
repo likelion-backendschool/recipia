@@ -40,25 +40,24 @@
         </script>
 
 
-    <form th:action method="POST" enctype="multipart/form-data" onsubmit="ModifyForm__submit(this); return false;">
-        <div>
-            <span>아이디</span>
-            <span th:text="${#authentication.principal.username}"></span>
+    <form th:action th:object="${myPageDto}" method="POST"  onsubmit="ModifyForm__submit(this); return false;">
+        <div class="flex justify-center mt-3">
+            <span>아이디 : </span>
+            <span th:text="${myPageDto.username}"></span>
+            <input readonly>
         </div>
-        <div>
-            <span>비밀번호</span>
-            <span th:text="${#authentication.principal.password}"></span>
+
+        <div class="flex justify-center mt-3">
+            <span>이메일 : </span>
+            <span th:text="${myPageDto.email}"></span>
+            <textarea th:field="*{email}" class="form-control" rows="1"></textarea>
         </div>
-        <div>
-            <span>이메일</span>
-            <span th:text="${#authentication.principal.email}"></span>
+        <div class="flex justify-center mt-3">
+            <span>닉네임 : </span>
+            <span th:text="${myPageDto.nickname}"></span>
+            <textarea th:field="*{nickname}" class="form-control" rows="1"></textarea>
         </div>
-        <div>
-            <span>닉네임</span>
-            <span th:text="${#authentication.principal.nickname}"></span>
-        </div>
-        <div>
-            <span>수정</span>
+        <div class="flex justify-center mt-3">
             <input type="submit" value="수정">
         </div>
 
