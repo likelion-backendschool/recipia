@@ -102,6 +102,6 @@ public class PostController {
     @PostMapping("/{postId}/reply")
     public String postComment(@PathVariable("postId") int postId, @RequestBody CommentDto dto,Principal principal){
         commentService.createComment(postId,dto,principal);
-        return "post/postDetail :: #resultDiv";
+        return "redirect:/posts/{postId}";
     }
 }
