@@ -30,7 +30,7 @@
                 <h2 class="card-title">
                     <p th:text="${post.title}"></p>
                     <div th:each="hashTagContent : ${post.hashTagContentList}">
-                        <span th:name="hashTag"  class="badge badge-secondary" th:text="${hashTagContent}"></span>
+                        <span th:name="hashTag" th:text="${hashTagContent}"></span>
                     </div>
                 </h2>
                 <div class="card-actions justify-end">
