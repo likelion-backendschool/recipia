@@ -5,7 +5,32 @@
 
 <th:block layout:fragment="content">
 
-    <h2>안녕하세요 회원수정 페이지입니다.</h2>
+    <title>회원 정보 수정</title>
+
+    <form th:action method="POST" enctype="multipart/form-data" onsubmit="ModifyForm__submit(this); return false;">
+        <div>
+            <span>아이디</span>
+            <span th:text="${#authentication.principal.username}"></span>
+        </div>
+        <div>
+            <span>비밀번호</span>
+            <span th:text="${#authentication.principal.password}"></span>
+        </div>
+        <div>
+            <span>이메일</span>
+            <span th:text="${#authentication.principal.email}"></span>
+        </div>
+        <div>
+            <span>닉네임</span>
+            <span th:text="${#authentication.principal.nickname}"></span>
+        </div>
+        <div>
+            <span>수정</span>
+            <input type="submit" value="수정">
+        </div>
+
+    </form>
+
 
 </th:block>
 

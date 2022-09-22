@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://thymeleaf.org"
+      xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 
   <th:block layout:fragment="content">
@@ -54,7 +54,7 @@
           <a th:href="@{/mypage/myposts}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">나의 게시물</a>
           <a th:href="@{/mypage/bookmark}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">즐겨찾기</a>
           <a th:href="@{/mypage/allergy}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
-          <a th:href="@{/mypage/modify}" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
+          <a th:href="@{/mypage/modify}" sec:authorize="isAuthenticated()" class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
           <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');"
              class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">
               회원탈퇴

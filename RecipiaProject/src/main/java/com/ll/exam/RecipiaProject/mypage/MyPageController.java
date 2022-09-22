@@ -58,8 +58,8 @@ public class MyPageController {
 
     @GetMapping("/modify")
     @PreAuthorize("isAuthenticated()")
-    public String userModify() {
-        return "mypage/modify";
+    public String showModify() {
+        return "mypage/mypage_userModify";
     }
 
     @PostMapping("/modify")
@@ -68,7 +68,8 @@ public class MyPageController {
         SiteUser siteUser1 = myPageService.getUser(siteUser.getUsername());
 
         myPageService.modify(siteUser1, password, email, nickname, gender);
-        return "/mypage";
+
+        return "redirect:/mypage";
     }
     @GetMapping("/withdraw")
     @PreAuthorize("isAuthenticated()")
