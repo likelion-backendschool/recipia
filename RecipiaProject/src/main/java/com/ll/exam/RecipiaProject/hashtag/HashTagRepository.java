@@ -16,4 +16,5 @@ public interface HashTagRepository extends JpaRepository<HashTag, Integer>, Base
     @Modifying
     @Transactional
     void truncate();
+
 }

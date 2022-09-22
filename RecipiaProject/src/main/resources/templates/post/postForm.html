@@ -40,8 +40,12 @@
                     
                     </div>
                 </div>
+<<<<<<< HEAD
+      <!--     수정폼           -->
+=======
 
                 <!--     수정폼           -->
+>>>>>>> 51f072314b4a8b5dfafcec664929f4b3a397fb62
                 <div th:if="${not #lists.isEmpty(postFormDto.postImgDtoList)}">
                    <div th:each="postImgDto,idx:${postFormDto.postImgDtoList}">
                        <input type="text" th:value="${postImgDto.id}" name="postImgIds" hidden>
@@ -67,6 +71,7 @@
                 <div  class="btnDiv" th:if="${postFormDto.id != 0}">
                     <button type="submit" th:formaction="@{|/posts/${postFormDto.id}/modify|}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 수정</button>
                 </div>
+
         </div>
     </form>
 </div>

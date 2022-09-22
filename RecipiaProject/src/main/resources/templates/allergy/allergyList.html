@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+<head>
+    <style>
+        input{
+            width : 100%;
+            max-width: 700px;
+            border:1px solid #000000; font-weight: bold;
+        }
+    </style>
+</head>
+
+<th:bloack layout:fragment="content">
+    <form th:method="post" th:object="${AllergyFormDto}" enctype="multipart/form-data">
+
+        <table class="border rounded-lg bg-white w-full container mx-auto p-2">
+            <thead>
+            <tr>
+                <th>알러지 리스트</th>
+            </tr>
+            </thead>
+            <tbody >
+            <input th:type="hidden" th:name = "_method" th:value = "delete"/>
+            <tr th:name = "allergyList" th:each="allergy : ${allergyList}" >
+                <td th:text="${allergy.allergyId}"></td>
+                <td th:text = "${allergy.allergyContent}"></td>
+                <td>
+                    <a th:href="@{|/allergy/${allergy.allergyId}|}" th:text="삭제"></a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <button type="button"
+                th:onclick="'location.href=\''+ @{|/allergy|} + '\''"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">
+            알러지 등록
+        </button>
+    </form>
+
+</th:bloack>
+
+</html>

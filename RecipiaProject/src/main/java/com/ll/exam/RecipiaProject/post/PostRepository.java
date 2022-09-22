@@ -4,6 +4,7 @@ import com.ll.exam.RecipiaProject.base.BaseRepository;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,6 +30,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     void truncate();
     @Query("select p.siteUser from Post p where p.id = :postId ")
     SiteUser getSiteUser(@Param("postId") int postId);
+
     @Query(value = "select distinct  p from HashTag h inner join h.post p where h.tagContent in :keywords ")
     Page<Post> getPostListByKeyword(@Param("keywords") String[] keywords,Pageable pageable);
 }
