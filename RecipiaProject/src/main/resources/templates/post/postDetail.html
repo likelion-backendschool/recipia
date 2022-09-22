@@ -13,13 +13,14 @@
     function dataSend() {
         var header = $("meta[name='_csrf_header']").attr('content');
         var token = $("meta[name='_csrf']").attr('content');
-        var data={
-            userId: $("#userId").val(),
-            postId: $("#postId").val(),
-            content: $("#comment").val()
+        let data = {
+            content: $("#comment").val(),
         };
+
+        // 데이터에 담을게 아니니 따로 뺌, int형이니 .val() 붙임
+        let postId = $("#postId").val();
         $.ajax({
-                url: "/posts/${data.postId}/reply",
+                url: `/posts/${postId}/reply`,
                 data: JSON.stringify(data),
                 type:"POST",
                 contentType:"application/json; charset=utf-8",
@@ -29,7 +30,7 @@
                 },
             }).done(function (resp) {
                 alert("댓글 작성이 완료되었습니다.");
-                location.href=`/posts/{data.postId}`;
+                location.href=`/posts/${postId}`;
             });
     }
 </script>
@@ -73,8 +74,7 @@
         <form>
             <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                 <!-- hidden 값들 -->
-                <input type="hidden" id="userId" value="${principal.user.id}">
-                <input type="hidden" id="postId" value="${postDetailDto.id}">
+                <input type="hidden" id="postId" th:value="${postDetailDto.id}">
                 <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                     <label class="sr-only">댓글 작성하기</label>
                     <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required=""></textarea>
