@@ -1,5 +1,7 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.comment.dto.CommentDto;
+import com.ll.exam.RecipiaProject.comment.service.CommentService;
 import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
@@ -26,6 +28,7 @@ public class PostController {
 
     private final PostService postService;
     private final HashTagService hashTagService;
+    private final CommentService commentService;
 
     private final PostImgService postImgService;
     //게시글 작성 폼으로 이동
@@ -104,4 +107,11 @@ public class PostController {
         return "redirect:/posts/list";
     }
 
+    // 댓글 쓰기
+    @PostMapping("/{postId}/reply")
+    @ResponseBody
+    public String postComment(@PathVariable("postId") int postId, @RequestBody CommentDto dto,Principal principal){
+        commentService.createComment(postId,dto,principal);
+        return "resp";
+    }
 }

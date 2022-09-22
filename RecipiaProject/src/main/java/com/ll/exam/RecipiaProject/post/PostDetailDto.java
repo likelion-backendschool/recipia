@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.comment.entity.Comment;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.*;
@@ -38,4 +39,6 @@ public class PostDetailDto {
     private List<String> hashTagContentList;
 
     private List<PostImgDto>postImgDtoList=new ArrayList<>();
+
+    private List<Comment> commentList=new ArrayList<>();
 }
