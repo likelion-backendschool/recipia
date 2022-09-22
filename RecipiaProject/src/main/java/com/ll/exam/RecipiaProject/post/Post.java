@@ -62,6 +62,7 @@ public class Post {
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();
         List<String> tageContentList=new ArrayList<>();
+        List<Comment> replyList= new ArrayList<>();
         for(PostImg postImg:postImgList){
             if(postImg.getThumbnailYn()){
                 postImgDtoList.add(0,postImg.createPostImgDto());
@@ -71,6 +72,9 @@ public class Post {
         }
         for(HashTag hashTag:hashTagList){
             tageContentList.add(hashTag.getTagContent());
+        }
+        for(Comment comment:commentList){
+            replyList.add(comment);
         }
         PostDetailDto postDetailDto=PostDetailDto.builder()
                 .id(id)
@@ -82,6 +86,7 @@ public class Post {
                 .username(siteUser.getUsername())
                 .postImgDtoList(postImgDtoList)
                 .hashTagContentList(tageContentList)
+                .commentList(replyList)
                 .build();
         return postDetailDto;
     }
