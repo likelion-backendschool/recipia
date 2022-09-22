@@ -57,6 +57,7 @@ public class Post {
     private List<HashTag> hashTagList = new ArrayList<>();
 
     @OneToMany(mappedBy = "post")
+    @OrderBy("id desc")
     private List<Comment> commentList=new ArrayList<>();
 
     public PostDetailDto createPostDetailDto(){

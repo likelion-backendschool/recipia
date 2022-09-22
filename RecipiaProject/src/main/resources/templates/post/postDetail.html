@@ -17,7 +17,6 @@
             content: $("#comment").val(),
         };
 
-        // 데이터에 담을게 아니니 따로 뺌, int형이니 .val() 붙임
         let postId = $("#postId").val();
         $.ajax({
                 url: `/posts/${postId}/reply`,
