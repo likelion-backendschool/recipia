@@ -50,13 +50,13 @@ public class Post {
     @ManyToOne
     private SiteUser siteUser;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<PostImg> postImgList=new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<HashTag> hashTagList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     @OrderBy("id desc")
     private List<Comment> commentList=new ArrayList<>();
 
