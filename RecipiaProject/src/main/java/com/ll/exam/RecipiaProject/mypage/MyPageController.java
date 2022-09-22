@@ -73,6 +73,8 @@ public class MyPageController {
         SiteUser siteUser = myPageService.getUser(principal.getName());
 
 
+
+
         myPageService.modify(siteUser, myPageDto.getUsername(), myPageDto.getEmail(), myPageDto.getNickname(), myPageDto.getGender());
         return "redirect:/mypage";
     }

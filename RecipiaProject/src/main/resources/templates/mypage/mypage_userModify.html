@@ -41,24 +41,31 @@
 
 
     <form th:action th:object="${myPageDto}" method="POST"  onsubmit="ModifyForm__submit(this); return false;">
-        <div class="flex justify-center mt-3">
-            <span>아이디 : </span>
-            <span th:text="${myPageDto.username}"></span>
-            <input type="text" th:field="*{username}" class="form-control" rows="1"></input>
+        <div class="flex justify-center mt-3 ">
+            <span>아이디 : &nbsp</span>
+            <input type="text" th:field="*{username}" class="form-control" rows="1" readonly></input>
 
         </div>
 
         <div class="flex justify-center mt-3">
-            <span>이메일 : </span>
-            <span th:text="${myPageDto.email}"></span>
-            <input type="email" th:field="*{email}" class="form-control" rows="1"></input>
+            <span> 이메일 : &nbsp</span>
+            <div th:text="${myPageDto.email}"></div>
         </div>
 
         <div class="flex justify-center mt-3">
-            <span>닉네임 : </span>
-            <span th:text="${myPageDto.nickname}"></span>
-            <input type="text" th:field="*{nickname}" class="form-control" rows="1"></input>
+        <input type="email" placeholder="변경할 이메일을 적어주세요." th:field="*{email}" class="form-control" rows="1"></input>
         </div>
+
+
+        <div class="flex justify-center mt-3">
+            <span>닉네임 : &nbsp</span>
+            <div th:text="${myPageDto.nickname}"></div>
+        </div>
+
+        <div class="flex justify-center mt-3">
+            <input type="text" placeholder="변경할 닉네임을 적어주세요." th:field="*{nickname}" class="form-control" rows="1"></input>
+        </div>
+
 
         <div class="flex justify-center mt-3">
             <input type="submit" value="수정">

@@ -13,6 +13,7 @@ public class MyPageService {
 
     private final UserRepository userRepository;
 
+
     //id 가져오기
     public SiteUser getUser(String username) {
         Optional<SiteUser> siteUser = this.userRepository.findByUsername(username);
@@ -37,4 +38,6 @@ public class MyPageService {
 
         userRepository.save(siteUser);
     }
+
+
 }
