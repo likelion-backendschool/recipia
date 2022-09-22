@@ -137,4 +137,21 @@ public class PostService {
     public void deletePost(int postId) {
         postRepository.deleteById(postId);
     }
+
+    public Page<PostMainDto> getPostListBykeyword(String[] keywords,Pageable pageable) {
+        Page<Post> posts = postRepository.getPostListByKeyword(keywords,pageable);
+        Page<PostMainDto> map = posts.map(post ->
+                PostMainDto.builder()
+                        .title(post.getTitle())
+                        .id(post.getId())
+                        .hashTagContentList(post.getHashTagList().stream().map(hashTag ->
+                                hashTag.getTagContent()).collect(Collectors.toList()))
+                        .imgUrl(post.getPostImgList().get(0).getImgUrl())
+                        .score(post.getScore())
+                        .likes(post.getLikes())
+                        .views(post.getViews())
+                        .build()
+        );
+        return map;
+    }
 }

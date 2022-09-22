@@ -1,5 +1,7 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.comment.dto.CommentDto;
+import com.ll.exam.RecipiaProject.comment.service.CommentService;
 import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
@@ -26,6 +28,7 @@ public class PostController {
 
     private final PostService postService;
     private final HashTagService hashTagService;
+    private final CommentService commentService;
 
     private final PostImgService postImgService;
     //게시글 작성 폼으로 이동
@@ -45,10 +48,19 @@ public class PostController {
     //게시글 리스트로 이동
 
     @GetMapping({"/list/{page}","/list"})
-    public String posts(@PathVariable(value = "page") Optional<Integer> page, Model model){
+    public String posts(@PathVariable(value = "page") Optional<Integer> page,@RequestParam(value = "keyword")Optional<String> keyword ,Model model){
         Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6);
-        Page<PostMainDto> posts=postService.getPostList(pageable);
+        Page<PostMainDto> posts=null;
+        String[] keywords=null;
+        //검색어가 있는 경우와 없는경우 분기
+        if(keyword.isPresent()){
+            keywords=keyword.get().split(",");
+            posts=postService.getPostListBykeyword(keywords,pageable);
+        }else{
+           posts=postService.getPostList(pageable);
+        }
         model.addAttribute("posts",posts);
+        model.addAttribute("keywords",keywords);
         return "post/postList";
     }
 
@@ -95,4 +107,11 @@ public class PostController {
         return "redirect:/posts/list";
     }
 
+    // 댓글 쓰기
+    @PostMapping("/{postId}/reply")
+    @ResponseBody
+    public String postComment(@PathVariable("postId") int postId, @RequestBody CommentDto dto,Principal principal){
+        commentService.createComment(postId,dto,principal);
+        return "resp";
+    }
 }
