@@ -44,19 +44,22 @@
         <div class="flex justify-center mt-3">
             <span>아이디 : </span>
             <span th:text="${myPageDto.username}"></span>
-            <input readonly>
+            <input type="text" th:field="*{username}" class="form-control" rows="1"></input>
+
         </div>
 
         <div class="flex justify-center mt-3">
             <span>이메일 : </span>
             <span th:text="${myPageDto.email}"></span>
-            <textarea th:field="*{email}" class="form-control" rows="1"></textarea>
+            <input type="email" th:field="*{email}" class="form-control" rows="1"></input>
         </div>
+
         <div class="flex justify-center mt-3">
             <span>닉네임 : </span>
             <span th:text="${myPageDto.nickname}"></span>
-            <textarea th:field="*{nickname}" class="form-control" rows="1"></textarea>
+            <input type="text" th:field="*{nickname}" class="form-control" rows="1"></input>
         </div>
+
         <div class="flex justify-center mt-3">
             <input type="submit" value="수정">
         </div>
