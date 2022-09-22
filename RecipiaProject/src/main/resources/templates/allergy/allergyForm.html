@@ -6,29 +6,42 @@
       layout:decorate="~{layout}">
 <head>
     <style>
-        input{
-            width : 100%;
+        input {
+            width: 100%;
             max-width: 700px;
-            border:1px solid #000000; font-weight: bold;
+            border: 1px solid #000000;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <th:bloack layout:fragment="content">
-<body>
-<form method="post" th:object="${allergyFormDto}" enctype="multipart/form-data">
-    <h1>알러지 페이지</h1>
-    <div>
-        <input th:type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <body>
+    <div class="text-center flex block flex-col items-center">
+        <div class="text-center">
+            <form method="post" th:object="${allergyFormDto}" enctype="multipart/form-data"
+                  class="flex items-center w-96">
+                <div class="relative w-full">
+                    <h1 class = "font-bold">알러지 페이지</h1>
+                    <div>
+                        <input th:type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    </div>
+                    <div>
+                        <input th:type="text" th:field="*{allergyContent}"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="알러지 혹은 기피하시는 재료를 입력하시오.">
+                    </div>
+                    <div class="btnDiv">
+                        <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">
+                            검색
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <input th:type="text"  th:field="*{allergyContent}" placeholder="알러지 혹은 기피하시는 재료를 입력하시오.">
-    </div>
-    <div>
-        <button type="submit">검색</button>
-    </div>
-</form>
-</body>
+    </body>
 
 </th:bloack>
 

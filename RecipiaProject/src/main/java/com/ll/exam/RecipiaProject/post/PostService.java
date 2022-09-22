@@ -10,11 +10,14 @@ import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
@@ -134,7 +137,10 @@ public class PostService {
             hashTagService.modifyHashTag(postFormUpdateDto.getTagContent(),post,principal);
         }
 
+
     public void deletePost(int postId) {
         postRepository.deleteById(postId);
     }
+
+
 }
