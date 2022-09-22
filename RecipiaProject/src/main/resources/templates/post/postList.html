@@ -6,44 +6,67 @@
 
 <th:bloack layout:fragment="content">
 <main class="min-h-screen ">
-    <div class="flex justify-center">
-        <form class="flex items-center w-96" th:action="@{/posts/list}">
-            <label for="simple-search" class="sr-only">Search</label>
+
+    <div class="flex justify-center text-center">
+        <form class="flex items-center w-3/5"  action="/" method="post">
+            <input  type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" />
             <div class="relative w-full">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                </div>
-                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="재료를 입력해주세요." required>
+                <input type="text" name="searchInput"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="재료를 입력후 Tab을 눌러주세요.">
             </div>
-            <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button type="submit" class="p-2.5 ml-2 text-xl font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <span class="sr-only">Search</span>
             </button>
         </form>
     </div>
-    <div class="flex flex-wrap m-10 justify-center gap-4">
-    <div th:each="post : ${posts}">
 
-        <div class="card w-100 bg-base-100 shadow-xl">
-            <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
-            <div class="card-body">
-                <h2 class="card-title">
-                    <p th:text="${post.title}"></p>
-                    <div th:each="hashTagContent : ${post.hashTagContentList}">
-                        <span th:name="hashTag" th:text="${hashTagContent}"></span>
+    <div  class=" text-center" th:if="${!#lists.isEmpty(keywords)}">
+        <p class="font-bold text-2xl">검색결과</p>
+        <th  th:each="keyword : ${keywords}">
+            <p class="text-xl" th:text="${keyword}"></p>
+        </th>
+    </div>
+
+    <div class="flex flex-wrap m-10 justify-center gap-4">
+        <div th:each="post : ${posts}">
+
+
+            <div class="card w-100 bg-base-100 shadow-xl">
+                <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <p th:text="${post.title}"></p>
+                        <div th:each="hashTagContent : ${post.hashTagContentList}">
+                            <span class="badge badge-secondary" th:text="${hashTagContent}"></span>
+                        </div>
+                    </h2>
+                    <div class="card-actions justify-end">
+                        <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
+                        <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
+                        <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
                     </div>
-                </h2>
-                <div class="card-actions justify-end">
-                    <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
-                    <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
-                    <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
                 </div>
             </div>
         </div>
-    </th:each>
     </div>
-    </div>
+    <nav th:if="${!posts.isEmpty()}"class="flex justify-center" aria-label="Page navigation example">
+        <ul class="inline-flex -space-x-px ">
+            <li th:classappend="${!posts.hasPrevious} ? 'invisible' ">
+                <a th:href="@{|/posts/list/${posts.number-1}|}" class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, posts.totalPages-1)}" th:if="${page >= posts.number-5 and page <= posts.number+5}"  th:classappend="${page == posts.number} ? 'font-bold'">
+                <a href="#" th:text="${page+1}"  th:href="@{|/posts/list/${page}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"></a>
+            </li>
+
+            <li th:classappend="${!posts.hasNext} ? 'invisible' ">
+                <a th:href="@{|/posts/list/${posts.number+1}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+            </li>
+        </ul>
+    </nav>
 </main>
+    <script>
+                var input = document.querySelector('input[name=searchInput]');
+                new Tagify(input);
+     </script>
 </th:bloack>
 
 </html>

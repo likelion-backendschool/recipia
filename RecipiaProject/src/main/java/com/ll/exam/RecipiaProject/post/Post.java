@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.comment.entity.Comment;
 import com.ll.exam.RecipiaProject.hashtag.HashTag;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
@@ -55,9 +56,14 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<HashTag> hashTagList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "post")
+    @OrderBy("id desc")
+    private List<Comment> commentList=new ArrayList<>();
+
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();
         List<String> tageContentList=new ArrayList<>();
+        List<Comment> replyList= new ArrayList<>();
         for(PostImg postImg:postImgList){
             if(postImg.getThumbnailYn()){
                 postImgDtoList.add(0,postImg.createPostImgDto());
@@ -67,6 +73,9 @@ public class Post {
         }
         for(HashTag hashTag:hashTagList){
             tageContentList.add(hashTag.getTagContent());
+        }
+        for(Comment comment:commentList){
+            replyList.add(comment);
         }
         PostDetailDto postDetailDto=PostDetailDto.builder()
                 .id(id)
@@ -78,6 +87,7 @@ public class Post {
                 .username(siteUser.getUsername())
                 .postImgDtoList(postImgDtoList)
                 .hashTagContentList(tageContentList)
+                .commentList(replyList)
                 .build();
         return postDetailDto;
     }

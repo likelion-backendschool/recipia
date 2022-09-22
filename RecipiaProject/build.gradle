@@ -43,6 +43,12 @@ dependencies {
 
 	//스프링시큐리티 환경에서 MockMvc테스트를 위한 라이브러리(csrf)
 	testImplementation 'org.springframework.security:spring-security-test:5.7.3'
+
+	// ajax에서 json 형태로 데이터를 주고 받기 위한 jackson 라이브러리
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.4'
+
+	//JsonParser 설치
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 }
 
 tasks.named('test') {

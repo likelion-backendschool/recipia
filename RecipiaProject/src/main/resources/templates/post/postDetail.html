@@ -7,7 +7,35 @@
 
 <th:bloack layout:fragment="content">
 
-<div class="flex flex-col px-60">
+
+<!--ajax 통신을 위한 함수-->
+<script>
+    function dataSend() {
+        var header = $("meta[name='_csrf_header']").attr('content');
+        var token = $("meta[name='_csrf']").attr('content');
+        let data = {
+            content: $("#comment").val(),
+        };
+
+        let postId = $("#postId").val();
+        $.ajax({
+                url: `/posts/${postId}/reply`,
+                data: JSON.stringify(data),
+                type:"POST",
+                contentType:"application/json; charset=utf-8",
+                dataType: "text",
+                beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+                },
+            }).done(function (req) {
+                alert("댓글 작성이 완료되었습니다.");
+                location.href=`/posts/${postId}`;
+            }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+</script>
+    <div class="flex flex-col px-60">
     <div class="p-6  bg-white rounded-lg border border-gray-200 shadow-md">
 
         <div class="flex flex-col w-full">
@@ -41,6 +69,45 @@
     <div class="bg-white rounded-lg border border-gray-200 shadow-md flex justify-center"th:each="postImgDto:${postDetailDto.postImgDtoList}">
         <img th:src="${postImgDto.imgUrl}">
     </div>
+    <!--댓글 파트-->
+    <div>
+        <!-- 댓글 쓰는 부분-->
+        <form>
+            <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+                <!-- hidden 값들 -->
+                <input type="hidden" id="postId" th:value="${postDetailDto.id}">
+                <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
+                    <label class="sr-only">댓글 작성하기</label>
+                    <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required=""></textarea>
+                </div>
+                <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
+                    <button type="button" onclick="dataSend()" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                        댓글 작성
+                    </button>
+                </div>
+            </div>
+        </form>
+        <!--댓글보여질 div-->
+        <div id="resultDiv">
+
+            <ul class="text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">댓글 리스트</li>
+                <div th:each="comment : ${postDetailDto.commentList}">
+                    <li id="comment--ajax" class="flex py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600">
+                        <div class="flex-grow" th:text="${comment.content}">
+                            댓글 내용입니다.
+                        </div>
+                        <div class="flex">
+                            <div class="m-3" th:text="${comment.siteUser.username}">작성자
+                            </div>
+                            <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">삭제</button>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
 </div>
+
 </th:bloack>
 </html>

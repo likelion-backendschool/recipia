@@ -18,7 +18,8 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     @Query("select new com.ll.exam.RecipiaProject.post.PostMainDto(p.id ,p.title ,p.score,p.views ,p.likes,pi.imgUrl) " +
             "from PostImg pi " +
             "join pi.post p " +
-            "where pi.thumbnailYn = true ")
+            "where pi.thumbnailYn = true " +
+            "order by p.createdDate desc")
     Page<PostMainDto> getPostList(Pageable pageable);
 
 
@@ -30,9 +31,6 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     @Query("select p.siteUser from Post p where p.id = :postId ")
     SiteUser getSiteUser(@Param("postId") int postId);
 
-
+    @Query(value = "select distinct  p from HashTag h inner join h.post p where h.tagContent in :keywords ")
+    Page<Post> getPostListByKeyword(@Param("keywords") String[] keywords,Pageable pageable);
 }
-
-
-
-
