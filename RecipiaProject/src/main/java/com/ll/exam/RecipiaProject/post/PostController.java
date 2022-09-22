@@ -100,8 +100,9 @@ public class PostController {
 
     // 댓글 쓰기
     @PostMapping("/{postId}/reply")
+    @ResponseBody
     public String postComment(@PathVariable("postId") int postId, @RequestBody CommentDto dto,Principal principal){
         commentService.createComment(postId,dto,principal);
-        return "redirect:/posts/{postId}";
+        return "resp";
     }
 }

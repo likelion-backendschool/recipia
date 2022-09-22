@@ -24,14 +24,16 @@
                 data: JSON.stringify(data),
                 type:"POST",
                 contentType:"application/json; charset=utf-8",
-                dataType: "json",
+                dataType: "text",
                 beforeSend: function(xhr){
                 xhr.setRequestHeader(header, token);
                 },
-            }).done(function (resp) {
+            }).done(function (req) {
                 alert("댓글 작성이 완료되었습니다.");
                 location.href=`/posts/${postId}`;
-            });
+            }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
 </script>
     <div class="flex flex-col px-60">
