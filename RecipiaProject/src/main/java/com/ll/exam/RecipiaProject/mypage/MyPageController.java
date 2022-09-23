@@ -75,7 +75,7 @@ public class MyPageController {
 
 
 
-        myPageService.modify(siteUser, myPageDto.getUsername(), myPageDto.getEmail(), myPageDto.getNickname(), myPageDto.getGender());
+        myPageService.modify(siteUser, myPageDto.getEmail(), myPageDto.getNickname(), myPageDto.getGender());
         return "redirect:/mypage";
     }
 

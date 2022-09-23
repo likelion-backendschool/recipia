@@ -29,9 +29,9 @@ public class MyPageService {
         this.userRepository.delete(siteUser);
     }
 
-    public void modify(SiteUser siteUser, String password, String email, String nickname, String gender) {
+    public void modify(SiteUser siteUser, String email, String nickname, String gender) {
 
-        siteUser.setPassword(password);
+
         siteUser.setEmail(email);
         siteUser.setNickname(nickname);
         siteUser.setGender(gender);
