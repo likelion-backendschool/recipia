@@ -119,8 +119,8 @@ public class PostController {
 
     @GetMapping("/{postId}/reply/{replyId}")
     @ResponseBody
-    public String deleteComment(@PathVariable("postId") int postId, @PathVariable("replyId") long commentId, Principal principal){
-        commentService.deleteComment(postId, commentId,principal);
+    public String deleteComment(@PathVariable("replyId") long commentId, Principal principal){
+        commentService.deleteComment(commentId,principal);
         return "resp";
     }
 }
