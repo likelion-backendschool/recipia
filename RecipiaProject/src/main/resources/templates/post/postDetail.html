@@ -34,11 +34,11 @@
                 xhr.setRequestHeader(header, token);
                 },
             }).done(function (req) {
-                alert("댓글 작성이 완료되었습니다.");
                 location.href=`/posts/${postId}`;
             }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+        $("#comment--ajax").focus();
     }
 </script>
     <div class="flex flex-col px-60">
@@ -84,7 +84,8 @@
                 <input type="hidden" id="postId" th:value="${postDetailDto.id}">
                 <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                     <label class="sr-only">댓글 작성하기</label>
-                    <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required=""></textarea>
+                    <textarea sec:authorize="isAnonymous()" disabled rows="4" class="px-0 w-full text-sm text-gray-900 bg-gray border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" required=""></textarea>
+                    <textarea sec:authorize="isAuthenticated()" id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="댓글을 입력해주세요..." required=""></textarea>
                 </div>
                 <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
                     <button type="button" onclick="dataSend()" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
