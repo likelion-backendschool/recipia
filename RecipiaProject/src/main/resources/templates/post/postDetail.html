@@ -16,6 +16,12 @@
         let data = {
             content: $("#comment").val(),
         };
+        data.content = data.content.trim();
+        if (data.content.length == 0){
+            alert("빈 댓글은 입력이 되지않습니다.");
+            $("#comment").focus();
+            return false;
+        }
 
         let postId = $("#postId").val();
         $.ajax({
