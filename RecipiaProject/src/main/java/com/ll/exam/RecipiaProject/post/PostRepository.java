@@ -15,12 +15,12 @@ import javax.transaction.Transactional;
 public interface PostRepository extends JpaRepository<Post, Integer>, BaseRepository {
     public Post findByTitle(String title);
 
-    @Query("select new com.ll.exam.RecipiaProject.post.PostMainDto(p.id ,p.title ,p.score,p.views ,p.likes,pi.imgUrl) " +
+    @Query("select p " +
             "from PostImg pi " +
             "join pi.post p " +
             "where pi.thumbnailYn = true " +
             "order by p.createdDate desc")
-    Page<PostMainDto> getPostList(Pageable pageable);
+    Page<Post> getPostList(Pageable pageable);
 
 
 

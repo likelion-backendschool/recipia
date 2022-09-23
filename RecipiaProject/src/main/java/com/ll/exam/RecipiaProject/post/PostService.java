@@ -36,7 +36,7 @@ public class PostService {
     private final HashTagRepository hashTagRepository;
 
     public Page<PostMainDto> getPostList(Pageable pageable){
-        Page<Post> posts = postRepository.findAll(pageable);
+        Page<Post> posts = postRepository.getPostList(pageable);
         Page<PostMainDto> map = posts.map(post ->
                 PostMainDto.builder()
                         .title(post.getTitle())

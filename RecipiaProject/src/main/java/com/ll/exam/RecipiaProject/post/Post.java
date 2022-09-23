@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.base.entity.BaseTime;
 import com.ll.exam.RecipiaProject.comment.entity.Comment;
 import com.ll.exam.RecipiaProject.hashtag.HashTag;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
@@ -23,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Post {
+public class Post extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -38,14 +39,6 @@ public class Post {
     private int views ;
 
     private int likes;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date modifiedDate;
 
     @ManyToOne
     private SiteUser siteUser;
