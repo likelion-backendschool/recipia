@@ -114,4 +114,13 @@ public class PostController {
         commentService.createComment(postId,dto,principal);
         return "resp";
     }
+
+    // 댓글 삭제
+
+    @GetMapping("/{postId}/reply/{replyId}")
+    @ResponseBody
+    public String deleteComment(@PathVariable("postId") int postId, @PathVariable("replyId") long commentId, Principal principal){
+        commentService.deleteComment(postId, commentId,principal);
+        return "resp";
+    }
 }

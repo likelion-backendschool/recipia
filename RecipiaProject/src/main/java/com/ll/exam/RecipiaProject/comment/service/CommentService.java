@@ -38,4 +38,7 @@ public class CommentService {
                 .build();
         commentRepository.save(comment);
     }
+
+    public void deleteComment(int postId, long commentId, Principal principal) {
+    }
 }

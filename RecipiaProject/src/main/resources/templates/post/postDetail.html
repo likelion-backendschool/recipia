@@ -14,11 +14,11 @@
         $.ajax({
             // 댓글 삭제
             type: "GET",
-            url: `/api/board/${postId}/reply/${commentId}`,
+            url: `/posts/${postId}/reply/${commentId}`,
             dataType: "text"
         }).done(function (res) {
             alert("댓글 삭제 성공");
-            location.href = `/board/${boardId}`;
+            location.href = `/posts/${postId}`;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
