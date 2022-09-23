@@ -38,4 +38,18 @@ public class CommentService {
                 .build();
         commentRepository.save(comment);
     }
+
+    public void deleteComment(long commentId, Principal principal) {
+        if (principal.getName().equals(CommentAuthor(commentId).getUsername())){
+            commentRepository.deleteById(commentId);
+        }
+    }
+
+    public SiteUser CommentAuthor(long commentId){
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                ()-> { return new IllegalArgumentException("댓글 사용자를 찾을 수 없습니다.");}
+        );
+        SiteUser user = comment.getSiteUser();
+        return user;
+    }
 }
