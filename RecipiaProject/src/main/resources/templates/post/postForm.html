@@ -40,12 +40,8 @@
                     
                     </div>
                 </div>
-<<<<<<< HEAD
-      <!--     수정폼           -->
-=======
 
                 <!--     수정폼           -->
->>>>>>> 51f072314b4a8b5dfafcec664929f4b3a397fb62
                 <div th:if="${not #lists.isEmpty(postFormDto.postImgDtoList)}">
                    <div th:each="postImgDto,idx:${postFormDto.postImgDtoList}">
                        <input type="text" th:value="${postImgDto.id}" name="postImgIds" hidden>
