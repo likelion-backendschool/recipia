@@ -29,14 +29,13 @@
     <div class="flex flex-wrap m-10 justify-center gap-4">
         <div th:each="post : ${posts}">
 
-
             <div class="card w-100 bg-base-100 shadow-xl">
                 <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
                 <div class="card-body">
                     <h2 class="card-title">
                         <p th:text="${post.title}"></p>
                         <div th:each="hashTagContent : ${post.hashTagContentList}">
-                            <span class="badge badge-secondary" th:text="${hashTagContent}"></span>
+                           <a th:href="@{|/posts/list?keyword=${hashTagContent}|}"> <span class="badge badge-secondary" th:text="${hashTagContent}"></span></a>
                         </div>
                     </h2>
                     <div class="card-actions justify-end">
