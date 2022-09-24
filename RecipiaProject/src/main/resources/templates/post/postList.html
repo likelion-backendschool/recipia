@@ -41,7 +41,7 @@
                     <div class="card-actions justify-end">
                         <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
                         <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
-                        <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
+                        <a th:href="@{|/posts/like?siteUserId=1&&postId=${post.id}|}"><div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div></a>
                     </div>
                 </div>
             </div>

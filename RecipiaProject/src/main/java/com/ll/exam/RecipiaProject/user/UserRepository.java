@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<SiteUser, Long>, BaseRepository {
+public interface UserRepository extends JpaRepository<SiteUser,Integer>, BaseRepository {
     boolean existsByEmail(String email);
     boolean existsByUsername(String username);
 
