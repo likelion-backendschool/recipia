@@ -34,6 +34,8 @@ public class PostMainDto {
 
     private List<String> hashTagContentList;
 
+    //좋아요 버튼을 누른 사용자의 좋아요 배경색 체크를 위한 변수
+    private List<String> likedSiteUserNameList;
     public PostMainDto(int id, String title, int score, int views, int likes, String imgUrl) {
         this.id = id;
         this.title = title;
