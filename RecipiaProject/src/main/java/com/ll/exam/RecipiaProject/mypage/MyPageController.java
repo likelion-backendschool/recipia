@@ -64,7 +64,7 @@ public class MyPageController {
 
     @GetMapping("/withdraw")
     @PreAuthorize("isAuthenticated()")
-    public String userWithdraw(Principal principal, @PathVariable("id") Long id) {
+    public String userWithdraw(Principal principal, @PathVariable("id") Integer id) {
         SiteUser siteUser = myPageService.getUser(id);
 
 
