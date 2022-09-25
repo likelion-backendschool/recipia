@@ -47,7 +47,7 @@ public class PostService {
                                 hashTag.getTagContent()).collect(Collectors.toList()))
                         .imgUrl(post.getPostImgList().get(0).getImgUrl())
                         .score(post.getScore())
-                        .likes(post.getLikeList().size())
+                        .likes(post.getLikes())
                         .likedSiteUserNameList(postLikeRepository.getPostLikedSiteUserName(post))
                         .views(post.getViews())
                         .build()

@@ -18,8 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     @Query("select p " +
             "from PostImg pi " +
             "join pi.post p " +
-            "where pi.thumbnailYn = true " +
-            "order by p.createdDate desc")
+            "where pi.thumbnailYn = true ")
     Page<Post> getPostList(Pageable pageable);
 
 
