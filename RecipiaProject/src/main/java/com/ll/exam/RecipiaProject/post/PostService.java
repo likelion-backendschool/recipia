@@ -161,6 +161,7 @@ public class PostService {
         postRepository.deleteById(postId);
     }
 
-
-
+    public void increaseView(int postId) {
+        postRepository.increaseView(postId);
+    }
 }
