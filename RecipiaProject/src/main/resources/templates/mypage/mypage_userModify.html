@@ -41,33 +41,33 @@
 
 
     <form th:action th:object="${myPageDto}" method="POST"  onsubmit="ModifyForm__submit(this); return false;">
-        <div class="flex justify-center mt-3 ">
+        <div class="flex justify-center mt-3 text-black">
             <span>아이디 : &nbsp</span>
-            <input type="text" th:field="*{username}" class="form-control" rows="1" readonly></input>
+            <input type="text" th:field="*{username}" class="form-control " rows="1" readonly disabled></input>
 
         </div>
 
-        <div class="flex justify-center mt-3">
+        <div class="flex justify-center mt-3 text-black ">
             <span> 이메일 : &nbsp</span>
             <div th:text="${myPageDto.email}"></div>
         </div>
 
-        <div class="flex justify-center mt-3">
-        <input type="email"  th:field="*{email}" value="-"  rows="1">
+        <div class="flex justify-center mt-3 ">
+        <input type="email" class="text-center" placeholder="이메일을 작성해주세요." th:field="*{email}" value="-"  rows="1">
         </div>
 
 
-        <div class="flex justify-center mt-3">
+        <div class="flex justify-center mt-3 text-black">
             <span>닉네임 : &nbsp</span>
             <div th:text="${myPageDto.nickname}"></div>
         </div>
 
         <div class="flex justify-center mt-3">
-            <input type="text" placeholder="변경할 닉네임을 적어주세요." th:field="*{nickname}"  rows="1">
+            <input type="text" class="text-center" placeholder="닉네임을 만들어주세요." th:field="*{nickname}"  rows="1">
         </div>
 
 
-        <div class="flex justify-center mt-3">
+        <div class="flex justify-center mt-3 text-black font-bold">
             <input type="submit" value="수정">
         </div>
 
