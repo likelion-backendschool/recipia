@@ -17,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -66,8 +69,32 @@ public class PostController {
 
     //게시글 상세 페이지로 이동
     @GetMapping("/{postId}")
+    public String postDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable("postId") int postId, Model model){
+        Cookie oldCookie=null;
+        Cookie[] cookies=request.getCookies();
+        if(cookies!=null){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("visited")){
+                    oldCookie=cookie;
+                }
+            }
+        }
 
-    public String postDetail(@PathVariable("postId") int postId,Model model){
+        if(oldCookie!=null){
+            if(!oldCookie.getValue().contains("["+String.valueOf(postId)+"]")){
+                postService.increaseView(postId);
+                oldCookie.setValue(oldCookie.getValue()+"_["+postId+"]");
+                oldCookie.setPath("/");
+                oldCookie.setMaxAge(60*60*24);
+                response.addCookie(oldCookie);
+            }
+        }else{
+            postService.increaseView(postId);
+            Cookie newCookie=new Cookie("visited","["+postId+"]");
+            newCookie.setPath("/");
+            newCookie.setMaxAge(60*60*24);
+            response.addCookie(newCookie);
+        }
         PostDetailDto postDetailDto=postService.getPostDetail(postId);
         model.addAttribute("postDetailDto",postDetailDto);
         return "post/postDetail";
