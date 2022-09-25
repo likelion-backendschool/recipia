@@ -74,8 +74,10 @@
 </main>
     <script>
       function likeButtonClicked (siteUserName,postId){
+            /*
             alert("clicked");
             alert(siteUserName+"/"+postId);
+            */
             var header = $("meta[name='_csrf_header']").attr('content');
             var token = $("meta[name='_csrf']").attr('content');
             let data = {
@@ -92,7 +94,7 @@
                     xhr.setRequestHeader(header, token);
                     },
                 }).done(function (req) {
-                    alert(req);
+                    //alert(req);
                    if( $('#likeImg_'+postId).hasClass("bg-blue-700")===false){
                    $('#likeImg_'+postId).removeClass("text-blue-700");
                     $('#likeImg_'+postId).addClass("bg-blue-700 text-white");

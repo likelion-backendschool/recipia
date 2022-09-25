@@ -1,6 +1,5 @@
 package com.ll.exam.RecipiaProject.post;
 
-import com.ll.exam.RecipiaProject.hashtag.HashTagFormDto;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.*;

@@ -1,6 +1,5 @@
 package com.ll.exam.RecipiaProject.post.postLike;
 
-import com.google.gson.Gson;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import com.ll.exam.RecipiaProject.user.UserService;
