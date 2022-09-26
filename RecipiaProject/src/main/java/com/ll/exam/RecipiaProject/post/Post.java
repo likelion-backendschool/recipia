@@ -1,9 +1,11 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.base.entity.BaseTime;
 import com.ll.exam.RecipiaProject.comment.entity.Comment;
 import com.ll.exam.RecipiaProject.hashtag.HashTag;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
+import com.ll.exam.RecipiaProject.post.postLike.PostLike;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,7 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Post {
+public class Post extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -38,27 +40,25 @@ public class Post {
     private int views ;
 
     private int likes;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date modifiedDate;
-
     @ManyToOne
     private SiteUser siteUser;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @Builder.Default
     private List<PostImg> postImgList=new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @Builder.Default
     private List<HashTag> hashTagList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     @OrderBy("id desc")
+    @Builder.Default
     private List<Comment> commentList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "post",cascade = CascadeType.REMOVE)
+    @Builder.Default
+    private List<PostLike> likeList=new ArrayList<>();
 
     public PostDetailDto createPostDetailDto(){
         List<PostImgDto> postImgDtoList=new ArrayList<>();

@@ -20,7 +20,7 @@ public class MyPageService {
                 new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
         String realPassword = siteUser.getPassword();
         boolean matches = passwordEncoder.matches(checkPassword, realPassword);
-        return matches;
+            return matches;
     }
 
 

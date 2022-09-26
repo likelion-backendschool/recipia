@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
 
+
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -46,10 +47,16 @@ public class HashTagService {
     }
 
     @Transactional
-    private void deleteHashTag(List<HashTag> hashTags) {
+    public void deleteHashTag(List<HashTag> hashTags) {
         for(HashTag hashTag:hashTags){
             hashTagRepository.deleteById(hashTag.getTagId());
         }
     }
+
+
+
+
+
+
 
 }

@@ -23,15 +23,15 @@
         $('#check-pwd').click(function() {
             const checkPassword = $('#password').val();
             if(!checkPassword || checkPassword.trim() === ""){
-                alert("비밀번호를 입력하세요.");
+                alert("비밀번호를 입력하세요."); // 여기는 잘됨
             } else{
                 $.ajax({
                     type: 'GET',
-                    url: '/mypage/check-pwd',
+                    url: '/rest/check-pwd',
                     data: {'checkPassword': checkPassword},
                     datatype: "text"
                 }).done(function(result){
-                    console.log(result);
+                    alert(result);
                     if(result){
                         console.log("비밀번호 일치");
                         window.location.href="/mypage/modify";

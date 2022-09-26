@@ -27,7 +27,7 @@ public class SearchController {
 
     //메인과 list에서 검색어 입력시 json 형태를 가진 String 입력을 검색쿼리로 변경해서 list 에 넘겨줌
     @PostMapping("/")
-    public String  search(@RequestParam String searchInput) throws UnsupportedEncodingException {
+    public String  search(@RequestParam String searchInput ,@RequestParam String sort) throws UnsupportedEncodingException {
         List<String> searchKeyword=new ArrayList<>();
         String searchQuery="";
         try {
@@ -39,7 +39,7 @@ public class SearchController {
                searchKeyword.add(String.valueOf(jo.get("value")));
            }
         } catch (ParseException e) {
-            return  "redirect:/posts/list";
+            return  "redirect:/posts/list?sort="+sort;
         }
         for(int i=0;i<searchKeyword.size();i++){
             if(i==0){
@@ -49,6 +49,6 @@ public class SearchController {
             }
         }
 
-        return  "redirect:/posts/list?"+searchQuery;
+        return  "redirect:/posts/list?"+searchQuery+"&sort="+sort;
     }
 }

@@ -12,11 +12,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -48,8 +52,9 @@ public class PostController {
     //게시글 리스트로 이동
 
     @GetMapping({"/list/{page}","/list"})
-    public String posts(@PathVariable(value = "page") Optional<Integer> page,@RequestParam(value = "keyword")Optional<String> keyword ,Model model){
-        Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6);
+    public String posts(@PathVariable(value = "page") Optional<Integer> page,@RequestParam(value = "keyword")Optional<String> keyword,@RequestParam(value = "sort",defaultValue = "createdDate")String sort ,Model model){
+        Sort addsort=Sort.by("post."+sort);
+        Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6,addsort.descending());
         Page<PostMainDto> posts=null;
         String[] keywords=null;
         //검색어가 있는 경우와 없는경우 분기
@@ -66,8 +71,32 @@ public class PostController {
 
     //게시글 상세 페이지로 이동
     @GetMapping("/{postId}")
+    public String postDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable("postId") int postId, Model model){
+        Cookie oldCookie=null;
+        Cookie[] cookies=request.getCookies();
+        if(cookies!=null){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("visited")){
+                    oldCookie=cookie;
+                }
+            }
+        }
 
-    public String postDetail(@PathVariable("postId") int postId,Model model){
+        if(oldCookie!=null){
+            if(!oldCookie.getValue().contains("["+String.valueOf(postId)+"]")){
+                postService.increaseView(postId);
+                oldCookie.setValue(oldCookie.getValue()+"_["+postId+"]");
+                oldCookie.setPath("/");
+                oldCookie.setMaxAge(60*60*24);
+                response.addCookie(oldCookie);
+            }
+        }else{
+            postService.increaseView(postId);
+            Cookie newCookie=new Cookie("visited","["+postId+"]");
+            newCookie.setPath("/");
+            newCookie.setMaxAge(60*60*24);
+            response.addCookie(newCookie);
+        }
         PostDetailDto postDetailDto=postService.getPostDetail(postId);
         model.addAttribute("postDetailDto",postDetailDto);
         return "post/postDetail";
@@ -112,6 +141,15 @@ public class PostController {
     @ResponseBody
     public String postComment(@PathVariable("postId") int postId, @RequestBody CommentDto dto,Principal principal){
         commentService.createComment(postId,dto,principal);
+        return "resp";
+    }
+
+    // 댓글 삭제
+
+    @GetMapping("/{postId}/reply/{replyId}")
+    @ResponseBody
+    public String deleteComment(@PathVariable("replyId") long commentId, Principal principal){
+        commentService.deleteComment(commentId,principal);
         return "resp";
     }
 }
