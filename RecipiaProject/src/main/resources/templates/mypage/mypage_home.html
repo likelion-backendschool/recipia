@@ -28,21 +28,30 @@
     <div>
         <!-- image -->
         <div class="flex justify-evenly mt-20">
-            <img
-                    src="https://cdn-icons-png.flaticon.com/512/3637/3637653.png"
-                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                    alt="..."
-            />
-            <img
-                    src="https://cdn-icons-png.flaticon.com/512/1585/1585316.png"
-                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                    alt="..."
-            />
-            <img
-                    src="https://cdn-icons-png.flaticon.com/512/3094/3094700.png"
-                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                    alt="..."
-            />
+
+            <a th:href="@{/allergy/allergyList}">
+                <img
+                        src="https://cdn-icons-png.flaticon.com/512/3637/3637653.png"
+                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                        alt="..."
+                />
+            </a>
+
+            <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()">
+                <img
+                        src="https://cdn-icons-png.flaticon.com/512/1585/1585316.png"
+                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                        alt="..."
+                />
+            </a>
+
+            <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');">
+                <img
+                        src="https://cdn-icons-png.flaticon.com/512/3094/3094700.png"
+                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                        alt="..."
+                />
+            </a>
         </div>
 
 
