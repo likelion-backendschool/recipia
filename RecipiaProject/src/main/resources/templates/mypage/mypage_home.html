@@ -1,71 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
       layout:decorate="~{layout}">
 
-  <th:block layout:fragment="content">
-        <div class="mt-30 h-32 w-32 p-4 border-4 bg-black rounded "></div>
-          <img class="mt-20"
-                  src="/mypage/default_mypage.png"
-                  alt="..."
-          />
-      </div>
-      <div class="flex justify-center">
+<th:block layout:fragment="content">
+    <div class="flex justify-center">
+        <img class="mt-20"
+             src="/mypage/default_mypage.png"
+             alt="..."
+        />
+    </div>
+    <div class="flex justify-center">
         <div class="mt-3 font-bold text-black" th:text="${myPageDto.username}"></div>
-      </div>
+    </div>
 
-      <div class="flex justify-center">
+    <div class="flex justify-center">
         <div class="text-black font-bold text-xs mt-3 p-1 bg-white rounded" th:text="${myPageDto.email}"></div>
-      </div>
+    </div>
 
-      <div class="flex justify-center">
-          <p1 class="text-black font-bold text-xs mt-3 p-1 bg-white rounded">닉네임 :</p1>
-          <div class="text-black font-bold text-xs mt-3 p-1 bg-white rounded" th:text="${myPageDto.nickname}"></div>
-      </div>
+    <div class="flex justify-center">
+        <p1 class="text-black font-bold text-xs mt-3 p-1 bg-white rounded">닉네임 :</p1>
+        <div class="text-black font-bold text-xs mt-3 p-1 bg-white rounded" th:text="${myPageDto.nickname}"></div>
+    </div>
 
 
-      <!-- 하위 페이지 -->
-      <div>
+    <!-- 하위 페이지 -->
+    <div>
         <!-- image -->
         <div class="flex justify-evenly mt-10">
-          <img
-                  src="https://cdn-icons-png.flaticon.com/512/889/889669.png"
-                  class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                  alt="..."
-          />
-          <img
-                  src="https://cdn-icons-png.flaticon.com/128/7222/7222088.png"
-                  class="p-1 mx-10 border-8 border-black bg-white  border rounded max-w-sm h-20 w-20"
-                  alt="..."
-          />
-          <img
-                  src="https://cdn-icons-png.flaticon.com/512/3637/3637653.png"
-                  class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                  alt="..."
-          />
-          <img
-                  src="https://cdn-icons-png.flaticon.com/512/1585/1585316.png"
-                  class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                  alt="..."
-          />
-          <img
-                  src="https://cdn-icons-png.flaticon.com/512/3094/3094700.png"
-                  class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                  alt="..."
-          />
+            <img
+                    src="https://cdn-icons-png.flaticon.com/512/889/889669.png"
+                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                    alt="..."
+            />
+            <img
+                    src="https://cdn-icons-png.flaticon.com/128/7222/7222088.png"
+                    class="p-1 mx-10 border-8 border-black bg-white  border rounded max-w-sm h-20 w-20"
+                    alt="..."
+            />
+            <img
+                    src="https://cdn-icons-png.flaticon.com/512/3637/3637653.png"
+                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                    alt="..."
+            />
+            <img
+                    src="https://cdn-icons-png.flaticon.com/512/1585/1585316.png"
+                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                    alt="..."
+            />
+            <img
+                    src="https://cdn-icons-png.flaticon.com/512/3094/3094700.png"
+                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                    alt="..."
+            />
         </div>
 
 
         <!--각 페이지로 넘어가기위한 button -->
         <div class="flex justify-evenly mt-2">
-          <a th:href="@{/mypage/myposts}" class="w-30 h-10 mx-10 px-2 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">나의 게시물</a>
-          <a th:href="@{/mypage/bookmark}" class="w-30 h-10 mx-10 px-4 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">즐겨찾기</a>
-          <a th:href="@{/allergy/allergyList}" class="w-30 h-10 mx-10 px-2 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
-          <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()" class="w-30 h-10 mx-10 px-5 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
-         <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');"
-           class="w-20 mx-10 py-1 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">
+            <a th:href="@{/mypage/myposts}" class="w-30 h-10 mx-10 px-2 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">나의 게시물</a>
+            <a th:href="@{/mypage/bookmark}" class="w-30 h-10 mx-10 px-4 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">즐겨찾기</a>
+            <a th:href="@{/allergy/allergyList}" class="w-30 h-10 mx-10 px-2 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
+            <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()" class="w-30 h-10 mx-10 px-5 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
+            <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');"
+               class="w-30 h-10 mx-10 px-5 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">
+                회원탈퇴
+            </a>
         </div>
-      </div>
-  </th:block>
+    </div>
+</th:block>
 
 </html>
