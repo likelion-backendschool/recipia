@@ -89,7 +89,7 @@ public class MyPageController {
 
     @GetMapping("/check-pwd")
     @PreAuthorize("isAuthenticated()")
-    public String checkPwdView(Principal principal){
+    public String checkPwdView(){
 
         return "mypage/check-pwd";
     }

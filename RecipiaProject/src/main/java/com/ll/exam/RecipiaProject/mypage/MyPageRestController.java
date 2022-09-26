@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MyPageRestController {
 
-    private MyPageService myPageService;
+    private final MyPageService myPageService;
 
     /** 회원 수정 전 비밀번호 확인 **/
     @GetMapping("/check-pwd")

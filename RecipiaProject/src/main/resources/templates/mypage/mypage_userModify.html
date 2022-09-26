@@ -9,13 +9,13 @@
 
 
     <form th:action th:object="${myPageDto}" method="POST"  onsubmit="ModifyForm__submit(this); return false;">
-        <div class="flex justify-center mt-3 text-black">
+        <div class="flex justify-center mt-20 text-black">
             <span class="font-bold">아이디 : &nbsp</span>
             <input type="text" th:field="*{username}" class="form-control " rows="1" readonly disabled></input>
 
         </div>
 
-        <div class="flex justify-center mt-3 text-black ">
+        <div class="flex justify-center mt-20 text-black ">
             <span class="font-bold"> 이메일 : &nbsp</span>
             <div th:text="${myPageDto.email}"></div>
         </div>
@@ -25,7 +25,7 @@
         </div>
 
 
-        <div class="flex justify-center mt-3 text-black">
+        <div class="flex justify-center mt-10 text-black">
             <span class="font-bold">닉네임 : &nbsp</span>
             <div th:text="${myPageDto.nickname}"></div>
         </div>
@@ -35,7 +35,7 @@
         </div>
 
 
-        <div class="flex justify-center mt-3">
+        <div class="flex justify-center mt-10">
             <input type="submit" class="btn bg-black w-00 my-4 mb-2" value="수정">
         </div>
 
