@@ -136,7 +136,8 @@
 
 ## 개발 결과물 공유
 ### 메인페이지 UI 수정
-<img width="1086" alt="스크린샷 2022-09-26 오후 11 15 40" src="https://user-images.githubusercontent.com/55697125/192299609-4e800a30-d07c-4ea7-a965-6e0573533a68.png">
+<img width="1086" alt="스크린샷 2022-09-26 오후 11 15 40" src="https://user-images.githubusercontent.com/55697125/192299609-4e800a30-d07c-4ea7-a965-6e0573533a68.png">  
+
 ### 좋아요 및 조회수 구현
 <img width="304" alt="스크린샷 2022-09-26 오후 11 16 38" src="https://user-images.githubusercontent.com/55697125/192299838-c1c8c2ae-5337-4125-aec0-d4dd15310f5f.png">
 
