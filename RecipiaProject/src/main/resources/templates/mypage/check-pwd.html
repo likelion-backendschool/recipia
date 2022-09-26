@@ -34,9 +34,8 @@
                     data: data,
                     datatype: "text"
                 }).done(function(result){
-                    alert(result);
                     if(result){
-                        alert("비밀번호 일치");
+                        alert("인증에 성공하였습니다.");
                         window.location.href="/mypage/modify";
                     } else if(!result){
                         // 비밀번호가 일치하지 않으면

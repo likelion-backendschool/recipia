@@ -32,7 +32,7 @@
             <a th:href="@{/allergy/allergyList}">
                 <img
                         src="https://cdn-icons-png.flaticon.com/512/3637/3637653.png"
-                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-30"
                         alt="..."
                 />
             </a>
@@ -40,7 +40,7 @@
             <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()">
                 <img
                         src="https://cdn-icons-png.flaticon.com/512/1585/1585316.png"
-                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-30"
                         alt="..."
                 />
             </a>
@@ -48,7 +48,7 @@
             <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');">
                 <img
                         src="https://cdn-icons-png.flaticon.com/512/3094/3094700.png"
-                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
+                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-30"
                         alt="..."
                 />
             </a>
@@ -57,10 +57,10 @@
 
         <!--각 페이지로 넘어가기위한 button -->
         <div class="flex justify-evenly mt-2">
-            <a th:href="@{/allergy/allergyList}" class="w-30 h-10 mx-10 px-2 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
-            <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()" class="w-30 h-10 mx-10 px-5 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
+            <a th:href="@{/allergy/allergyList}" class="ml-2 mr-1 text-sm w-30 h-10 mx-10 px-2 pt-2 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
+            <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()" class="mr-1 text-sm w-30 h-10 mx-10 px-4 pt-2 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
             <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');"
-               class="w-30 h-10 mx-10 px-5 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">
+               class="mr-2 text-sm w-30 h-10 mx-10 px-4 pt-2 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">
                 회원탈퇴
             </a>
         </div>
