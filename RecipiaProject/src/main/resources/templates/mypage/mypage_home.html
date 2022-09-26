@@ -11,11 +11,16 @@
         />
     </div>
     <div class="flex justify-center">
-        <div class="mt-3 font-bold text-white" th:text="${myPageDto.username}"></div>
+        <div class="mt-3 font-bold text-black" th:text="${myPageDto.username}"></div>
     </div>
 
     <div class="flex justify-center">
         <div class="text-black font-bold text-xs mt-3 p-1 bg-white rounded" th:text="${myPageDto.email}"></div>
+    </div>
+
+    <div class="flex justify-center">
+        <p1 class="text-black font-bold text-xs mt-3 p-1 bg-white rounded">닉네임 :</p1>
+        <div class="text-black font-bold text-xs mt-3 p-1 bg-white rounded" th:text="${myPageDto.nickname}"></div>
     </div>
 
 
