@@ -15,12 +15,12 @@ public class MyPageService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public boolean checkPassword(int user_id, String checkPassword) {
-        SiteUser siteUser = userRepository.findById(user_id).orElseThrow(() ->
+    public boolean checkPassword(String userName, String checkPassword) {
+        SiteUser siteUser = userRepository.findByUsername(userName).orElseThrow(() ->
                 new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
         String realPassword = siteUser.getPassword();
         boolean matches = passwordEncoder.matches(checkPassword, realPassword);
-            return matches;
+        return matches;
     }
 
 
