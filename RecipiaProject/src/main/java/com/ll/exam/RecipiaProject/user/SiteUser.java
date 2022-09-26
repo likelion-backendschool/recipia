@@ -1,6 +1,7 @@
 package com.ll.exam.RecipiaProject.user;
 
 import com.ll.exam.RecipiaProject.comment.entity.Comment;
+import com.ll.exam.RecipiaProject.post.postLike.PostLike;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,5 +33,7 @@ public class SiteUser {
     private String gender;
 
     @OneToMany(mappedBy = "siteUser")
+    @Builder.Default
     private List<Comment> commentList=new ArrayList<>();
+
 }

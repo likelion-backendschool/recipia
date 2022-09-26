@@ -18,8 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
     @Query("select p " +
             "from PostImg pi " +
             "join pi.post p " +
-            "where pi.thumbnailYn = true " +
-            "order by p.createdDate desc")
+            "where pi.thumbnailYn = true ")
     Page<Post> getPostList(Pageable pageable);
 
 
@@ -33,4 +32,8 @@ public interface PostRepository extends JpaRepository<Post, Integer>, BaseReposi
 
     @Query(value = "select distinct  p from HashTag h inner join h.post p where h.tagContent in :keywords ")
     Page<Post> getPostListByKeyword(@Param("keywords") String[] keywords,Pageable pageable);
+
+    @Query("update Post p set p.views =p.views+1 where p.id= :postId ")
+    @Modifying
+    void increaseView(@Param("postId") int postId);
 }

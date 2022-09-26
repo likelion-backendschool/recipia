@@ -6,6 +6,7 @@ import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgRepository;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
+import com.ll.exam.RecipiaProject.post.postLike.PostLikeRepository;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,7 @@ public class PostService {
 
     private final HashTagRepository hashTagRepository;
 
+    private final PostLikeRepository postLikeRepository;
     public Page<PostMainDto> getPostList(Pageable pageable){
         Page<Post> posts = postRepository.getPostList(pageable);
         Page<PostMainDto> map = posts.map(post ->
@@ -46,11 +48,28 @@ public class PostService {
                         .imgUrl(post.getPostImgList().get(0).getImgUrl())
                         .score(post.getScore())
                         .likes(post.getLikes())
+                        .likedSiteUserNameList(postLikeRepository.getPostLikedSiteUserName(post))
                         .views(post.getViews())
                         .build()
         );
+        return map;
+    }
 
-
+    public Page<PostMainDto> getPostListBykeyword(String[] keywords,Pageable pageable) {
+        Page<Post> posts = postRepository.getPostListByKeyword(keywords,pageable);
+        Page<PostMainDto> map = posts.map(post ->
+                PostMainDto.builder()
+                        .title(post.getTitle())
+                        .id(post.getId())
+                        .hashTagContentList(post.getHashTagList().stream().map(hashTag ->
+                                hashTag.getTagContent()).collect(Collectors.toList()))
+                        .imgUrl(post.getPostImgList().get(0).getImgUrl())
+                        .score(post.getScore())
+                        .likes(post.getLikeList().size())
+                        .likedSiteUserNameList(postLikeRepository.getPostLikedSiteUserName(post))
+                        .views(post.getViews())
+                        .build()
+        );
         return map;
     }
 
@@ -142,21 +161,7 @@ public class PostService {
         postRepository.deleteById(postId);
     }
 
-
-    public Page<PostMainDto> getPostListBykeyword(String[] keywords,Pageable pageable) {
-        Page<Post> posts = postRepository.getPostListByKeyword(keywords,pageable);
-        Page<PostMainDto> map = posts.map(post ->
-                PostMainDto.builder()
-                        .title(post.getTitle())
-                        .id(post.getId())
-                        .hashTagContentList(post.getHashTagList().stream().map(hashTag ->
-                                hashTag.getTagContent()).collect(Collectors.toList()))
-                        .imgUrl(post.getPostImgList().get(0).getImgUrl())
-                        .score(post.getScore())
-                        .likes(post.getLikes())
-                        .views(post.getViews())
-                        .build()
-        );
-        return map;
+    public void increaseView(int postId) {
+        postRepository.increaseView(postId);
     }
 }
