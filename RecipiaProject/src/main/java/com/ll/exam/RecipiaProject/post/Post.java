@@ -39,7 +39,7 @@ public class Post extends BaseTime {
 
     private int views ;
 
-
+    private int likes;
     @ManyToOne
     private SiteUser siteUser;
 
@@ -83,7 +83,7 @@ public class Post extends BaseTime {
                 .content(content)
                 .score(score)
                 .views(views)
-                .likes(likeList.size())
+                .likes(likes)
                 .username(siteUser.getUsername())
                 .postImgDtoList(postImgDtoList)
                 .hashTagContentList(tageContentList)

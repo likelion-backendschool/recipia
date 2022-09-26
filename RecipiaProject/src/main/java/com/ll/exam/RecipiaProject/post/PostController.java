@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,8 +52,9 @@ public class PostController {
     //게시글 리스트로 이동
 
     @GetMapping({"/list/{page}","/list"})
-    public String posts(@PathVariable(value = "page") Optional<Integer> page,@RequestParam(value = "keyword")Optional<String> keyword ,Model model){
-        Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6);
+    public String posts(@PathVariable(value = "page") Optional<Integer> page,@RequestParam(value = "keyword")Optional<String> keyword,@RequestParam(value = "sort",defaultValue = "createdDate")String sort ,Model model){
+        Sort addsort=Sort.by("post."+sort);
+        Pageable pageable= PageRequest.of(page.isPresent()?page.get():0,6,addsort.descending());
         Page<PostMainDto> posts=null;
         String[] keywords=null;
         //검색어가 있는 경우와 없는경우 분기
