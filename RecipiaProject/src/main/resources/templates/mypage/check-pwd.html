@@ -21,27 +21,30 @@
 
         <script>
         $('#check-pwd').click(function() {
-            const checkPassword = $('#password').val();
+        let checkPassword= $("#password").val();
+                let data = {
+            checkPassword: checkPassword,
+                };
             if(!checkPassword || checkPassword.trim() === ""){
                 alert("비밀번호를 입력하세요."); // 여기는 잘됨
             } else{
                 $.ajax({
                     type: 'GET',
-                    url: '/rest/check-pwd',
-                    data: {'checkPassword': checkPassword},
+                    url: '/mypage/api/check-pwd',
+                    data: data,
                     datatype: "text"
                 }).done(function(result){
                     alert(result);
                     if(result){
-                        console.log("비밀번호 일치");
+                        alert("비밀번호 일치");
                         window.location.href="/mypage/modify";
                     } else if(!result){
-                        console.log("비밀번호 틀림");
                         // 비밀번호가 일치하지 않으면
                         alert("비밀번호가 맞지 않습니다.");
                         window.location.reload();
                     }
                 }).fail(function(error){
+                alert("비밀번호 에러");
                     alert(JSON.stringify(error));
                 })
             }

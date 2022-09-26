@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -92,6 +90,16 @@ public class MyPageController {
     public String checkPwdView(){
 
         return "mypage/check-pwd";
+    }
+
+    /** 회원 수정 전 비밀번호 확인 **/
+    @GetMapping("/api/check-pwd")
+    @ResponseBody
+    public boolean checkPassword(Principal principal,
+                                 @RequestParam String checkPassword,
+                                 Model model){
+        String userName= principal.getName();
+        return myPageService.checkPassword(userName, checkPassword);
     }
 
 }
