@@ -72,9 +72,6 @@ public class MyPageController {
     public String modify(@Valid MyPageDto myPageDto, Principal principal, Model model, String password) {
         SiteUser siteUser = myPageService.getUser(principal.getName());
 
-
-
-
         myPageService.modify(siteUser, myPageDto.getEmail(), myPageDto.getNickname(), myPageDto.getGender());
         return "redirect:/mypage";
     }
@@ -90,5 +87,11 @@ public class MyPageController {
         return "redirect:/user/logout";
     }
 
+    @GetMapping("/check-pwd")
+    @PreAuthorize("isAuthenticated()")
+    public String checkPwdView(Principal principal){
+
+        return "mypage/check-pwd";
+    }
 
 }
