@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://thymeleaf.org"
+      xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 
 <th:block layout:fragment="content">
@@ -27,17 +27,7 @@
     <!-- 하위 페이지 -->
     <div>
         <!-- image -->
-        <div class="flex justify-evenly mt-10">
-            <img
-                    src="https://cdn-icons-png.flaticon.com/512/889/889669.png"
-                    class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
-                    alt="..."
-            />
-            <img
-                    src="https://cdn-icons-png.flaticon.com/128/7222/7222088.png"
-                    class="p-1 mx-10 border-8 border-black bg-white  border rounded max-w-sm h-20 w-20"
-                    alt="..."
-            />
+        <div class="flex justify-evenly mt-20">
             <img
                     src="https://cdn-icons-png.flaticon.com/512/3637/3637653.png"
                     class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-20"
@@ -58,8 +48,6 @@
 
         <!--각 페이지로 넘어가기위한 button -->
         <div class="flex justify-evenly mt-2">
-            <a th:href="@{/mypage/myposts}" class="w-30 h-10 mx-10 px-2 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">나의 게시물</a>
-            <a th:href="@{/mypage/bookmark}" class="w-30 h-10 mx-10 px-4 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">즐겨찾기</a>
             <a th:href="@{/allergy/allergyList}" class="w-30 h-10 mx-10 px-2 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">알러지 태그</a>
             <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()" class="w-30 h-10 mx-10 px-5 pt-1 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
             <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');"

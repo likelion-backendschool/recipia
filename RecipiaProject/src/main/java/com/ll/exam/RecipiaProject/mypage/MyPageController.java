@@ -36,17 +36,6 @@ public class MyPageController {
         return "mypage/mypage_home";
     }
 
-    @GetMapping("/myposts")
-    @PreAuthorize("isAuthenticated()")
-    public String myPosts(Principal principal) {
-        return "mypage/mypage_myPosts";
-    }
-
-    @GetMapping("/bookmark")
-    @PreAuthorize("isAuthenticated()")
-    public String myPageBookmark(Principal principal) {
-        return "mypage/mypage_bookmark";
-    }
 
     @GetMapping("/allergy")
     @PreAuthorize("isAuthenticated()")
