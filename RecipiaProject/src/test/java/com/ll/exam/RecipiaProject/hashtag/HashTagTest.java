@@ -1,6 +1,5 @@
 package com.ll.exam.RecipiaProject.hashtag;
 
-import com.ll.exam.RecipiaProject.post.Post;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,10 +9,6 @@ import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class HashTagTest {

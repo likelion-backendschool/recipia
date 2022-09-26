@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+
+    <th:block layout:fragment="content">
+
+        <div class="card-body">
+            <div class="text-start">
+                <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/>
+                <div class="input-group input-group-outline my-3">
+                    <label class="form-label text-black font-black">비밀번호 확인 : &nbsp</label>
+                    <input type="password" id="password" name="password" class="form-control rounded-lg">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn bg-gradient-primary w-00 my-4 mb-2" id="check-pwd"> 비밀번호 확인</button>
+            </div>
+        </div>
+
+        <script>
+        $('#check-pwd').click(function() {
+            const checkPassword = $('#password').val();
+            if(!checkPassword || checkPassword.trim() === ""){
+                alert("비밀번호를 입력하세요."); // 여기는 잘됨
+            } else{
+                $.ajax({
+                    type: 'GET',
+                    url: '/rest/check-pwd',
+                    data: {'checkPassword': checkPassword},
+                    datatype: "text"
+                }).done(function(result){
+                    alert(result);
+                    if(result){
+                        console.log("비밀번호 일치");
+                        window.location.href="/mypage/modify";
+                    } else if(!result){
+                        console.log("비밀번호 틀림");
+                        // 비밀번호가 일치하지 않으면
+                        alert("비밀번호가 맞지 않습니다.");
+                        window.location.reload();
+                    }
+                }).fail(function(error){
+                    alert(JSON.stringify(error));
+                })
+            }
+        });
+        </script>
+
+    </th:block>
+
+</html>

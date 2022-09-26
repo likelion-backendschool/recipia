@@ -23,6 +23,8 @@ class RecipiaProjectApplicationTests {
 	@DisplayName("샘플 유저 생성")
 	void t1() {
 		userService.create("admin", "1234", "admin@test.com");
+		userService.create("user1", "1234", "user1@test.com");
+
 	}
 
 	public static void createSampleData(UserService userService) {
