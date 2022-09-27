@@ -47,3 +47,7 @@ https://www.notion.so/Github-Flow-7b5aac93b5be4c648449cec6367a34be
 
 ### Code Review
 https://www.notion.so/4b16088e25924cd7a9304ee7ada82dd6
+
+### 젠킨스
+
+- 시범
