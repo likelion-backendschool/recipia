@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +45,7 @@ public class PostController {
 
     //게시글 작성
     @PostMapping("")
-    public String postCreate(PostFormDto postFormDto, @RequestParam("files") List<MultipartFile> files, Principal principal) {
+    public String postCreate(PostFormDto postFormDto, @RequestParam("files") List<MultipartFile> files, Principal principal) throws IOException {
         postService.createPost(postFormDto, files, principal);
         return "redirect:/posts/list";
     }
@@ -117,7 +118,7 @@ public class PostController {
 
     //게시글 수정
     @PostMapping("/{postId}/modify")
-    public String postModify(Principal principal,PostFormUpdateDto postFormUpdateDto,@RequestParam("files") List<MultipartFile> files, @PathVariable("postId") int postId) {
+    public String postModify(Principal principal,PostFormUpdateDto postFormUpdateDto,@RequestParam("files") List<MultipartFile> files, @PathVariable("postId") int postId) throws IOException {
 
       postService.modifyPost(postFormUpdateDto,files,postId,principal);
         return "redirect:/posts/list";

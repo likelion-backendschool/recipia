@@ -1,11 +1,11 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.aws.AwsS3Service;
 import com.ll.exam.RecipiaProject.hashtag.HashTag;
 import com.ll.exam.RecipiaProject.hashtag.HashTagRepository;
 import com.ll.exam.RecipiaProject.hashtag.HashTagService;
 import com.ll.exam.RecipiaProject.post.postImg.PostImg;
 import com.ll.exam.RecipiaProject.post.postImg.PostImgRepository;
-import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import com.ll.exam.RecipiaProject.post.postLike.PostLikeRepository;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import com.ll.exam.RecipiaProject.user.UserRepository;
@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final HashTagService hashTagService;
-    private final PostImgService postImgService;
+    private final AwsS3Service postImgService;
     private final PostImgRepository postImgRepository;
 
     private final HashTagRepository hashTagRepository;
@@ -73,7 +74,7 @@ public class PostService {
         return map;
     }
 
-    public void createPost(PostFormDto postFormDto, List<MultipartFile> files, Principal principal) {
+    public void createPost(PostFormDto postFormDto, List<MultipartFile> files, Principal principal) throws IOException {
         //로그인 기능 추가시 여기에 principal 로 SiteUser 불러오기
 
         SiteUser user=userRepository.findByUsername(principal.getName()).orElseThrow(()->new EntityNotFoundException());
@@ -108,7 +109,7 @@ public class PostService {
         return postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException());
     }
 
-    public void modifyPost(PostFormUpdateDto postFormUpdateDto, List<MultipartFile> files,int postId,Principal principal) {
+    public void modifyPost(PostFormUpdateDto postFormUpdateDto, List<MultipartFile> files,int postId,Principal principal) throws IOException {
         Post post=postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException());
         post.setTitle(postFormUpdateDto.getTitle());
         post.setContent(postFormUpdateDto.getContent());
