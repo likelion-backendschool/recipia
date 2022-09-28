@@ -1,12 +1,12 @@
 cloud:
     aws:
         credentials:
-            access-key: ${s3.accesskey}
-            secret-key: ${s3.secretkey}
+            access-key: ${accesskey}
+            secret-key: ${secretkey}
         region:
-            static: ${s3.resion}
+            static: ${region}
         s3:
-            bucket: ${s3.bucket}
+            bucket: ${bucket}
         stack:
             auto: false
 
