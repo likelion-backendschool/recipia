@@ -30,9 +30,9 @@
                         
                             <div class="flex mb-1">
                                 <input type="text"  name="imgNames" class="imgNames text-lg  border rounded-lg font-bold flex-grow" style="background-color: rgba(209, 213, 219, 1);" value="파일"  readonly/>
-                                <label for="file_0" class="text-white bg-[#3E7C17] hover:bg-[#1A4D2E] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20">파일선택</label>
+                                <label for="file_0" class="text-white bg-[#EC7272] hover:bg-[#FC4F4F] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20">파일선택</label>
                                 <input type="file" id="file_0" name="files" onchange="changeFilename(this,0)" accept=".jpg,.jpeg,.png,.gif,.bmp" hidden>
-                                <button type="button" onclick="addFile()" class="text-white bg-[#3E7C17] hover:bg-[#1A4D2E] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <button type="button" onclick="addFile()" class="text-white bg-[#EC7272] hover:bg-[#FC4F4F] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-1  ml-1 w-20"><i class="fa fa-plus" aria-hidden="true"></i></button>
                             </div>
                                 <div>
                                     <img th:id="LoadImg_0"class="object-fill w-96 h-96">
@@ -61,11 +61,11 @@
                 </div>
 
                 <div class="btnDiv"th:if="${postFormDto.id == 0}">
-                    <button type="submit" th:formaction="@{/posts}" class="text-white bg-[#3E7C17] hover:bg-[#1A4D2E] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 등록</button>
+                    <button type="submit" th:formaction="@{/posts}" class="text-white bg-[#EC7272] hover:bg-[#FC4F4F] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 등록</button>
                 </div>
 
                 <div  class="btnDiv" th:if="${postFormDto.id != 0}">
-                    <button type="submit" th:formaction="@{|/posts/${postFormDto.id}/modify|}" class="text-white bg-[#3E7C17] hover:bg-[#1A4D2E]  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-3">게시물 수정</button>
+                    <button type="submit" th:formaction="@{|/posts/${postFormDto.id}/modify|}" class="text-white bg-[#EC7272] hover:bg-[#FC4F4F] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-3">게시물 수정</button>
                 </div>
 
         </div>

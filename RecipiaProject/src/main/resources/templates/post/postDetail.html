@@ -76,11 +76,11 @@
 
 
         <div class="flex justify-end">
-            <a th:href="@{|/posts/${postDetailDto.id}/modify|}" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == postDetailDto.username}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#3E7C17] hover:bg-[#1A4D2E] rounded-lg  focus:ring-4 focus:outline-none focus:ring-blue-300">
+            <a th:href="@{|/posts/${postDetailDto.id}/modify|}" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == postDetailDto.username}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#EC7272] hover:bg-[#FC4F4F] rounded-lg  focus:ring-4 focus:outline-none focus:ring-blue-300">
                 글수정
                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
             </a>
-            <a th:href="@{|/posts/${postDetailDto.id}/delete|}"sec:authorize="isAuthenticated()"   th:if="${#authentication.getPrincipal().getUsername() == postDetailDto.username}"  class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <a th:href="@{|/posts/${postDetailDto.id}/delete|}"sec:authorize="isAuthenticated()"   th:if="${#authentication.getPrincipal().getUsername() == postDetailDto.username}"  class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#EC7272] hover:bg-[#FC4F4F] rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 삭제
                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
             </a>
@@ -103,7 +103,7 @@
                     <textarea sec:authorize="isAuthenticated()" id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="댓글을 입력해주세요..." required=""></textarea>
                 </div>
                 <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
-                    <button type="button" onclick="dataSend()" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#3E7C17] hover:bg-[#1A4D2E] rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900">
+                    <button type="button" onclick="dataSend()" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#EC7272] hover:bg-[#FC4F4F] rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900">
                         댓글 작성
                     </button>
                 </div>
@@ -112,7 +112,7 @@
         <!--댓글보여질 div-->
         <div id="resultDiv">
 
-            <ul class="text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <ul class="text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-10">
                 <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">댓글 리스트</li>
                 <div th:each="comment : ${postDetailDto.commentList}">
                     <li id="comment--ajax" class="flex py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600">

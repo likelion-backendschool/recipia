@@ -5,12 +5,12 @@
       layout:decorate="~{layout}">
 
 <th:bloack layout:fragment="content"  class="container mx-auto max-w-screen-md flex justify-center flex-wrap">
-    <div class="w-full border-b-4 border-indigo-500">
+    <div class="w-full border-b-4 border-[#FF9292]">
         <div>
-            <h1 class="font-bold">회원 가입 페이지야!!</h1>
+            <h1 class="font-bold">회원 가입 페이지</h1>
         </div>
     </div>
-    <div class="block p-6 rounded-lg shadow-lg bg-white w-full">
+    <div class="block p-6 rounded-lg shadow-lg bg-white w-full mb-10">
         <form th:action="@{/user/sign-up}" th:object="${userFormDto}" method="post">
             <div th:replace="form_errors :: formErrorsFragment"></div>
               <div class="flex flex-col">
@@ -92,7 +92,7 @@
       w-full
       px-6
       py-2.5
-      bg-[#3E7C17]
+      bg-[#EC7272]
       text-white
       font-medium
       text-xs
@@ -100,7 +100,7 @@
       uppercase
       rounded
       shadow-md
-      hover:bg-[#1A4D2E] hover:shadow-lg
+      hover:bg-[#FC4F4F] hover:shadow-lg
       focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
       active:bg-blue-800 active:shadow-lg
       transition
