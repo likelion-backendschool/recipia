@@ -50,4 +50,4 @@ https://www.notion.so/4b16088e25924cd7a9304ee7ada82dd6
 
 ### 젠킨스
 
-- 시범
+- 테스트
