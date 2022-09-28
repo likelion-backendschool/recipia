@@ -63,9 +63,12 @@ public class PostController {
             posts=postService.getPostListBykeyword(keywords,pageable);
         }else{
            posts=postService.getPostList(pageable);
+
         }
         model.addAttribute("posts",posts);
         model.addAttribute("keywords",keywords);
+        model.addAttribute("keyWord",keyword);
+        model.addAttribute("sort",sort);
         return "post/postList";
     }
 
