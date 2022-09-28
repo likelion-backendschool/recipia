@@ -6,25 +6,25 @@
       layout:decorate="~{layout}">
 
 <th:bloack layout:fragment="content">
-<div class="border rounded-lg bg-white w-full container mx-auto p-2">
+<div class="border rounded-lg bg-white w-full container mx-auto p-2 mb-5">
     <form method="post" th:object="${postFormDto}" enctype="multipart/form-data" th:onsubmit ="return image_check()">
         <input  type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" />
-        <div class="flex flex-col px-60">
+        <div class="flex flex-col px-60 ">
             <div>
-                <label class="block mb-2 text-sm font-bold text-gray-900">제목</label>
-                <input type="text" th:field="*{title}" class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2.5" placeholder="제목" required>
+                <label class="block mb-1 text-sm font-bold text-gray-900 mt-3">제목</label>
+                <input type="text" th:field="*{title}" class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2.5 mb-3" placeholder="제목" required>
             </div>
             <div>
-                <label class="block mb-2 text-sm font-bold text-gray-900">내용</label>
-                <textarea th:field="*{content}" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300" placeholder="내용" required></textarea>
+                <label class="block mb-1 text-sm font-bold text-gray-900">내용</label>
+                <textarea th:field="*{content}" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 mb-3" placeholder="내용" required></textarea>
             </div>
              <div class="flex flex-col">
-                <label class="block mb-2 text-sm font-bold text-gray-900">태그</label>
-                <input class="w-6/12 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300" th:type="text" th:id="tagContent" th:name="tagContent" th:value="${postFormDto.tagContent}"  placeholder="재료를 입력하시오.">
+                <label class="block mb-1 text-sm font-bold text-gray-900">태그</label>
+                <input class="w-6/12 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 mb-3" th:type="text" th:id="tagContent" th:name="tagContent" th:value="${postFormDto.tagContent}"  placeholder="재료를 입력하시오.">
             </div>
 
 
-                <label class="block mb-2 text-sm font-bold text-gray-900">이미지</label>
+                <label class="block mb-1 text-sm font-bold text-gray-900">이미지</label>
                 <div th:if="${#lists.isEmpty(postFormDto.postImgDtoList)}">
                     <div data-name="fileDiv">
                         
@@ -65,7 +65,7 @@
                 </div>
 
                 <div  class="btnDiv" th:if="${postFormDto.id != 0}">
-                    <button type="submit" th:formaction="@{|/posts/${postFormDto.id}/modify|}" class="text-white bg-[#3E7C17] hover:bg-[#1A4D2E]  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-2">게시물 수정</button>
+                    <button type="submit" th:formaction="@{|/posts/${postFormDto.id}/modify|}" class="text-white bg-[#3E7C17] hover:bg-[#1A4D2E]  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-3">게시물 수정</button>
                 </div>
 
         </div>
