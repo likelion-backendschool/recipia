@@ -39,4 +39,4 @@ out/
 ### Google SMTP ###
 google-smtp.properties
 ### AWS ###
-application-aws.yml
+application-secret.yml
