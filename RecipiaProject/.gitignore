@@ -36,5 +36,7 @@ out/
 ### VS Code ###
 .vscode/
 
-## Google SMTP
+### Google SMTP ###
 google-smtp.properties
+### AWS ###
+application-secret.yml

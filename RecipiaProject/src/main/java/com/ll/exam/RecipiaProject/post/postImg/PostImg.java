@@ -24,7 +24,8 @@ public class PostImg {
 
     private Boolean thumbnailYn;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
     private Post post;
 
     public void updatePostImg(String oriImgName,String imgName,String imgUrl){
