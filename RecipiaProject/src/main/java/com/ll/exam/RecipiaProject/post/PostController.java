@@ -1,13 +1,10 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.aws.AwsS3Service;
 import com.ll.exam.RecipiaProject.comment.dto.CommentDto;
 import com.ll.exam.RecipiaProject.comment.service.CommentService;
 import com.ll.exam.RecipiaProject.hashtag.HashTagService;
-import com.ll.exam.RecipiaProject.post.postImg.PostImg;
-import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
-import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import com.ll.exam.RecipiaProject.user.SiteUser;
-import com.ll.exam.RecipiaProject.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,7 +32,7 @@ public class PostController {
     private final HashTagService hashTagService;
     private final CommentService commentService;
 
-    private final PostImgService postImgService;
+    private final AwsS3Service postImgService;
     //게시글 작성 폼으로 이동
     @GetMapping("")
     public String postForm(Model model) {

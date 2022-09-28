@@ -15,9 +15,9 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.persistence.EntityNotFoundException;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -75,13 +75,21 @@ public class AwsS3Service {
         List<PostImg> postImgList=post.getPostImgList();
         for(int i=0;i<postImgList.size();i++){
             PostImg postImg=postImgList.get(i);
+            System.out.println("이미지 주소:"+postImg.getImgName());
             amazonS3.deleteObject(new DeleteObjectRequest(bucket,postImg.getImgName()));
-            postImgList.remove(postImg);
-            postImgRepository.deleteById(postImg.getId());
         }
     }
-    public void deletePostImg(int postImgId) {
-        postImgRepository.deleteById(postImgId);
+    public void deletePostImgModify(int postImgId) {
+        PostImg postImg=postImgRepository.findById(postImgId).orElseThrow(EntityNotFoundException::new);
+        amazonS3.deleteObject(new DeleteObjectRequest(bucket,postImg.getImgName()));
+        postImgRepository.deleteById(postImg.getId());
+    }
+    public void deletePostImgModifyDuple(int postImgId) {
+        PostImg postImg=postImgRepository.findById(postImgId).get();
+        if(postImgRepository.getCountOfImgName(postImg.getImgName())<=1){
+            amazonS3.deleteObject(new DeleteObjectRequest(bucket,postImg.getImgName()));
+        }
+        postImgRepository.deleteById( postImgId);
     }
 
     public String findImage(String fileName){
