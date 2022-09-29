@@ -25,7 +25,7 @@ public class Post extends BaseTime {
     private int id;
 
     private String title;
-
+    @Column(length = 1000)
     private String content;
 
 
