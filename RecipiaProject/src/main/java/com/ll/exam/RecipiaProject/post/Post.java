@@ -25,7 +25,7 @@ public class Post extends BaseTime {
     private int id;
 
     private String title;
-
+    @Lob
     private String content;
 
 
@@ -112,7 +112,7 @@ public class Post extends BaseTime {
         PostFormDto postFormDto=PostFormDto.builder()
                 .id(id)
                 .title(title)
-                .content(content)
+                .content(content.replace("<br/>","\r\n"))
                 .postImgDtoList(pids)
                 .postImgDtoIds(pidIds)
                 .tagContent(tagContent.toString())

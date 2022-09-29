@@ -113,7 +113,7 @@ public class PostService {
     public void modifyPost(PostFormUpdateDto postFormUpdateDto, List<MultipartFile> files,int postId,Principal principal) throws IOException {
         Post post=postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException());
         post.setTitle(postFormUpdateDto.getTitle());
-        post.setContent(postFormUpdateDto.getContent());
+        post.setContent(postFormUpdateDto.getContent().replace("\r\n","<br/>"));
             for (int i = 0; i < files.size(); i++) {
                 int  postImgId;
                try{

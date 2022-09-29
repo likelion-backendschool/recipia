@@ -12,11 +12,17 @@
         <div class="flex flex-col px-60 ">
             <div>
                 <label class="block mb-1 text-sm font-bold text-gray-900 mt-3">제목</label>
-                <input type="text" th:field="*{title}" class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2.5 mb-3" placeholder="제목" required>
+                <input type="text" th:field="*{title}" class="postTitle block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2.5 mb-3" placeholder="제목" required>
+            </div>
+            <div class="flex justify-end">
+                <p class="textCountTitle block text-sm font-bold text-gray-900" th:text="20자중0자"></p>
             </div>
             <div>
-                <label class="block mb-1 text-sm font-bold text-gray-900">내용</label>
-                <textarea th:field="*{content}" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 mb-3" placeholder="내용" required></textarea>
+                <label class="block mb-1 text-sm font-bold text-gray-900">내용(레시피)</label>
+                <textarea th:field="*{content}" rows="5" class="postContent block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 mb-3" placeholder="내용" required></textarea>
+            </div>
+            <div class="flex justify-end">
+                <p class="textCountContent block text-sm font-bold text-gray-900" th:text="1000자중0자"></p>
             </div>
              <div class="flex flex-col">
                 <label class="block mb-1 text-sm font-bold text-gray-900">태그</label>
@@ -156,6 +162,44 @@ if( $("#tagContent").val().endsWith("#") ){
 }
 
 }
+
+$('.postContent').keyup(function (e) {
+	let content = $(this).val();
+
+    // 글자수 세기
+    if (content.length == 0 || content == '') {
+    	$('.textCountContent').text('1000자중0자');
+    } else {
+    	$('.textCountContent').text('1000자중'+content.length+'자');
+    }
+
+    // 글자수 제한
+    if (content.length > 1000) {
+    	// 1000자 부터는 타이핑 되지 않도록
+        $(this).val($(this).val().substring(0,998));
+        // 10000자 넘으면 알림창 뜨도록
+        alert('글자수는 1000자까지 입력 가능합니다.');
+    };
+});
+
+$('.postTitle').keyup(function (e) {
+	let content = $(this).val();
+
+    // 글자수 세기
+    if (content.length == 0 || content == '') {
+    	$('.textCountTitle').text('20자중0자');
+    } else {
+    	$('.textCountTitle').text('20자중'+content.length+'자');
+    }
+
+    // 글자수 제한
+    if (content.length > 20) {
+    	// 50자 부터는 타이핑 되지 않도록
+        $(this).val($(this).val().substring(0,20));
+        // 50자 넘으면 알림창 뜨도록
+        alert('글자수는 20자까지 입력 가능합니다.');
+    };
+});
     </script>
 </th:bloack>
 

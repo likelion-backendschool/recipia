@@ -35,7 +35,7 @@ private List<String> postImgDtoIds=new ArrayList<>();
     public Post createPost(SiteUser siteUser) {
         return Post.builder()
                 .title(title)
-                .content(content)
+                .content(content.replace("\r\n","<br/>"))
                 .siteUser(siteUser)
                 .build();
     }

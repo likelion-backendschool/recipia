@@ -14,9 +14,10 @@
         <form th:action="@{/user/sign-up}" th:object="${userFormDto}" method="post">
             <div th:replace="form_errors :: formErrorsFragment"></div>
               <div class="flex flex-col">
+                  <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"id="warn_id" hidden></div>
                   <label class="form-label mt-3">사용자ID</label>
                    <div class="form-group mb-6">
-                       <input type="text" th:field="*{username}" class="form-control
+                       <input type="text" th:field="*{username}"oninput="id_check(this)" class="form-control
           block
           w-full
           px-3
@@ -36,7 +37,7 @@
                     </div>
                     <div class="form-group mb-6">
                         <label class="form-label">이메일 입력</label>
-                        <input type="email" th:field="*{email}" class="form-control block
+                        <input oninput="email_check(this)" type="email" th:field="*{email}" class="form-control block
         w-full
         px-3
         py-1.5
@@ -108,5 +109,18 @@
       ease-in-out">회원가입</button>
                 </form>
         </div>
+    <script>
+    function id_check(e)  {
+    var expression = RegExp(/[^a-zA-Z0-9]/);
+    if(expression.test(e.value)){
+    $("div[id=warn_id]").show();
+     $("div[id=warn_id]").text("사용자ID 에는  영어,숫자 만 입력 가능합니다.");
+    e.value = e.value.replace(/[^a-zA-Z0-9]/, '');
+    }else{
+    $("div[id=warn_id]").text("");
+    $("div[id=warn_id]").hide(); // display 속성을 none 으로 바꾼다.
+    }
+    }
+    </script>
 </th:bloack>
 </html>

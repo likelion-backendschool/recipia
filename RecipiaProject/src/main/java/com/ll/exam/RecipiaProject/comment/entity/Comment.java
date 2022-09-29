@@ -1,5 +1,6 @@
 package com.ll.exam.RecipiaProject.comment.entity;
 
+import com.ll.exam.RecipiaProject.base.entity.BaseTime;
 import com.ll.exam.RecipiaProject.post.Post;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.*;
@@ -15,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Comment {
+public class Comment  extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +24,6 @@ public class Comment {
 
     private String content;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date modifiedDate;
 
     @ManyToOne(optional = false)
     private Post post;
