@@ -116,7 +116,7 @@
                 <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">댓글 리스트</li>
                 <div th:each="comment : ${postDetailDto.commentList}">
                     <li id="comment--ajax" class="flex py-2 px-4 w-full border-b border-gray-200 dark:border-gray-600">
-                        <div class="flex-grow" th:text="${comment.content}">
+                        <div class="flex-grow break-all " th:text="${comment.content}">
                             댓글 내용입니다.
                         </div>
                         <div class="flex">
