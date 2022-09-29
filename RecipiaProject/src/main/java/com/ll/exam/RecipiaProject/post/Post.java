@@ -8,15 +8,9 @@ import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
 import com.ll.exam.RecipiaProject.post.postLike.PostLike;
 import com.ll.exam.RecipiaProject.user.SiteUser;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -43,7 +37,7 @@ public class Post extends BaseTime {
     @ManyToOne
     private SiteUser siteUser;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE,orphanRemoval = true)
     @Builder.Default
     private List<PostImg> postImgList=new ArrayList<>();
 

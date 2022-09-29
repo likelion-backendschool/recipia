@@ -1,18 +1,16 @@
 package com.ll.exam.RecipiaProject.post;
 
+import com.ll.exam.RecipiaProject.aws.AwsS3Service;
 import com.ll.exam.RecipiaProject.comment.dto.CommentDto;
 import com.ll.exam.RecipiaProject.comment.service.CommentService;
 import com.ll.exam.RecipiaProject.hashtag.HashTagService;
-import com.ll.exam.RecipiaProject.post.postImg.PostImg;
-import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
-import com.ll.exam.RecipiaProject.post.postImg.PostImgService;
 import com.ll.exam.RecipiaProject.user.SiteUser;
-import com.ll.exam.RecipiaProject.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +33,10 @@ public class PostController {
     private final HashTagService hashTagService;
     private final CommentService commentService;
 
-    private final PostImgService postImgService;
+    private final AwsS3Service postImgService;
     //게시글 작성 폼으로 이동
     @GetMapping("")
+    @PreAuthorize("isAuthenticated()")
     public String postForm(Model model) {
         model.addAttribute("postFormDto", new PostFormDto());
         return "post/postForm";
@@ -44,7 +44,7 @@ public class PostController {
 
     //게시글 작성
     @PostMapping("")
-    public String postCreate(PostFormDto postFormDto, @RequestParam("files") List<MultipartFile> files, Principal principal) {
+    public String postCreate(PostFormDto postFormDto, @RequestParam("files") List<MultipartFile> files, Principal principal) throws IOException {
         postService.createPost(postFormDto, files, principal);
         return "redirect:/posts/list";
     }
@@ -63,20 +63,26 @@ public class PostController {
             posts=postService.getPostListBykeyword(keywords,pageable);
         }else{
            posts=postService.getPostList(pageable);
+
         }
         model.addAttribute("posts",posts);
         model.addAttribute("keywords",keywords);
+        model.addAttribute("keyWord",keyword);
+        model.addAttribute("sort",sort);
         return "post/postList";
     }
 
     //게시글 상세 페이지로 이동
     @GetMapping("/{postId}")
-    public String postDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable("postId") int postId, Model model){
+    @PreAuthorize("isAuthenticated()")
+    public String postDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable("postId") int postId, Model model,Principal principal){
+
+        //쿠키로 로그인 후 방문한 게시물 저장해서 조회수 상승시키기
         Cookie oldCookie=null;
         Cookie[] cookies=request.getCookies();
         if(cookies!=null){
             for(Cookie cookie:cookies){
-                if(cookie.getName().equals("visited")){
+                if(cookie.getName().equals("visited_"+principal.getName())){
                     oldCookie=cookie;
                 }
             }
@@ -92,7 +98,7 @@ public class PostController {
             }
         }else{
             postService.increaseView(postId);
-            Cookie newCookie=new Cookie("visited","["+postId+"]");
+            Cookie newCookie=new Cookie("visited_"+principal.getName(),"["+postId+"]");
             newCookie.setPath("/");
             newCookie.setMaxAge(60*60*24);
             response.addCookie(newCookie);
@@ -104,6 +110,7 @@ public class PostController {
 
     //게시글 수정 페이지로 이동
     @GetMapping("/{postId}/modify")
+    @PreAuthorize("isAuthenticated()")
     public String postModifyForm(@PathVariable("postId") int postId, Principal principal,Model model) {
         Post post=postService.getPostById(postId);
         PostFormDto postFormDto=post.createPostFormDto();
@@ -117,7 +124,7 @@ public class PostController {
 
     //게시글 수정
     @PostMapping("/{postId}/modify")
-    public String postModify(Principal principal,PostFormUpdateDto postFormUpdateDto,@RequestParam("files") List<MultipartFile> files, @PathVariable("postId") int postId) {
+    public String postModify(Principal principal,PostFormUpdateDto postFormUpdateDto,@RequestParam("files") List<MultipartFile> files, @PathVariable("postId") int postId) throws IOException {
 
       postService.modifyPost(postFormUpdateDto,files,postId,principal);
         return "redirect:/posts/list";
@@ -125,6 +132,7 @@ public class PostController {
 
     //게시글 삭제
     @GetMapping("/{postId}/delete")
+    @PreAuthorize("isAuthenticated()")
     public String postDelete(@PathVariable("postId") int postId,Principal principal) {
         SiteUser siteUser=postService.getSiteUser(postId);
         Post post =postService.getPostById(postId);
