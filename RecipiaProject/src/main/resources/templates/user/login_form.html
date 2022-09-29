@@ -5,12 +5,12 @@
       layout:decorate="~{layout}">
 
 <th:bloack layout:fragment="content">
-    <section class="bg-gray-50 dark:bg-gray-900">
-        <div class="flex flex-col items-center justify-center px-6 py-8  ">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+    <section>
+        <div class="flex flex-col items-center justify-center px-6 py-3  ">
+            <a href="#" class="flex items-center mb-3 text-2xl font-semibold text-gray-900 dark:text-white">
                 With Recipia!!
             </a>
-            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 mb-10 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <div th:if="${param.error}">
                         <div class="alert alert-danger bg-red">
@@ -40,7 +40,7 @@
                             </div>
                             <a th:href="@{/user/find-password}" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">비밀번호를 잊으셨나요?</a>
                         </div>
-                        <button type="submit" class="w-full text-white bg-[#3E7C17] hover:bg-[#1A4D2E] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                        <button type="submit" class="w-full text-white bg-[#EC7272] hover:bg-[#FC4F4F] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                             아직 회원가입을 하지 않으셨나요? <a th:href="@{/user/sign-up}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                         </p>
