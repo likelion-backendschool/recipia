@@ -1,22 +1,45 @@
 <!doctype html>
 <html lang="ko">
+<html prefix="og: https://ogp.me/ns#">
 <head>
+
+    <title>🍜레시피아🍳</title>
+    <meta property="og:title" content="재료 위주의 검색 사이트 Recipia입니다!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://welcome.recipia.site/" />
+    <meta property="og:image" content="https://i.ibb.co/Gxpy2Ht/recipia.png" />
+
+    <!--구글 태그-->
+    <meta name="google-site-verification" content="fZ5HnnPTUPIy8mABrSNd3dZ1E-NXrQkSeEib_UCRcFs" />
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- 폰트 어썸 -->
-    <script src="https://kit.fontawesome.com/2708bf20c0.js" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/7fa2757e91.js"></script>
     <!-- 데이지 UI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
     <!-- 테일윈드 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>안녕!</title>
+    <!-- tagify -->
+    <script src="https://unpkg.com/@yaireo/tagify"></script>
+    <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    <!--csrf 토큰-->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <!--i태그-->
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen bg-[#F9F3DF]">
 <!-- 네비게이션바 -->
 <nav th:replace="navbar :: navbarFragment"></nav>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<div class="h-screen">
+<div class="flex-grow">
     <th:block layout:fragment="content"></th:block>
 </div>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->

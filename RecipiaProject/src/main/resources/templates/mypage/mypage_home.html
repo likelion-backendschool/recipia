@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+
+<th:block layout:fragment="content">
+
+    <div class="flex justify-center mt-20">
+        <!--default image-->
+    </div>
+    <div class="flex justify-center mt-20">
+        <div class="text-2xl font-bold text-black" th:text="${myPageDto.username}"></div>
+    </div>
+
+    <div class="flex justify-center">
+        <div class="text-black font-bold text-sm mt-5 p-1 bg-white rounded" th:text="${myPageDto.email}"></div>
+    </div>
+
+
+    <!-- 하위 페이지 -->
+    <div>
+        <!-- image -->
+        <div class="flex justify-evenly mt-20">
+
+            <!-- 알러지태그 -->
+
+            <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()">
+                <img
+                        src="https://cdn-icons-png.flaticon.com/512/1585/1585316.png"
+                        class="p-1 mx-10 border-8 border-black bg-white border rounded max-w-sm h-20 w-30"
+                        alt="..."
+                />
+            </a>
+
+            <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');">
+                <img
+                        src="https://cdn-icons-png.flaticon.com/512/3094/3094700.png"
+                        class="p-1 mx-2 border-8 border-black bg-white border rounded max-w-sm h-20 w-30"
+                        alt="..."
+                />
+            </a>
+        </div>
+
+
+        <!--각 페이지로 넘어가기위한 button -->
+        <div class="flex justify-evenly mt-2">
+            <!-- 알러지 태그 -->
+            <a th:href="@{/mypage/check-pwd}" sec:authorize="isAuthenticated()" class="mr-1 text-sm w-30 h-10 mx-10 px-4 pt-2 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">회원수정</a>
+            <a th:href="@{/mypage/withdraw}" onclick="return confirm('정말 삭제하시겠습니까?');"
+               class="mr-2 text-sm w-30 h-10 mx-10 px-4 pt-2 py-4 bg-gray-700 text-white font-xs text-s rounded hover:bg-gray-400">
+                회원탈퇴
+            </a>
+        </div>
+    </div>
+</th:block>
+
+</html>

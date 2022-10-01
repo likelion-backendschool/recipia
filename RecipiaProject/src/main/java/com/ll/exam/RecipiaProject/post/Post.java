@@ -1,58 +1,122 @@
 package com.ll.exam.RecipiaProject.post;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.ll.exam.RecipiaProject.base.entity.BaseTime;
+import com.ll.exam.RecipiaProject.comment.entity.Comment;
+import com.ll.exam.RecipiaProject.hashtag.HashTag;
+import com.ll.exam.RecipiaProject.post.postImg.PostImg;
+import com.ll.exam.RecipiaProject.post.postImg.PostImgDto;
+import com.ll.exam.RecipiaProject.post.postLike.PostLike;
+import com.ll.exam.RecipiaProject.user.SiteUser;
+import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
-public class Post {
+public class Post extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String title;
-
+    @Lob
     private String content;
 
-    @Lob
-    private byte[] image;
 
     private int score;
 
     private int views ;
 
     private int likes;
+    @ManyToOne
+    private SiteUser siteUser;
 
-    @CreationTimestamp
-    private Timestamp createdDate;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @Builder.Default
+    private List<PostImg> postImgList=new ArrayList<>();
 
-    @UpdateTimestamp
-    private Timestamp modifiedDate;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @Builder.Default
+    private List<HashTag> hashTagList = new ArrayList<>();
 
-    private Timestamp deleteDate;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OrderBy("id desc")
+    @Builder.Default
+    private List<Comment> commentList=new ArrayList<>();
 
-    private boolean isBlind;
+    @OneToMany(mappedBy = "post",cascade = CascadeType.REMOVE)
+    @Builder.Default
+    private List<PostLike> likeList=new ArrayList<>();
 
-    @Builder
-    public Post(String title, String content, byte[] image, int score, int views, int likes, Timestamp createdDate, Timestamp modifiedDate, Timestamp deleteDate, boolean isBlind){
-        this.title=title;
-        this.content=content;
-        this.image=image;
-        this.score=score;
-        this.views=views;
-        this.likes=likes;
-        this.createdDate=createdDate;
-        this.modifiedDate=modifiedDate;
-        this.deleteDate=deleteDate;
-        this.isBlind=isBlind;
+    public PostDetailDto createPostDetailDto(){
+        List<PostImgDto> postImgDtoList=new ArrayList<>();
+        List<String> tageContentList=new ArrayList<>();
+        List<Comment> replyList= new ArrayList<>();
+        for(PostImg postImg:postImgList){
+            if(postImg.getThumbnailYn()){
+                postImgDtoList.add(0,postImg.createPostImgDto());
+            }else{
+                postImgDtoList.add( postImg.createPostImgDto());
+            }
+        }
+        for(HashTag hashTag:hashTagList){
+            tageContentList.add(hashTag.getTagContent());
+        }
+        for(Comment comment:commentList){
+            replyList.add(comment);
+        }
+        PostDetailDto postDetailDto=PostDetailDto.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .score(score)
+                .views(views)
+                .likes(likes)
+                .username(siteUser.getUsername())
+                .postImgDtoList(postImgDtoList)
+                .hashTagContentList(tageContentList)
+                .commentList(replyList)
+                .build();
+        return postDetailDto;
+    }
+    //postFormDto 변환
+    public PostFormDto createPostFormDto() {
+
+        List<PostImgDto> pids=new ArrayList<>();
+        List<String> pidIds=new ArrayList<>();
+
+        //List<postImgDto>로 변환해주는과정
+        for(PostImg pi : postImgList){
+            PostImgDto pid= pi.createPostImgDto();
+            //
+            if(pi.getThumbnailYn()){
+                pids.add(0,pid);
+                pidIds.add(0,pid.getId()+"");
+            }else{
+                pids.add(pid);
+                pidIds.add(pid.getId()+"");
+            }
+        }
+        StringBuilder tagContent=new StringBuilder();
+        for(HashTag hashTag:hashTagList){
+
+            tagContent.append("#"+hashTag.getTagContent());
+        }
+        //postFormDto 생성
+        PostFormDto postFormDto=PostFormDto.builder()
+                .id(id)
+                .title(title)
+                .content(content.replace("<br/>","\r\n"))
+                .postImgDtoList(pids)
+                .postImgDtoIds(pidIds)
+                .tagContent(tagContent.toString())
+                .build();
+        return postFormDto;
     }
 }

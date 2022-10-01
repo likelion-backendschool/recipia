@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<head>
+    <style>
+        .td{
+            order: -1;
+            flex: 100%;
+            border: 1px solid var(--tags-border-color);
+            margin-bottom: 1em;
+            transition: .1s;
+        }
+    </style>
+</head>
+
+<th:bloack layout:fragment="content">
+
+
+    <form th:method="post" th:object="${HashtagFormDto}" enctype="multipart/form-data">
+
+    <table>
+        <thead>
+        <tr>
+            <th>해시태그</th>
+        </tr>
+        </thead>
+        <tbody>
+        <input th:type="hidden" th:name = "_method" th:value = "delete"/>
+        <tr th:name = "tagList" th:each="hash_tag : ${hashtagList}">
+            <td th:text="${hash_tag.tagId}"></td>
+            <td th:text = "${hash_tag.tagContent}"></td>
+            <td>
+                <a th:href="@{|/hashtag/${hash_tag.tagId}|}" th:text="삭제"></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+</th:bloack>
+</html>
+
+
+
+
+

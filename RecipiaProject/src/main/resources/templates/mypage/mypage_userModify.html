@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org"
+      layout:decorate="~{layout}">
+
+<th:block layout:fragment="content">
+
+    <title>회원 정보 수정</title>
+
+
+    <form th:action th:object="${myPageDto}" method="POST"  onsubmit="ModifyForm__submit(this); return false;">
+        <div class="flex justify-center mt-20 text-black">
+            <span class="font-bold">아이디 : &nbsp</span>
+            <input type="text" th:field="*{username}" class="form-control " rows="1" readonly disabled></input>
+
+        </div>
+
+        <div class="flex justify-center mt-20 text-black ">
+            <span class="font-bold"> 이메일 : &nbsp</span>
+            <div th:text="${myPageDto.email}"></div>
+        </div>
+
+        <div class="flex justify-center mt-3 ">
+        <input type="email" id="email" class="text-center" placeholder="이메일을 작성해주세요." th:field="*{email}" value="-"  rows="1">
+        </div>
+
+
+        <div class="flex justify-center mt-10 text-black">
+            <span class="font-bold">닉네임 : &nbsp</span>
+            <div th:text="${myPageDto.nickname}"></div>
+        </div>
+
+        <div class="flex justify-center mt-3">
+            <input type="text" id="nickname" class="text-center" placeholder="닉네임을 작성해주세요." th:field="*{nickname}"  rows="1">
+        </div>
+
+
+        <div class="flex justify-center mt-10">
+            <input type="submit" class="btn bg-[#EC7272] hover:bg-[#FC4F4F] w-00 my-4 mb-2" value="수정">
+        </div>
+
+    </form>
+
+    <script>
+            function ModifyForm__submit(form) {
+
+                form.email.value = form.email.value.trim();
+
+                if (form.email.value.length == 0) {
+                    alert("이메일을 입력해주세요.");
+                    form.email.focus();
+                    return;
+                }
+
+                form.nickname.value = form.nickname.value.trim();
+
+                if (form.nickname.value.length == 0) {
+                    alert("닉네임를 입력해주세요.");
+                    form.nickname.focus();
+                    return;
+                }
+
+                form.submit();
+            }
+
+        </script>
+</th:block>
+
+</html>

@@ -1,43 +1,125 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link
-    href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css"
-    rel="stylesheet"
-    type="text/css"
-  />
-  <script src="https://cdn.tailwindcss.com"></script>
-    <title>Title</title>
-</head>
-<body>
-<main class="min-h-screen ">
-    <div class="flex flex-wrap m-10 justify-center gap-4">
-    <div th:each="post : ${posts}">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 
-        <div class="card w-100 bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-            <div class="card-body">
-                <h2 class="card-title">
-                    <p th:text="${post.title}"></p>
-                    <div class="badge badge-secondary">NEW</div>
-                </h2>
-                <p th:text="${post.content}"></p>
-                <div class="card-actions justify-end">
-                    <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
-                    <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
-                    <div class="badge badge-outline" th:text="|likes : ${post.likes}|"></div>
-                </div>
-                <div class="card-actions justify-end ">
-                    <div class="badge badge-outline " th:text="|created : ${post.createdDate}|"></div>
+      layout:decorate="~{layout}">
+
+<th:bloack layout:fragment="content">
+<main class="min-h-screen ">
+
+    <div class="flex justify-center text-center">
+        <form class="flex items-center w-3/5"  action="/" method="post">
+            <input  type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" />
+            <div class="relative w-full">
+                <input th:if="${!keyWord.isPresent()}" type="text" name="searchInput"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="재료를 입력후 Tab을 눌러주세요.">
+                <input th:unless="${!keyWord.isPresent()}" th:value="${keyWord.get()}" type="text" name="searchInput"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="재료를 입력후 Tab을 눌러주세요.">
+            </div>
+            <div>
+                <select id="countries" th:name="sort"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option th:selected="${sort=='createdDate'}" th:value="createdDate">최신순</option>
+                    <option  th:selected="${sort=='views'}"  th:value="views">조회순</option>
+                    <option  th:selected="${sort=='likes'}"   th:value="likes">좋아요순</option>
+                </select>
+            </div>
+            <button type="submit" class="p-2.5 ml-2 text-xl font-medium text-white bg-[#EC7272] hover:bg-[#FC4F4F] rounded-lg border focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </button>
+        </form>
+    </div>
+
+    <div class="flex flex-wrap m-10 justify-center gap-4">
+        <div th:each="post : ${posts}">
+
+            <div class="card w-100 bg-base-100 shadow-xl">
+                <figure ><a th:href="@{|/posts/${post.id}|}"><img th:src="${post.imgUrl}" alt="Shoes"/></a></figure>
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <p th:text="${post.title}"></p>
+                        <div th:each="hashTagContent : ${post.hashTagContentList}">
+
+                            
+                           <a th:href="@{|/posts/list?keyword=${hashTagContent}|}"> <span class="badge badge-secondary bg-[#FF5B00]" th:text="${hashTagContent}"></span></a>
+
+                        </div>
+                    </h2>
+                    <div class="card-actions justify-end">
+                        <div class="badge badge-outline" th:text="|score : ${post.score}|"></div>
+                        <div class="badge badge-outline" th:text="|views : ${post.views}|"></div>
+                        <div class="badge badge-outline">
+                            <p  th:id="'likes_'+${post.id}" th:text="|likes : ${post.likes}|" ></p>
+                        </div>
+
+                       <div sec:authorize="isAuthenticated()">
+                           <button th:classappend="${#lists.contains(post.likedSiteUserNameList,#authentication.principal.username)} ? 'bg-blue-700 text-white' " th:onclick="likeButtonClicked([[${#authentication.name}]],[[${post.id}]])" type="button" th:id="'likeImg_'+${post.id}" class="p-1  border border-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm  text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800">
+                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                               </svg>
+                           </button>
+                       </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-    </th:each>
     </div>
-    </div>
+    <nav th:if="${!posts.isEmpty()}"class="flex justify-center" aria-label="Page navigation example">
+        <ul class="inline-flex -space-x-px ">
+            <li th:classappend="${!posts.hasPrevious} ? 'invisible' ">
+                <a th:if="${!keyWord.isPresent()}" th:href="@{|/posts/list/${posts.number-1}?sort=${sort}|}" class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                <a th:unless="${!keyWord.isPresent()}" th:href="@{|/posts/list/${posts.number-1}?keyword=${keyWord.get()}&sort=${sort}|}" class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, posts.totalPages-1)}" th:if="${page >= posts.number-5 and page <= posts.number+5}"  th:classappend="${page == posts.number} ? 'font-bold'">
+                <a th:if="${!keyWord.isPresent()}"   th:text="${page+1}"  th:href="@{|/posts/list/${page}?sort=${sort}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"></a>
+                <a th:unless="${!keyWord.isPresent()}"  th:text="${page+1}"  th:href="@{|/posts/list/${page}?keyword=${keyWord.get()}&sort=${sort}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"></a>
+            </li>
+
+            <li th:classappend="${!posts.hasNext} ? 'invisible' ">
+                <a th:if="${!keyWord.isPresent()}" th:href="@{|/posts/list/${posts.number+1}?sort=${sort}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                <a th:unless="${!keyWord.isPresent()}" th:href="@{|/posts/list/${posts.number+1}?keyword=${keyWord.get()}&sort=${sort}|}" class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+            </li>
+        </ul>
+    </nav>
 </main>
-</body>
+    <script>
+      function likeButtonClicked (siteUserName,postId){
+            /*
+            alert("clicked");
+            alert(siteUserName+"/"+postId);
+            */
+            var header = $("meta[name='_csrf_header']").attr('content');
+            var token = $("meta[name='_csrf']").attr('content');
+            let data = {
+                siteUserName: siteUserName,
+                postId: postId
+            };
+            $.ajax({
+                    url: '/posts/like',
+                    data: JSON.stringify(data),
+                    type:"POST",
+                    contentType:"application/json; charset=utf-8",
+                    dataType: "text",
+                    beforeSend: function(xhr){
+                    xhr.setRequestHeader(header, token);
+                    },
+                }).done(function (req) {
+                    //alert(req);
+                   if( $('#likeImg_'+postId).hasClass("bg-blue-700")===false){
+                   $('#likeImg_'+postId).removeClass("text-blue-700");
+                    $('#likeImg_'+postId).addClass("bg-blue-700 text-white");
+                   }else{
+                      $('#likeImg_'+postId).removeClass("bg-blue-700 text-white");
+                        $('#likeImg_'+postId).addClass("text-blue-700");
+                   }
+                   $('#likes_'+postId).text('likes : '+req);
+                }).fail(function (error) {
+                //alert(JSON.stringify(error));
+                 });
+                }
+
+
+                        //input을 tagify로 바꾸는 script
+                        var input = document.querySelector('input[name=searchInput]');
+                        new Tagify(input);
+     </script>
+</th:bloack>
+
 </html>
