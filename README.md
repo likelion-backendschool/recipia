@@ -9,25 +9,14 @@ https://welcome.recipia.site/
 ### 프로젝트 발표 PPT
 https://docs.google.com/presentation/d/1W9lozH5y1k0KGbUkp-mP60USf5zs1NADUCp6frH_JGA/edit#slide=id.g15b3135a333_11_240
 
+### 시연 영상
+https://www.youtube.com/watch?v=QVoBN_iaIi4
+
 ## 기간 🗓
 22.08.01 ~ 22.09.30
 
 ## 기술 스택 🌠
-
-### **Front-End**  
-<div> 
-<img src="https://user-images.githubusercontent.com/55697125/186715435-d06dd283-3fd2-44b3-bf8a-6ba4dcc27f53.png" height="200"/>                             
-<img src="https://user-images.githubusercontent.com/55697125/186715651-f6ecd587-673a-4514-bf73-db7ae12188a3.png" height="200"/>
-<img src="https://user-images.githubusercontent.com/55697125/186717684-ef7d3e86-2c7d-4a1f-8e07-46a21f06b2c1.png" height="200"/>
-</div>
-
-### **Back-End** 
-<div>
-<img src="https://user-images.githubusercontent.com/55697125/186715145-7043b6ae-9da8-40a1-b274-53588d1b2517.png" height="100"/>
-<img src="https://user-images.githubusercontent.com/55697125/186715258-4a2d6479-906f-4df0-ac5a-e21de11f30ef.png" height="100"/>
-<img src="https://user-images.githubusercontent.com/55697125/186718117-8b64261e-283b-4786-ad5f-c8521c031ba5.png" height="100"/>
-
-</div>
+<img width="563" alt="skill" src="https://user-images.githubusercontent.com/40134318/193782592-18b22959-3ef4-4c2b-b54e-9ba00e8b9aa9.png">
 
 ## 프로젝트 ERD 및 배포 구조
 ### ERD
