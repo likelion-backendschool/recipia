@@ -6,6 +6,9 @@
 ### 운영 URL 📝
 https://welcome.recipia.site/
 
+### 프로젝트 발표 PPT
+https://docs.google.com/presentation/d/1W9lozH5y1k0KGbUkp-mP60USf5zs1NADUCp6frH_JGA/edit#slide=id.g15b3135a333_11_240
+
 ## 기간 🗓
 22.08.01 ~ 22.09.30
 
@@ -25,6 +28,14 @@ https://welcome.recipia.site/
 <img src="https://user-images.githubusercontent.com/55697125/186718117-8b64261e-283b-4786-ad5f-c8521c031ba5.png" height="100"/>
 
 </div>
+
+## 프로젝트 ERD 및 배포 구조
+### ERD
+<img width="633" alt="recipia_erd" src="https://user-images.githubusercontent.com/40134318/193760979-ac3d4ff1-6ce3-40eb-9ace-dba7905c44ca.png">
+
+### 배포 구조
+<img width="890" alt="deployStructure" src="https://user-images.githubusercontent.com/40134318/193761724-b6ef7f4a-b075-4385-80a0-03bf718026c7.png">
+
 
 ## Git 컨벤션 🍆
 
